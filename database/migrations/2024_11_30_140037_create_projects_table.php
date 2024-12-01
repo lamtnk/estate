@@ -13,6 +13,7 @@ class CreateProjectsTable extends Migration
             $table->string('name');
             $table->string('location');
             $table->text('description');
+            $table->longText('content')->nullable();
             $table->date('start_date');
             $table->date('end_date')->nullable();
             $table->enum('status', ['ongoing', 'completed']);

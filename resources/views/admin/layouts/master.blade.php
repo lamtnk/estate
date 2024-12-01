@@ -56,7 +56,7 @@
                             </a>
                         </li>
                         <li class="sidebar-item ">
-                            <a href="{{ route('feedback.index') }}" class='sidebar-link'>
+                            <a href="" class='sidebar-link'>
                                 <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                                 <span>FeedBack</span>
                             </a>

@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +17,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('client.home.index');
+});
+
+Route::prefix('admin')->group(function () {
+    Route::get('/', [DashboardController::class, 'index']);
+
+    Route::prefix('project')->group(function () {
+        Route::get('/', [ProjectController::class, 'index']);
+    });
 });
