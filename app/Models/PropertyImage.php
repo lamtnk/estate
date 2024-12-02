@@ -9,13 +9,10 @@ class PropertyImage extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'property_id', 'image_path', 'is_primary',
-    ];
+    protected $fillable = ['property_id', 'image_path', 'is_primary'];
 
-    // Quan hệ N-1: Mỗi hình ảnh thuộc về một bất động sản
     public function property()
     {
-        return $this->belongsTo(Property::class);
+        return $this->belongsTo(Property::class, 'property_id');
     }
 }

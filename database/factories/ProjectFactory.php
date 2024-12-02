@@ -18,6 +18,7 @@ class ProjectFactory extends Factory
             'content' => "<p>This is the <strong>content</strong> of project. You can add HTML here.</p>",
             'start_date' => $this->faker->date,
             'end_date' => $this->faker->date,
+            'handover_date' => $this->faker->date,
             'status' => $this->faker->randomElement(['ongoing', 'completed']),
         ];
     }

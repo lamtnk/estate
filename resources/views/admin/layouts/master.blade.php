@@ -42,40 +42,19 @@
                     <ul class="menu">
                         <li class="sidebar-title">Menu</li>
 
-                        <li class="sidebar-item  ">
-                            <a href="index.html" class='sidebar-link'>
+                        <li class="sidebar-item  {{ request()->routeIs('index') ? 'active' : '' }}">
+                            <a href="{{ route('index') }}" class='sidebar-link'>
                                 <i class="bi bi-grid-fill"></i>
                                 <span>Dashboard</span>
                             </a>
                         </li>
 
-                        <li class="sidebar-item active ">
-                            <a href="table-datatable.html" class='sidebar-link'>
+                        <li class="sidebar-item {{ request()->routeIs('admin.project.index') ? 'active' : '' }}">
+                            <a href="{{ route('admin.project.index') }}" class='sidebar-link'>
                                 <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-                                <span>Datatable</span>
+                                <span>Dự án</span>
                             </a>
                         </li>
-                        <li class="sidebar-item ">
-                            <a href="" class='sidebar-link'>
-                                <i class="bi bi-file-earmark-spreadsheet-fill"></i>
-                                <span>FeedBack</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-item  has-sub">
-                            <a href="#" class='sidebar-link'>
-                                <i class="bi bi-bar-chart-fill"></i>
-                                <span>Charts</span>
-                            </a>
-                            <ul class="submenu ">
-                                <li class="submenu-item ">
-                                    <a href="ui-chart-chartjs.html">ChartJS</a>
-                                </li>
-                                <li class="submenu-item ">
-                                    <a href="ui-chart-apexcharts.html">Apexcharts</a>
-                                </li>
-                            </ul>
-                        </li>
-
 
                     </ul>
                 </div>
@@ -100,6 +79,7 @@
     <script src="{{ url('') }}/assets/js/bootstrap.bundle.min.js"></script>
     <script src="{{ url('') }}/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="{{ url('') }}/assets/vendors/apexcharts/apexcharts.js"></script>
+    <script src="{{ url('') }}/assets/vendors/jquery/jquery.min.js"></script>
     <script src="{{ url('') }}/assets/vendors/simple-datatables/simple-datatables.js"></script>
     <script>
         // Simple Datatable

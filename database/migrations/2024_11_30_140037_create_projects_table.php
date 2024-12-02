@@ -14,8 +14,9 @@ class CreateProjectsTable extends Migration
             $table->string('location');
             $table->text('description');
             $table->longText('content')->nullable();
-            $table->date('start_date');
+            $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
+            $table->date('handover_date')->nullable();
             $table->enum('status', ['ongoing', 'completed']);
             $table->timestamps();
         });

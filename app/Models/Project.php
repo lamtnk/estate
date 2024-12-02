@@ -10,7 +10,7 @@ class Project extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'location', 'description', 'start_date', 'end_date', 'status',
+        'name', 'location', 'description', 'start_date', 'end_date', 'handover_date', 'status', 'content',
     ];
 
     // Quan hệ 1-N: Một dự án có thể có nhiều bất động sản
