@@ -22,6 +22,7 @@ class CreatePropertiesTable extends Migration
             $table->integer('bathrooms'); // Số phòng tắm
             $table->integer('parking')->nullable(); // Chỗ đậu xe
             $table->text('description'); // Mô tả chi tiết (bao gồm tính năng)
+            $table->longText('content')->nullable();
             $table->enum('status', ['available', 'sold', 'rented']); // Trạng thái
             $table->timestamps();
         });

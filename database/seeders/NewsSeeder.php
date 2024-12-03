@@ -19,6 +19,8 @@ class NewsSeeder extends Seeder
                     'title' => 'Tin tức số ' . $i,
                     'content' => 'Nội dung tin tức số ' . $i,
                     'author_id' => $user->id,
+                    'image' => 'path/to/image' . $i . '.jpg',
+                    'project_id' => 1,
                     'published_at' => now(),
                 ]);
             }

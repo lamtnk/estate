@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
             PropertyImageSeeder::class,
             NewsSeeder::class,
             ContactSeeder::class,
+            TagSeeder::class,
+            NewsTagSeeder::class,
         ]); 
         Project::factory()->count(10)->create();
     }
