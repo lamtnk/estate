@@ -13,13 +13,12 @@ class PropertyService
     public function getAllProperties()
     {
         // Lấy toàn bộ dữ liệu từ bảng Properties
-        return Property::with(['project', 'propertyType'])->get();
+        return Property::all();
     }
 
-    public function storeProperty($data, $image)
+    public function storeProperty($data)
     {
-        $property = Property::create($data); // Tạo Property
-        $this->storeImage($property->id, $image, true); // Lưu ảnh chính của bất động sản
+        return Property::create($data); // Tạo Property
     }
 
     public function storeImage($propertyId, $image, $isPrimary)

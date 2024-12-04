@@ -60,7 +60,8 @@ class PropertyController extends Controller
 
         // Neu Validate thanh cong thi goi den Service de luu bat dong san
         try {
-            $this->propertyService->storeProperty($validateData, $image);
+            $property = $this->propertyService->storeProperty($validateData); // Lưu bất động sản
+            $this->propertyService->storeImage($property->id, $image, true); // Lưu ảnh chính của bất động sản
         } catch (\Throwable $th) {
             // Neu co loi khi luu thi quay lai form va thong bao loi
             return redirect()->back()->with('error', 'Lỗi trong quá trình lưu bất động sản');
