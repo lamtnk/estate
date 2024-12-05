@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Service\admin\ProjectService;
+use App\Service\admin\PropertyImageService;
 use App\Service\admin\PropertyService;
 use App\Service\admin\PropertyTypeService;
 use Illuminate\Http\Request;
@@ -13,12 +14,14 @@ class PropertyController extends Controller
     private $propertyService;
     private $projectService;
     private $propertyTypeService;
+    private $propertyImageService;
 
-    public function __construct(PropertyService $propertyService, ProjectService $projectService, PropertyTypeService $propertyTypeService)
+    public function __construct(PropertyService $propertyService, ProjectService $projectService, PropertyTypeService $propertyTypeService, PropertyImageService $propertyImageService)
     {
         $this->propertyService = $propertyService;
         $this->projectService = $projectService;
         $this->propertyTypeService = $propertyTypeService;
+        $this->propertyImageService = $propertyImageService;
     }
 
     public function index()
@@ -61,7 +64,7 @@ class PropertyController extends Controller
         // Neu Validate thanh cong thi goi den Service de luu bat dong san
         try {
             $property = $this->propertyService->storeProperty($validateData); // Lưu bất động sản
-            $this->propertyService->storeImage($property->id, $image, true); // Lưu ảnh chính của bất động sản
+            $this->propertyImageService->storeImage($property->id, $image, true); // Lưu ảnh chính của bất động sản
         } catch (\Throwable $th) {
             // Neu co loi khi luu thi quay lai form va thong bao loi
             return redirect()->back()->with('error', 'Lỗi trong quá trình lưu bất động sản');
@@ -122,38 +125,5 @@ class PropertyController extends Controller
 
         // Chuyển hướng về danh sách bất động sản với thông báo thành công
         return redirect()->route('admin.property.index')->with('success', 'Bất động sản được xóa thành công!');
-    }
-
-    public function imageIndex($propertyId)
-    {
-        $property = $this->propertyService->getPropertyById($propertyId);
-        return view('admin.property.imageIndex', compact('property'));
-    }
-
-    public function addImage($propertyId)
-    {
-        return view('admin.property.imageAdd', compact('propertyId'));
-    }
-
-    public function storeImage(Request $request, $propertyId)
-    {
-        // Validate du lieu
-        $request->validate([
-            'image' => 'required',
-        ]);
-
-        // Lấy tệp ảnh từ request
-        $image = $request->file('image');  // Đây là đối tượng UploadedFile
-
-        // Neu Validate thanh cong thi goi den Service de luu anh
-        try {
-            $this->propertyService->storeImage($propertyId, $image, false);
-        } catch (\Throwable $th) {
-            // Neu co loi khi luu thi quay lai form va thong bao loi
-            return redirect()->back()->with('error', 'Lỗi trong quá trình lưu ảnh');
-        }
-
-        // Chuyển hướng về danh sách bất động sản với thông báo thành công
-        return redirect()->route('admin.property.images.index', $propertyId)->with('success', 'Ảnh được thêm thành công!');
     }
 }

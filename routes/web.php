@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\ProjectController;
 use App\Http\Controllers\admin\PropertyController;
+use App\Http\Controllers\admin\PropertyImageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,8 +40,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/{id}/edit', [PropertyController::class, 'edit'])->name('admin.property.edit');
         Route::put('/{id}/update', [PropertyController::class, 'update'])->name('admin.property.update');
         Route::get('/{id}/delete', [PropertyController::class, 'forceDelete'])->name('admin.property.delete');
-        Route::get('/{id}/images', [PropertyController::class, 'imageIndex'])->name('admin.property.images.index');
-        Route::get('/{id}/images/add', [PropertyController::class, 'addImage'])->name('admin.property.images.add');
-        Route::post('/{id}/images/store', [PropertyController::class, 'storeImage'])->name('admin.property.images.store');
+        Route::get('/{id}/images', [PropertyImageController::class, 'index'])->name('admin.property.images.index');
+        Route::post('/{id}/images/store', [PropertyImageController::class, 'store'])->name('admin.property.images.store');
+        Route::post('/{id}/images/delete', [PropertyImageController::class, 'delete'])->name('admin.property.images.delete');
+        Route::post('/{id}/images/deleteAll', [PropertyImageController::class, 'deleteAll'])->name('admin.property.images.deleteAll');
     });
 });

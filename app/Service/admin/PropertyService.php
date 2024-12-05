@@ -21,25 +21,6 @@ class PropertyService
         return Property::create($data); // Tạo Property
     }
 
-    public function storeImage($propertyId, $image, $isPrimary)
-    {
-        // Tạo tên file duy nhất
-        $fileName = uniqid() . '_' . $image->getClientOriginalName();
-
-        // Chuyển file vào thư mục public/assets/images/property
-        $image->move(public_path('assets/images/property'), $fileName);
-
-        // Cập nhật đường dẫn ảnh
-        $imagePath = 'assets/images/property/' . $fileName;
-
-        // Tạo bản ghi trong bảng PropertyImage
-        PropertyImage::create([
-            'property_id' => $propertyId,
-            'image_path' => $imagePath,
-            'is_primary' => $isPrimary,
-        ]);
-    }
-
     /**
      * Lấy bất động sản theo ID.
      *
