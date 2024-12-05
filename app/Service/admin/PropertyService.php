@@ -48,7 +48,7 @@ class PropertyService
 
     public function deleteProperty($id)
     {
-        $Property = $this->getPropertyById($id);
-        $Property->delete();
+        $property = $this->getPropertyById($id); // xóa bất động sản
+        $property->delete();
     }
 }

@@ -80,15 +80,13 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-12 col-md-6 order-md-1 order-last">
-                        <h3>Danh sách ảnh {{ $images[0]->property->name }}</h3>
+                        <h3>{{ $property->name }}</h3>
                     </div>
                     <div class="col-12 col-md-6 order-md-2 order-first">
                         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Danh sách ảnh
-                                    {{ $images[0]->property->name }}
-                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">Danh sách ảnh BDS</li>
                             </ol>
                         </nav>
                     </div>
@@ -124,7 +122,8 @@
                                     {{-- <div class="thumbnail-caption">{{ basename($image->image_path) }}</div> --}}
                                     <div>
                                         <button class="delete-btn" data-bs-toggle="modal"
-                                            data-bs-target="#confirmDeleteModal" data-id="{{ $image->id }}">Xóa</button>
+                                            data-bs-target="#confirmDeleteModal" data-property-id="{{ $property->id }}"
+                                            data-image-id="{{ $image->id }}">Xóa</button>
                                     </div>
                                 </div>
                             @endforeach
@@ -140,8 +139,8 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <form action="{{ route('admin.property.images.store', $images[0]->property_id) }}"
-                                        method="POST" enctype="multipart/form-data">
+                                    <form action="{{ route('admin.property.images.store', $property->id) }}" method="POST"
+                                        enctype="multipart/form-data">
                                         @csrf
                                         <div class="modal-body">
                                             <div class="mb-3">
@@ -174,13 +173,9 @@
                                         Bạn có chắc chắn muốn xóa ảnh này không?
                                     </div>
                                     <div class="modal-footer">
-                                        <form action="" method="POST" id="deleteImageForm">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Hủy</button>
-                                            <button type="submit" class="btn btn-danger">Xóa</button>
-                                        </form>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Hủy</button>
+                                        <a href="#" class="btn btn-danger delete-image">Xóa</a>
                                     </div>
                                 </div>
                             </div>
@@ -200,14 +195,10 @@
                                         Bạn có chắc chắn muốn xóa tất cả ảnh không?
                                     </div>
                                     <div class="modal-footer">
-                                        {{-- <form action="{{ route('admin.property.images.deleteAll', $property->id) }}" --}}
-                                        <form action="" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="button" class="btn btn-secondary"
-                                                data-bs-dismiss="modal">Hủy</button>
-                                            <button type="submit" class="btn btn-danger">Xóa tất cả</button>
-                                        </form>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Hủy</button>
+                                        <a href="{{ route('admin.property.images.deleteAll', $property->id) }}"
+                                            class="btn btn-danger">Xóa tất cả</a>
                                     </div>
                                 </div>
                             </div>
@@ -245,12 +236,15 @@
 
             // Gán URL xóa cho modal xác nhận xóa ảnh
             var confirmDeleteModal = document.getElementById('confirmDeleteModal');
-            var deleteImageForm = document.getElementById('deleteImageForm');
 
             confirmDeleteModal.addEventListener('show.bs.modal', function(event) {
-                var button = event.relatedTarget;
-                var imageId = button.getAttribute('data-id');
-                deleteImageForm.action = `/admin/property/images/delete/${imageId}`;
+                var button = event.relatedTarget; // Nút vừa được nhấn
+                var propertyId = button.getAttribute('data-property-id'); // Lấy propertyId
+                var imageId = button.getAttribute('data-image-id'); // Lấy imageId
+
+                // Gán đường dẫn xóa ảnh vào modal (có cả propertyId và imageId)
+                var deleteUrl = `/admin/property/${propertyId}/images/delete/${imageId}`;
+                confirmDeleteModal.querySelector('.btn-danger').setAttribute('href', deleteUrl);
             });
         </script>
     @endsection

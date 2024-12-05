@@ -40,9 +40,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/{id}/edit', [PropertyController::class, 'edit'])->name('admin.property.edit');
         Route::put('/{id}/update', [PropertyController::class, 'update'])->name('admin.property.update');
         Route::get('/{id}/delete', [PropertyController::class, 'forceDelete'])->name('admin.property.delete');
-        Route::get('/{id}/images', [PropertyImageController::class, 'index'])->name('admin.property.images.index');
-        Route::post('/{id}/images/store', [PropertyImageController::class, 'store'])->name('admin.property.images.store');
-        Route::post('/{id}/images/delete', [PropertyImageController::class, 'delete'])->name('admin.property.images.delete');
-        Route::post('/{id}/images/deleteAll', [PropertyImageController::class, 'deleteAll'])->name('admin.property.images.deleteAll');
+        Route::get('/{propertyId}/images', [PropertyImageController::class, 'index'])->name('admin.property.images.index');
+        Route::post('/{propertyId}/images/store', [PropertyImageController::class, 'store'])->name('admin.property.images.store');
+        Route::get('/{propertyId}/images/delete/{id}', [PropertyImageController::class, 'delete'])->name('admin.property.images.delete');
+        Route::get('/{propertyId}/images/deleteAll', [PropertyImageController::class, 'deleteAll'])->name('admin.property.images.deleteAll');
     });
 });

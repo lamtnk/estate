@@ -13,6 +13,11 @@ class PropertyImageService
         return PropertyImage::with('property')->where('property_id', $propertyId)->get();
     }
 
+    public function getImageById($id)
+    {
+        return PropertyImage::findOrFail($id);
+    }
+
     public function storeImage($propertyId, $image, $isPrimary)
     {
         // Tạo tên file duy nhất
@@ -30,5 +35,36 @@ class PropertyImageService
             'image_path' => $imagePath,
             'is_primary' => $isPrimary,
         ]);
+    }
+
+    public function deleteImage($id)
+    {
+        // Lấy thông tin ảnh cần xóa
+        $image = $this->getImageById($id);
+
+        // Xóa file vật lý trên server
+        $filePath = public_path($image->image_path);
+        if (file_exists($filePath)) {
+            unlink($filePath);
+        }
+
+        // Xóa bản ghi trong database
+        $image->delete();
+    }
+
+    public function deletePropertyImages($propertyId)
+    {
+        $images = $this->getPropertyImages($propertyId);
+
+        foreach ($images as $image) {
+            // Xóa tệp vật lý
+            $filePath = public_path($image->image_path);
+            if (file_exists($filePath)) {
+                unlink($filePath);
+            }
+
+            // Xóa bản ghi trong db
+            $image->delete();
+        }
     }
 }

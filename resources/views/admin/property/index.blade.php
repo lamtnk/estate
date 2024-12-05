@@ -72,17 +72,54 @@
                                                 class="btn btn-info">Kho ảnh</a>
                                             <a href="{{ route('admin.property.edit', $property->id) }}"
                                                 class="btn btn-warning">Sửa</a>
-                                            <a href="{{ route('admin.property.delete', $property->id) }}"
-                                                class="btn btn-danger">Xóa</a>
+                                            <a href="#" class="btn btn-danger" data-bs-toggle="modal"
+                                                data-bs-target="#confirmDeleteModal" data-id="{{ $property->id }}">Xóa</a>
                                         </td>
                                     </tr>
                                 @endforeach
 
                             </tbody>
                         </table>
+
+                        <!-- Modal xác nhận xóa -->
+                        <div class="modal fade" id="confirmDeleteModal" tabindex="-1"
+                            aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="confirmDeleteModalLabel">Xác nhận xóa</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Bạn có chắc chắn muốn xóa bất động sản này không?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Hủy</button>
+                                        <a href="#" class="btn btn-danger">Xóa</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
             </section>
         </div>
+    @endsection
+
+    @section('scripts')
+        <script>
+            // Khi mở modal xác nhận xóa
+            var confirmDeleteModal = document.getElementById('confirmDeleteModal');
+
+            confirmDeleteModal.addEventListener('show.bs.modal', function(event) {
+                var button = event.relatedTarget; // Nút vừa được nhấn
+                var propertyId = button.getAttribute('data-id'); // Lấy ID bất động sản
+
+                // Gán đường dẫn xóa bất động sản
+                var deleteUrl = `/admin/property/${propertyId}/delete`;
+                confirmDeleteModal.querySelector('.btn-danger').setAttribute('href', deleteUrl);
+            });
+        </script>
     @endsection

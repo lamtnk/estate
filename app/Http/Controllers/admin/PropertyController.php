@@ -117,7 +117,8 @@ class PropertyController extends Controller
     public function forceDelete($id)
     {
         try {
-            $this->propertyService->deleteProperty($id);
+            $this->propertyService->deleteProperty($id); // xóa bất động sản
+            $this->propertyImageService->deletePropertyImages($id); // xóa toàn bộ ảnh của bất động sản
         } catch (\Throwable $th) {
             // Neu co loi khi xoa thi quay lai form va thong bao loi
             return redirect()->back()->with('error', 'Lỗi trong quá trình sửa bất động sản');
