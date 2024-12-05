@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\NewsController;
 use App\Http\Controllers\admin\ProjectController;
+use App\Models\News;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +24,15 @@ Route::get('/', function () {
 Route::prefix('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
 
+    // Route Tin tức
+    Route::prefix('news')->group(function (){
+        Route::get('/', [NewsController::class, 'index'])->name('admin.news.index');
+        Route::get('/add', [NewsController::class, 'showAddNew'])->name('admin.news.show_add');
+        Route::post('/add', [NewsController::class, 'addNew'])->name('admin.news.add');
+        Route::get('/edit', [NewsController::class, 'showEditNew'])->name('admin.news.show_edit');
+        Route::put('/edit/{id}', [NewsController::class, 'editNew'])->name('admin.news.edit');
+        Route::get('/delete/{id}', [NewsController::class, 'deleteNew'])->name('admin.news.delete');
+    });
     Route::prefix('project')->group(function () {
         Route::get('/', [ProjectController::class, 'index'])->name('admin.project.index');
         Route::get('/add', [ProjectController::class, 'add'])->name('admin.project.show_add');
