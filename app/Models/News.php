@@ -19,7 +19,7 @@ class News extends Model
     ];
 
     // Quan hệ N-1: Mỗi bài viết được viết bởi một người dùng
-    public function author()
+    public function User()
     {
         return $this->belongsTo(User::class, 'author_id');
     }
