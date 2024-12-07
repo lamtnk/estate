@@ -39,11 +39,11 @@
                         <table class="table table-striped table-bordered" id="table1">
                             <thead>
                                 <tr>
-                                    <th class="col-1">Tiêu đề</th>
-                                    <th class="col-3">Nội dung</th>
-                                    <th class="col-3">Ảnh</th>
-                                    <th class="col-1">Thuộc dự án</th>
-                                    <th class="col-1">Người đăng bài</th>
+                                    <th class="col-2">Tiêu đề</th>
+                                    <th class="col-2">Ảnh</th>
+                                    <th class="col-2">Thuộc dự án</th>
+                                    <th class="col-2">Người đăng bài</th>
+                                    <th class="col-2">Ngày xuất bản</th>
                                     <th class="col-2">Hành động</th>
                                 </tr>
                             </thead>
@@ -52,10 +52,10 @@
                                 @foreach ($news as $new)
                                     <tr>
                                         <td>{{ $new->title }}</td>
-                                        <td>{{ $new->content }}</td>
-                                        <td><img src="{{ url('assets/images/thumb') . '/' . $new->image }}" alt="" style="width: 100px; height: auto;"></td>
+                                        <td class="text-center"><img src="{{ url('assets/images/thumb') . '/' . $new->image }}" alt="" style="width: 150px; height: auto;"></td>
                                         <td>{{ $new->Project->name }}</td>
                                         <td>{{ $new->User->name }}</td>
+                                        <td>{{ $new->published_at }}</td>
                                         <td class="text-center">
                                             <a href="{{ route('admin.news.show_edit', ['id' => $new->id]) }}" class="btn btn-info">Sửa</a>
                                             <a href="{{ route('admin.news.delete', ['id' => $new->id]) }}"

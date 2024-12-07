@@ -18,6 +18,10 @@ class News extends Model
         'project_id',
     ];
 
+    protected $casts = [
+        'published_at' => 'datetime',
+    ];
+
     // Quan hệ N-1: Mỗi bài viết được viết bởi một người dùng
     public function User()
     {

@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique(); // Tên thẻ
+            $table->tinyInteger('status')->default(1);
             $table->timestamps();
         });
     }

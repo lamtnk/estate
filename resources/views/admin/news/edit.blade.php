@@ -2,6 +2,7 @@
 
 @section('styles')
     <link rel="stylesheet" href="{{ url('') }}/assets/vendors/summernote/summernote-lite.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
 @endsection
 
 @section('main')
@@ -16,13 +17,13 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-12 col-md-6 order-md-1 order-last">
-                        <h3>Sửa tin tức</h3>
+                        <h3>Chỉnh sửa Tin tức</h3>
                     </div>
                     <div class="col-12 col-md-6 order-md-2 order-first">
                         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="">Dashboard</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Thêm Dự Án</li>
+                                <li class="breadcrumb-item active" aria-current="page">Chỉnh sửa Tin tức</li>
                             </ol>
                         </nav>
                     </div>
@@ -33,7 +34,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Sửa tin tức</h4>
+                                <h4 class="card-title">Chỉnh sửa tin tức</h4>
                             </div>
                             <div class="card-body">
                                 {{-- Hiển thị thông báo lỗi --}}
@@ -47,47 +48,63 @@
                                     </div>
                                 @endif
 
-                                {{-- Form thêm dự án --}}
-                                <form action="{{ route('admin.news.edit', $new->id )}}" 
-                                    enctype="multipart/form-data" method="POST">
+                                {{-- Form chỉnh sửa tin tức --}}
+                                <form action="{{ route('admin.news.update', ['id' => $news->id]) }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
-                                    @method('PUT')
+                                    @method('PUT') {{-- Dùng PUT cho chỉnh sửa --}}
+
                                     <div class="mb-3">
                                         <label for="title" class="form-label">Tiêu đề</label>
                                         <input type="text" class="form-control" id="title" name="title"
-                                            value="{{ old('title', $new->title) }}" required>
+                                            value="{{ old('title', $news->title) }}" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="published_at" class="form-label">Ngày đăng bài</label>
                                         <input type="date" class="form-control" id="published_at" name="published_at"
-                                            value="{{ old('published_at', $new->published_at) }}">
+                                            value="{{ old('published_at', $news->published_at->format('Y-m-d')) }}">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="image">Hình ảnh (Bỏ trống nếu không muốn cập nhật ảnh)</label>
+                                        <label for="image">Hình ảnh</label>
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input" id="image" name="image">
                                         </div>
+                                        @if ($news->image)
+                                            <img src="{{ url('assets/images/thumb/' . $news->image) }}" alt="Image"
+                                                style="width: 100px; height: auto;" class="mt-2">
+                                        @endif
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="project_id">Chọn dự án</label>
-                                        <select class="form-control" id="project_id" name="project_id">
+                                        <label for="product_id">Chọn dự án</label>
+                                        <select class="form-control" id="product_id" name="project_id">
                                             @foreach ($projects as $project)
                                                 <option value="{{ $project->id }}"
-                                                    {{ $project['id'] == $new['project_id'] ? 'selected' : '' }}>
+                                                    {{ $news->project_id == $project->id ? 'selected' : '' }}>
                                                     {{ $project->name }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tags">Thẻ liên quan</label>
+                                        <select class="form-control selectpicker" id="tags" name="tags[]" multiple>
+                                            @foreach ($tags as $tag)
+                                                <option value="{{ $tag->id }}"
+                                                    {{ in_array($tag->id, $news->tags->pluck('id')->toArray()) ? 'selected' : '' }}>
+                                                    {{ $tag->name }}
                                                 </option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="mb-3">
                                         <label for="content" class="form-label">Nội Dung Chi Tiết</label>
-                                        <div id="summernote" class="form-control">{{ old('content', $new->content) }}</div>
-                                        <input type="hidden" id="content" name="content" value="{{ old('content') }}">
+                                        <div id="summernote" class="form-control">{!! old('content', $news->content) !!}
+                                        </div>
                                     </div>
-
-                                    <input type="hidden" name="author_id" value="{{ $new->author_id }}">
-                                    <button type="submit" class="btn btn-warning">Sửa Dự Án</button>
+                                    <input type="hidden" name="content" id="content">
+                                    <input type="hidden" name="id" value="{{$news->id}}">
+                                    <button type="submit" class="btn btn-primary">Cập nhật</button>
                                 </form>
                             </div>
                         </div>
@@ -99,23 +116,33 @@
 
     @section('scripts')
         <script src="{{ url('') }}/assets/vendors/summernote/summernote-lite.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
         <script>
-            $('#summernote').summernote({
-                tabsize: 2,
-                height: 300,
-                placeholder: 'Nhập nội dung chi tiết của dự án...',
-                callbacks: {
-                    onChange: function(contents, $editable) {
-                        // Cập nhật giá trị của trường ẩn mỗi khi có thay đổi
-                        $('#content').val(contents);
-                    }
-                }
-            });
+            $(document).ready(function() {
+                // Khởi tạo Choices.js
+                const element = document.querySelector('.selectpicker');
+                const choices = new Choices(element, {
+                    searchEnabled: true, // Bật tìm kiếm
+                });
 
-            // Trước khi submit form, đảm bảo nội dung Summernote được lưu vào trường ẩn
-            $('form').on('submit', function() {
-                var content = $('#summernote').summernote('code'); // Lấy nội dung HTML từ Summernote
-                $('#content').val(content); // Gán nội dung vào trường ẩn
+                // Khởi tạo Summernote
+                $('#summernote').summernote({
+                    tabsize: 2,
+                    height: 300,
+                    placeholder: 'Nhập nội dung chi tiết...',
+                    callbacks: {
+                        onChange: function(contents, $editable) {
+                            // Cập nhật giá trị của trường ẩn mỗi khi có thay đổi
+                            $('#content').val(contents);
+                        }
+                    }
+                });
+
+                // Trước khi submit form, đảm bảo nội dung Summernote được lưu vào trường ẩn
+                $('form').on('submit', function() {
+                    var content = $('#summernote').summernote('code'); // Lấy nội dung HTML từ Summernote
+                    $('#content').val(content); // Gán nội dung vào trường ẩn
+                });
             });
         </script>
     @endsection

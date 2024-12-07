@@ -16,13 +16,13 @@
             <div class="page-title">
                 <div class="row">
                     <div class="col-12 col-md-6 order-md-1 order-last">
-                        <h3>Thêm Dự Án</h3>
+                        <h3>Thêm Tin tức</h3>
                     </div>
                     <div class="col-12 col-md-6 order-md-2 order-first">
                         <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="">Dashboard</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Thêm Dự Án</li>
+                                <li class="breadcrumb-item active" aria-current="page">Thêm Tin tức</li>
                             </ol>
                         </nav>
                     </div>
@@ -66,7 +66,7 @@
                                             <input type="file" class="custom-file-input" id="image" name="image">
                                         </div>
                                     </div>
-                                    
+
                                     <div class="form-group">
                                         <label for="product_id">Chọn dự án</label>
                                         <select class="form-control" id="product_id" name="project_id">
@@ -77,14 +77,25 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                    <div class="form-group">
+                                        <label for="tags">Thẻ liên quan</label>
+                                        <select class="form-control selectpicker" id="tags" name="tags[]" multiple
+                                            data-live-search="true">
+                                            @foreach ($tags as $tag)
+                                                <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                     <div class="mb-3">
                                         <label for="content" class="form-label">Nội Dung Chi Tiết</label>
                                         <div id="summernote" class="form-control">{{ old('content') }}</div>
                                         <input type="hidden" id="content" name="content" value="{{ old('content') }}">
                                     </div>
 
+
+
                                     {{-- <input type="hidden" name="user_id" value="{{ Auth::user()->id }}"> --}}
-                                    <button type="submit" class="btn btn-primary">Thêm Dự Án</button>
+                                    <button type="submit" class="btn btn-primary">Thêm</button>
                                 </form>
                             </div>
                         </div>
@@ -97,22 +108,35 @@
     @section('scripts')
         <script src="{{ url('') }}/assets/vendors/summernote/summernote-lite.min.js"></script>
         <script>
-            $('#summernote').summernote({
-                tabsize: 2,
-                height: 300,
-                placeholder: 'Nhập nội dung chi tiết của dự án...',
-                callbacks: {
-                    onChange: function(contents, $editable) {
-                        // Cập nhật giá trị của trường ẩn mỗi khi có thay đổi
-                        $('#content').val(contents);
-                    }
-                }
-            });
+            $(document).ready(function() {
+                // Initialize selectpicker
+                // $('.selectpicker').selectpicker();
 
-            // Trước khi submit form, đảm bảo nội dung Summernote được lưu vào trường ẩn
-            $('form').on('submit', function() {
-                var content = $('#summernote').summernote('code'); // Lấy nội dung HTML từ Summernote
-                $('#content').val(content); // Gán nội dung vào trường ẩn
+
+                // Initialize Summernote
+                $('#summernote').summernote({
+                    tabsize: 2,
+                    height: 300,
+                    placeholder: 'Nhập nội dung chi tiết của dự án...',
+                    callbacks: {
+                        onChange: function(contents, $editable) {
+                            // Cập nhật giá trị của trường ẩn mỗi khi có thay đổi
+                            $('#content').val(contents);
+                        }
+                    }
+                });
+
+                // Trước khi submit form, đảm bảo nội dung Summernote được lưu vào trường ẩn
+                $('form').on('submit', function() {
+                    var content = $('#summernote').summernote('code'); // Lấy nội dung HTML từ Summernote
+                    $('#content').val(content); // Gán nội dung vào trường ẩn
+                });
+            });
+            document.addEventListener('DOMContentLoaded', function() {
+                const element = document.querySelector('.selectpicker');
+                const choices = new Choices(element, {
+                    searchEnabled: true, // Bật tìm kiếm
+                });
             });
         </script>
     @endsection
