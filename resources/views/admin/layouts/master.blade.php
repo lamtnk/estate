@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="{{ url('') }}/assets/vendors/bootstrap-icons/bootstrap-icons.css">
     <link rel="stylesheet" href="{{ url('') }}/assets/css/app.css">
     <link rel="shortcut icon" href="{{ url('') }}/assets/images/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css">
 
     <!-- Thêm CSS từ section 'styles' nếu có -->
     @yield('styles')
@@ -88,6 +90,9 @@
     <script src="{{ url('') }}/assets/vendors/apexcharts/apexcharts.js"></script>
     <script src="{{ url('') }}/assets/vendors/jquery/jquery.min.js"></script>
     <script src="{{ url('') }}/assets/vendors/simple-datatables/simple-datatables.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script>
+
     <script>
         // Simple Datatable
         let table1 = document.querySelector('#table1');
