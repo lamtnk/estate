@@ -10,14 +10,19 @@ class Property extends Model
     use HasFactory;
 
     protected $fillable = [
+        'unit_code',
         'project_id',
         'type_id',
         'name',
         'area',
+        'frontage',
+        'floor_1_area',
         'price',
         'bedrooms',
         'bathrooms',
+        'parking',
         'description',
+        'content',
         'status',
     ];
 

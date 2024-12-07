@@ -3,6 +3,8 @@
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\NewsController;
 use App\Http\Controllers\admin\ProjectController;
+use App\Http\Controllers\admin\PropertyController;
+use App\Http\Controllers\admin\PropertyImageController;
 use App\Http\Controllers\admin\TagController;
 use App\Models\News;
 use Illuminate\Support\Facades\Route;
@@ -26,7 +28,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
 
     // Route Tin tức
-    Route::prefix('news')->group(function (){
+    Route::prefix('news')->group(function () {
         Route::get('/', [NewsController::class, 'index'])->name('admin.news.index');
         Route::get('/add', [NewsController::class, 'showAddNew'])->name('admin.news.show_add');
         Route::post('/add', [NewsController::class, 'addNew'])->name('admin.news.add');
@@ -42,6 +44,20 @@ Route::prefix('admin')->group(function () {
         Route::put('edit/{id}', [ProjectController::class, 'update'])->name('admin.project.update');
         Route::post('/hide/{status}', [ProjectController::class, 'index'])->name('admin.project.hide');
     });
+
+    Route::prefix('property')->group(function () {
+        Route::get('/', [PropertyController::class, 'index'])->name('admin.property.index');
+        Route::get('/add', [PropertyController::class, 'add'])->name('admin.property.show_add');
+        Route::post('/store', [PropertyController::class, 'store'])->name('admin.property.store');
+        Route::get('/{id}/edit', [PropertyController::class, 'edit'])->name('admin.property.edit');
+        Route::put('/{id}/update', [PropertyController::class, 'update'])->name('admin.property.update');
+        Route::get('/{id}/delete', [PropertyController::class, 'forceDelete'])->name('admin.property.delete');
+        Route::get('/{propertyId}/images', [PropertyImageController::class, 'index'])->name('admin.property.images.index');
+        Route::post('/{propertyId}/images/store', [PropertyImageController::class, 'store'])->name('admin.property.images.store');
+        Route::get('/{propertyId}/images/delete/{id}', [PropertyImageController::class, 'delete'])->name('admin.property.images.delete');
+        Route::get('/{propertyId}/images/deleteAll', [PropertyImageController::class, 'deleteAll'])->name('admin.property.images.deleteAll');
+    });
+
     Route::prefix('tag')->group(function () {
         Route::get('/', [TagController::class, 'index'])->name('admin.tag.index');
         Route::get('/add', [TagController::class, 'add'])->name('admin.tag.show_add');
