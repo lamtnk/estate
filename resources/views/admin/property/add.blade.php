@@ -89,12 +89,12 @@
 
                                     <div class="row mb-3">
                                         <div class="col-md-6">
-                                            <label for="area" class="form-label">Diện Tích Đất</label>
+                                            <label for="area" class="form-label">Diện Tích Đất (m2)</label>
                                             <input type="number" class="form-control" id="area" name="area"
                                                 value="{{ old('area') }}" required>
                                         </div>
                                         <div class="col-md-6">
-                                            <label for="floor_1_area" class="form-label">Diện Tích Xây Dựng</label>
+                                            <label for="floor_1_area" class="form-label">Diện Tích Xây Dựng (m2)</label>
                                             <input type="number" class="form-control" id="floor_1_area" name="floor_1_area"
                                                 value="{{ old('floor_1_area') }}">
                                         </div>
@@ -132,22 +132,6 @@
                                     </div>
 
                                     <div class="row mb-3">
-                                        <div class="col-md-3">
-                                            <label for="price" class="form-label">Giá Bất Động Sản</label>
-                                            <input type="number" class="form-control" id="price" name="price"
-                                                value="{{ old('price') }}" required>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label for="price_type" class="form-label">Đơn vị</label>
-                                            <select class="form-select" id="price_type" name="price_type">
-                                                <option value="1" {{ old('price_type') == '1' ? 'selected' : '' }}>
-                                                    VND</option>
-                                                <option value="2" {{ old('price_type') == '2' ? 'selected' : '' }}>
-                                                    m2</option>
-                                                <option value="3" {{ old('price_type') == '3' ? 'selected' : '' }}>
-                                                    Thỏa thuận</option>
-                                            </select>
-                                        </div>
                                         <div class="col-md-6">
                                             <label for="status" class="form-label">Tình Trạng</label>
                                             <select class="form-select" id="status" name="status">
@@ -165,15 +149,6 @@
                                                     Trích đo</option>
                                             </select>
                                         </div>
-                                    </div>
-
-                                    <div class="row mb-3">
-                                        <div class="col-md-6">
-                                            <div id="calculated-price" class="mt-2 text-muted" style="display: none;">
-                                                <i class="bi bi-info-circle"></i>
-                                                <span id="price-calculation-result"></span>
-                                            </div>
-                                        </div>
                                         <div class="col-md-6">
                                             <label for="deal_type" class="form-label">Loại hình giao dịch</label>
                                             <select class="form-select" id="deal_type" name="deal_type">
@@ -185,9 +160,35 @@
                                         </div>
                                     </div>
 
+                                    <div class="row mb-3">
+                                        <div class="col-md-3">
+                                            <label for="price_type" class="form-label">Đơn vị</label>
+                                            <select class="form-select" id="price_type" name="price_type">
+                                                <option value="1" {{ old('price_type') == '1' ? 'selected' : '' }}>
+                                                    VND</option>
+                                                <option value="2" {{ old('price_type') == '2' ? 'selected' : '' }}>
+                                                    m2</option>
+                                                <option value="3" {{ old('price_type') == '3' ? 'selected' : '' }}>
+                                                    Thỏa thuận</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="price" class="form-label">Giá Bất Động Sản</label>
+                                            <input type="number" class="form-control" id="price" name="price"
+                                                value="{{ old('price') }}" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="" class="form-label"></label>
+                                            <div id="calculated-price" class="mt-2 text-muted" style="display: none;">
+                                                <i class="bi bi-info-circle"></i>
+                                                <span id="price-calculation-result"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="mb-3">
                                         <label for="description" class="form-label">Mô Tả</label>
-                                        <textarea class="form-control" id="description" name="description" rows="3">{{ old('description') }}</textarea>
+                                        <textarea class="form-control" id="description" name="description" rows="5">{{ old('description') }}</textarea>
                                     </div>
                                     <div class="mb-3">
                                         <label for="image" class="form-label">Ảnh bất động sản</label>
