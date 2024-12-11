@@ -19,11 +19,14 @@ class PropertySeeder extends Seeder
             'frontage' => 10, // Mặt tiền 10m
             'floor_1_area' => 150, // Diện tích sàn tầng 1
             'price' => 15000000000, // Giá 15 tỷ
+            'price_type' => 1,
+            'deal_type' => 'sell',
+            'number_of_floors' => 1,
             'bedrooms' => 4,
             'bathrooms' => 4,
             'parking' => 2, // Có 2 chỗ đậu xe
             'description' => 'This is a luxurious villa located in the city center with a swimming pool, garden, and security...',
-            'status' => 'available',
+            'status' => 'red book',
             'unit_code' => 'VILLA-001', // Mã căn cho bất động sản
         ]);
 
@@ -55,11 +58,14 @@ class PropertySeeder extends Seeder
             'frontage' => 5, // Mặt tiền 5m
             'floor_1_area' => 80, // Diện tích sàn tầng 1
             'price' => 5000000000, // Giá 5 tỷ
+            'price_type' => 1,
+            'deal_type' => 'sell',
+            'number_of_floors' => 1,
             'bedrooms' => 2,
             'bathrooms' => 2,
             'parking' => 1, // Có 1 chỗ đậu xe
             'description' => 'This modern apartment is located near the beach, offering stunning sea views and all modern amenities.',
-            'status' => 'available',
+            'status' => 'red book',
             'unit_code' => 'APT-002', // Mã căn cho bất động sản
         ]);
 
@@ -91,11 +97,14 @@ class PropertySeeder extends Seeder
             'frontage' => 8, // Mặt tiền 8m
             'floor_1_area' => 50, // Diện tích sàn tầng 1
             'price' => 2000000000, // Giá 2 tỷ
+            'price_type' => 1,
+            'deal_type' => 'sell',
+            'number_of_floors' => 1,
             'bedrooms' => 2,
             'bathrooms' => 1,
             'parking' => 1, // Có 1 chỗ đậu xe
             'description' => 'A cozy 2-bedroom apartment located in the quiet suburbs, perfect for families.',
-            'status' => 'rented',
+            'status' => 'red book',
             'unit_code' => 'APT-003', // Mã căn cho bất động sản
         ]);
 
