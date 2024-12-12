@@ -42,10 +42,11 @@
                                     <th class="col-1">Dự án</th>
                                     <th class="col-1">Loại BDS</th>
                                     <th class="col-2">Tên BDS</th>
-                                    <th class="col-1">Giá (VND)</th>
+                                    {{-- <th class="col-1">Giá (VND)</th> --}}
                                     <th class="col-1">Tổng diện tích (m2)</th>
                                     <th class="col-3">Mô tả</th>
                                     <th class="col-1">Tình trạng</th>
+                                    <th class="col-1">Loại giao dịch</th>
                                     <th class="col-2">Hành động</th>
                                 </tr>
                             </thead>
@@ -55,18 +56,20 @@
                                         <td>{{ $property->project->name }}</td>
                                         <td>{{ $property->propertyType->name }}</td>
                                         <td>{{ $property->name }}</td>
-                                        <td>{{ round($property->price) }}</td>
+                                        {{-- <td>{{ round($property->price) }}</td> --}}
                                         <td>{{ $property->area }}</td>
                                         <td>{{ $property->description }}</td>
                                         <td>
                                             <span
                                                 class="badge
-                                                @if ($property->status == 'available') bg-success
-                                                @elseif($property->status == 'rented') bg-primary
-                                                @else bg-secondary @endif">
+                                                @if ($property->status == 'red book') bg-success
+                                                @elseif($property->status == 'sale contract') bg-primary
+                                                @elseif($property->status == 'pending red book') bg-warning
+                                                @else bg-danger @endif">
                                                 {{ ucfirst($property->status) }}
                                             </span>
                                         </td>
+                                        <td>{{ $property->deal_type }}</td>
                                         <td class="text-center">
                                             <a href="{{ route('admin.property.images.index', $property->id) }}"
                                                 class="btn btn-info">Kho ảnh</a>

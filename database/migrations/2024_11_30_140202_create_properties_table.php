@@ -18,12 +18,15 @@ class CreatePropertiesTable extends Migration
             $table->float('frontage')->nullable(); // Mặt tiền sử dụng
             $table->float('floor_1_area')->nullable(); // Diện tích sàn tầng 1
             $table->decimal('price', 15, 2); // Giá
+            $table->integer('price_type'); //  Kiểu tính giá
+            $table->enum('deal_type', ['sell', 'rent']); // Loại hình giao dịch
+            $table->integer('number_of_floors'); // Số tầng
             $table->integer('bedrooms'); // Số phòng ngủ
             $table->integer('bathrooms'); // Số phòng tắm
             $table->integer('parking')->nullable(); // Chỗ đậu xe
             $table->text('description'); // Mô tả chi tiết (bao gồm tính năng)
             $table->longText('content')->nullable();
-            $table->enum('status', ['available', 'sold', 'rented']); // Trạng thái
+            $table->enum('status', ['red book', 'pending red book', 'sale contract', 'land measurement extract']); // Tình trạng pháp lý
             $table->timestamps();
         });
     }
