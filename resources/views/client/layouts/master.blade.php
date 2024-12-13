@@ -79,7 +79,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><img src="{{ url('') }}/cassets/img/logo.png" alt=""></a>
+                <a class="navbar-brand" href="index.html"><img src="{{ url('') }}/cassets/img/logo.png" width="10%" alt=""></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
