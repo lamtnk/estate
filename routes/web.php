@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\ContactController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\NewsController;
 use App\Http\Controllers\admin\ProjectController;
@@ -66,5 +67,9 @@ Route::prefix('admin')->group(function () {
         Route::put('edit/{id}', [TagController::class, 'update'])->name('admin.tag.update');
         Route::post('destroy/{id}', [TagController::class, 'destroy'])->name('admin.tag.destroy');
         Route::post('restore/{id}', [TagController::class, 'restore'])->name('admin.tag.restore');
+    });
+
+    Route::prefix('contact')->group(function () {
+        Route::get('/', [ContactController::class, 'index'])->name('admin.contact.index');
     });
 });
