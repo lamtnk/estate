@@ -65,6 +65,13 @@
                             </a>
                         </li>
 
+                        <li class="sidebar-item {{ request()->routeIs('admin.contact.index') ? 'active' : '' }}">
+                            <a href="{{ route('admin.contact.index') }}" class='sidebar-link'>
+                                <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                <span>Liên hệ</span>
+                            </a>
+                        </li>
+
                     </ul>
                 </div>
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
