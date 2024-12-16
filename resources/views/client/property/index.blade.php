@@ -19,19 +19,37 @@
                     <div class="section clear">
                         <div class="col-xs-10 page-subheader sorting pl0">
                             <ul class="sort-by-list">
-                                <li class="active">
-                                    <a href="javascript:void(0);" class="order_by_date" data-orderby="property_date"
-                                        data-order="ASC">
-                                        Ngày Đăng <i class="fa fa-sort-amount-asc"></i>
+                                <li>
+                                    <a href="{{ route(
+                                        'client.property.index',
+                                        array_merge(request()->except(['order_by', 'order']), [
+                                            'order_by' => 'created_at',
+                                            'order' => request('order_by') == 'created_at' && request('order') == 'ASC' ? 'DESC' : 'ASC',
+                                        ]),
+                                    ) }}"
+                                        class="{{ request('order_by') == 'created_at' ? 'active' : '' }}">
+                                        Ngày Đăng
+                                        <i
+                                            class="fa {{ request('order_by') == 'created_at' && request('order') == 'ASC' ? 'fa-sort-amount-desc' : 'fa-sort-amount-asc' }}"></i>
                                     </a>
                                 </li>
-                                <li class="">
-                                    <a href="javascript:void(0);" class="order_by_price" data-orderby="property_price"
-                                        data-order="DESC">
-                                        Giá <i class="fa fa-sort-numeric-desc"></i>
+                                <li>
+                                    <a href="{{ route(
+                                        'client.property.index',
+                                        array_merge(request()->except(['order_by', 'order']), [
+                                            'order_by' => 'price',
+                                            'order' => request('order_by') == 'price' && request('order') == 'ASC' ? 'DESC' : 'ASC',
+                                        ]),
+                                    ) }}"
+                                        class="{{ request('order_by') == 'price' ? 'active' : '' }}">
+                                        Giá
+                                        <i
+                                            class="fa {{ request('order_by') == 'price' && request('order') == 'ASC' ? 'fa-sort-amount-desc' : 'fa-sort-amount-asc' }}"></i>
                                     </a>
                                 </li>
-                            </ul><!--/ .sort-by-list-->
+                            </ul>
+                            <!--/ .sort-by-list-->
+
                             <div class="items-per-page">
                                 <label for="items_per_page"><b>Hiển thị trên trang :</b></label>
                                 <div class="sel">
@@ -86,7 +104,8 @@
                                                 @if ($property->price_type == 1)
                                                     {{ number_format($property->price, 0, ',', '.') }} VND
                                                 @elseif ($property->price_type == 2)
-                                                    {{ number_format($property->price, 0, ',', '.') }} / m2
+                                                    {{ number_format($property->price * $property->area, 0, ',', '.') }}
+                                                    VND
                                                 @else
                                                     Thỏa thuận
                                                 @endif
@@ -162,8 +181,7 @@
                                     <fieldset>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <select name="transaction_type" class="selectpicker"
-                                                    title="Loại hình giao dịch">
+                                                <select name="deal_type" class="selectpicker" title="Loại hình giao dịch">
                                                     <option value="">Tất cả</option>
                                                     <option value="sell">Giao bán</option>
                                                     <option value="rent">Cho thuê</option>
@@ -318,4 +336,12 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $('.selectpicker').selectpicker({
+            container: 'body' // Đảm bảo dropdown của select luôn hiển thị đầy đủ
+        });
+    </script>
 @endsection

@@ -30,8 +30,8 @@ class PropertyController extends Controller
         $filters = [
             'province' => $request->input('province'),
             'project_id' => $request->input('project'),
-            'transaction_type' => $request->input('transaction_type'),
-            'property_type_id' => $request->input('property_type'),
+            'deal_type' => $request->input('deal_type'),
+            'property_type' => $request->input('property_type'),
             'price_min' => $request->input('price_min'),
             'price_max' => $request->input('price_max'),
             'area_min' => $request->input('area_min'),
@@ -40,8 +40,13 @@ class PropertyController extends Controller
             'bathrooms' => $request->input('bathrooms'),
         ];
 
-        // Lấy danh sách bất động sản với bộ lọc và phân trang
-        $properties = $this->propertyService->searchProperties($filters, $perPage);
+        // Lấy thông tin sắp xếp từ request
+        $orderBy = $request->input('order_by', 'created_at'); // Mặc định sắp xếp theo ngày đăng
+        $order = $request->input('order', 'DESC'); // Mặc định là giảm dần
+
+        // Lấy danh sách bất động sản với bộ lọc, phân trang, và sắp xếp
+        $properties = $this->propertyService->searchProperties($filters, $perPage, $orderBy, $order);
+
 
         // Lấy danh sách dự án và loại hình bất động sản để đổ select box
         $propertyTypes = $this->propertyTypeService->getAllPropertyTypes();

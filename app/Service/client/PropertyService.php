@@ -30,7 +30,7 @@ class PropertyService
     }
 
     // tìm kiếm bất động sản theo bộ lọc
-    public function searchProperties(array $filters, $perPage)
+    public function searchProperties(array $filters, $perPage, $orderBy = 'created_at', $order = 'DESC')
     {
         $query = Property::with(['images', 'primaryImage']);
 
@@ -45,13 +45,13 @@ class PropertyService
         }
 
         // Bộ lọc theo loại hình giao dịch
-        if (!empty($filters['transaction_type'])) {
-            $query->where('transaction_type', $filters['transaction_type']);
+        if (!empty($filters['deal_type'])) {
+            $query->where('deal_type', $filters['deal_type']);
         }
 
         // Bộ lọc theo loại hình bất động sản
-        if (!empty($filters['property_type_id'])) {
-            $query->where('property_type_id', $filters['property_type_id']);
+        if (!empty($filters['property_type'])) {
+            $query->where('type_id', $filters['property_type']);
         }
 
         // Bộ lọc theo giá
@@ -78,6 +78,22 @@ class PropertyService
         // Bộ lọc theo số phòng tắm
         if (!empty($filters['bathrooms'])) {
             $query->where('bathrooms', '>=', $filters['bathrooms']);
+        }
+
+        // Sắp xếp theo cột và thứ tự
+        // Sắp xếp theo giá
+        if ($orderBy === 'price') {
+            $query->orderByRaw("
+            CASE
+                WHEN price_type = 1 THEN price
+                WHEN price_type = 2 THEN price * area
+                ELSE NULL
+            END {$order},
+            price_type = 3 ASC
+        ");
+        } else {
+            // Sắp xếp mặc định
+            $query->orderBy($orderBy, $order);
         }
 
         return $query->paginate($perPage);

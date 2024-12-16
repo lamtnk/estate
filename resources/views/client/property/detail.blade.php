@@ -286,10 +286,12 @@
                                         <h1 class="property-title">{{ $property->name }}</h1>
 
                                         <span class="property-price">
-                                            @if ($property->price_type == 3)
-                                                Thỏa thuận
-                                            @else
+                                            @if ($property->price_type == 1)
                                                 {{ number_format($property->price, 0, ',', '.') }} VND
+                                            @elseif ($property->price_type == 2)
+                                                {{ number_format($property->price * $property->area, 0, ',', '.') }} VND
+                                            @else
+                                                Thỏa thuận
                                             @endif
                                         </span>
                                     </div>
@@ -429,7 +431,7 @@
                                     <fieldset>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <select name="transaction_type" class="selectpicker"
+                                                <select name="deal_type" class="selectpicker"
                                                     title="Loại hình giao dịch">
                                                     <option value="">Tất cả</option>
                                                     <option value="sell">Giao bán</option>
@@ -543,6 +545,10 @@
                 },
                 thumbMargin: 10, // Thêm khoảng cách giữa các thumbnail
             });
+        });
+
+        $('.selectpicker').selectpicker({
+            container: 'body' // Đảm bảo dropdown của select luôn hiển thị đầy đủ
         });
     </script>
 @endsection
