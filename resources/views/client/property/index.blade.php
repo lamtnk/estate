@@ -37,21 +37,21 @@
                                 <div class="sel">
                                     <form action="{{ route('client.property.index') }}" method="get">
                                         <select id="items_per_page" name="per_page" onchange="this.form.submit()">
-                                            <option value="3" {{ request('per_page') == 3 ? 'selected' : '' }}>3
+                                            <option value="3" {{ request('per_page', 12) == 3 ? 'selected' : '' }}>3
                                             </option>
-                                            <option value="6" {{ request('per_page') == 6 ? 'selected' : '' }}>6
+                                            <option value="6" {{ request('per_page', 12) == 6 ? 'selected' : '' }}>6
                                             </option>
-                                            <option value="9" {{ request('per_page') == 9 ? 'selected' : '' }}>9
+                                            <option value="9" {{ request('per_page', 12) == 9 ? 'selected' : '' }}>9
                                             </option>
-                                            <option value="12" {{ request('per_page') == 12 ? 'selected' : '' }}>12
+                                            <option value="12" {{ request('per_page', 12) == 12 ? 'selected' : '' }}>12
+                                            </option> <!-- Mặc định là 12 -->
+                                            <option value="15" {{ request('per_page', 12) == 15 ? 'selected' : '' }}>15
                                             </option>
-                                            <option value="15" {{ request('per_page') == 15 ? 'selected' : '' }}>15
+                                            <option value="30" {{ request('per_page', 12) == 30 ? 'selected' : '' }}>30
                                             </option>
-                                            <option value="30" {{ request('per_page') == 30 ? 'selected' : '' }}>30
+                                            <option value="45" {{ request('per_page', 12) == 45 ? 'selected' : '' }}>45
                                             </option>
-                                            <option value="45" {{ request('per_page') == 45 ? 'selected' : '' }}>45
-                                            </option>
-                                            <option value="60" {{ request('per_page') == 60 ? 'selected' : '' }}>60
+                                            <option value="60" {{ request('per_page', 12) == 60 ? 'selected' : '' }}>60
                                             </option>
                                         </select>
                                     </form>
@@ -78,7 +78,8 @@
                                         </div>
 
                                         <div class="item-entry overflow">
-                                            <h5><a href="property-1.html"> {{ $property->name }} </a></h5>
+                                            <h5><a href="{{ route('client.property.detail', $property->id) }}">
+                                                    {{ $property->name }} </a></h5>
                                             <div class="dot-hr"></div>
                                             <span class="pull-left"><b>Diện tích :</b> {{ $property->area }}m </span>
                                             <span class="proerty-price pull-right">
@@ -120,167 +121,133 @@
                                 <h3 class="panel-title">Tìm Kiếm</h3>
                             </div>
                             <div class="panel-body search-widget">
-                                <form action="" class=" form-inline">
+                                <form action="{{ route('client.property.index') }}" method="get" class="form-inline">
+                                    <!-- Khu vực -->
                                     <fieldset>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <input type="text" class="form-control" placeholder="Key word">
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset>
-                                        <div class="row">
-                                            <div class="col-xs-6">
-
-                                                <select id="lunchBegins" class="selectpicker" data-live-search="true"
-                                                    data-live-search-style="begins" title="Select Your City">
-
-                                                    <option>New york, CA</option>
-                                                    <option>Paris</option>
-                                                    <option>Casablanca</option>
-                                                    <option>Tokyo</option>
-                                                    <option>Marraekch</option>
-                                                    <option>kyoto , shibua</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-xs-6">
-
-                                                <select id="basic" class="selectpicker show-tick form-control">
-                                                    <option> -Status- </option>
-                                                    <option>Rent </option>
-                                                    <option>Boy</option>
-                                                    <option>used</option>
-
+                                                <select name="province" class="selectpicker" data-live-search="true"
+                                                    title="Chọn khu vực">
+                                                    <option value="">Tất cả</option>
+                                                    <option>Hà Nội</option>
+                                                    <option>Hồ Chí Minh</option>
+                                                    <option>Đà Nẵng</option>
+                                                    <option>Cần Thơ</option>
+                                                    <option>Hải Phòng</option>
+                                                    <option>Bình Dương</option>
+                                                    <option>Hải Dương</option>
+                                                    <option>Vũng Tàu</option>
+                                                    <!-- Thêm các tỉnh thành khác nếu cần -->
                                                 </select>
                                             </div>
                                         </div>
                                     </fieldset>
 
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <label for="price-range">Price range (VND):</label>
-                                                <input type="text" class="span2" value="" data-slider-min="0"
-                                                    data-slider-max="600" data-slider-step="5"
-                                                    data-slider-value="[0,450]" id="price-range"><br />
-                                                <b class="pull-left color">100.000.000 VND</b>
-                                                <b class="pull-right color">100.000.000.000 VND</b>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <label for="property-geo">Property geo (m2) :</label>
-                                                <input type="text" class="span2" value="" data-slider-min="0"
-                                                    data-slider-max="600" data-slider-step="5"
-                                                    data-slider-value="[50,450]" id="property-geo"><br />
-                                                <b class="pull-left color">40m</b>
-                                                <b class="pull-right color">12000m</b>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <label for="price-range">Min baths :</label>
-                                                <input type="text" class="span2" value="" data-slider-min="0"
-                                                    data-slider-max="600" data-slider-step="5"
-                                                    data-slider-value="[250,450]" id="min-baths"><br />
-                                                <b class="pull-left color">1</b>
-                                                <b class="pull-right color">120</b>
-                                            </div>
-
-                                            <div class="col-xs-6">
-                                                <label for="property-geo">Min bed :</label>
-                                                <input type="text" class="span2" value="" data-slider-min="0"
-                                                    data-slider-max="600" data-slider-step="5"
-                                                    data-slider-value="[250,450]" id="min-bed"><br />
-                                                <b class="pull-left color">1</b>
-                                                <b class="pull-right color">120</b>
-
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox" checked>Fire Place</label>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox">Dual Sinks</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox" checked>Swimming Pool</label>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox" checked>2 Stories </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label><input type="checkbox">Laundry Room </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox">Emergency Exit</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox" checked>Jog Path </label>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox">26' Ceilings </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
-                                    <fieldset class="padding-5">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <div class="checkbox">
-                                                    <label> <input type="checkbox">Hurricane Shutters </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </fieldset>
-
+                                    <!-- Dự án -->
                                     <fieldset>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <input class="button btn largesearch-btn" value="Search" type="submit">
+                                                <select name="project" class="selectpicker" data-live-search="true"
+                                                    title="Dự án">
+                                                    <option value="">Tất cả</option>
+                                                    @foreach ($projects as $project)
+                                                        <option value="{{ $project->id }}">{{ $project->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <!-- Loại hình giao dịch -->
+                                    <fieldset>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <select name="transaction_type" class="selectpicker"
+                                                    title="Loại hình giao dịch">
+                                                    <option value="">Tất cả</option>
+                                                    <option value="sell">Giao bán</option>
+                                                    <option value="rent">Cho thuê</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <!-- Loại hình bất động sản -->
+                                    <fieldset>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <select name="property_type" class="selectpicker"
+                                                    title="Loại hình bất động sản">
+                                                    <option value="">Tất cả</option>
+                                                    @foreach ($propertyTypes as $propertyType)
+                                                        <option value="{{ $propertyType->id }}">{{ $propertyType->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <!-- Giá bán -->
+                                    <fieldset class="padding-5">
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <label for="price-min">Giá bán từ (VND):</label>
+                                                <input type="number" class="form-control" name="price_min"
+                                                    placeholder="Từ" value="" min="0">
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <label for="price-max">Giá bán đến (VND):</label>
+                                                <input type="number" class="form-control" name="price_max"
+                                                    placeholder="Đến" value="" min="0">
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <!-- Diện tích -->
+                                    <fieldset class="padding-5">
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <label for="property-area-min">Diện tích từ (m²):</label>
+                                                <input type="number" class="form-control" name="area_min"
+                                                    placeholder="Từ" value="" min="0">
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <label for="property-area-max">Diện tích đến (m²):</label>
+                                                <input type="number" class="form-control" name="area_max"
+                                                    placeholder="Đến" value="" min="0">
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <!-- Số phòng ngủ -->
+                                    <fieldset class="padding-5">
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <label for="min-bed">Số phòng ngủ:</label>
+                                                <input type="number" class="form-control" name="bedrooms"
+                                                    placeholder="Số phòng ngủ" value="" min="1">
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <label for="min-baths">Số phòng tắm:</label>
+                                                <input type="number" class="form-control" name="bathrooms"
+                                                    placeholder="Số phòng tắm" value="" min="1">
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    <!-- Nút tìm kiếm -->
+                                    <fieldset>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <button class="button btn largesearch-btn" value="Search"
+                                                    type="submit">Tìm kiếm</button>
                                             </div>
                                         </div>
                                     </fieldset>
                                 </form>
                             </div>
+
                         </div>
 
                         <div class="panel panel-default sidebar-menu wow fadeInRight animated">

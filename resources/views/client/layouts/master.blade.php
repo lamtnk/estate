@@ -117,7 +117,7 @@
                     </li>
 
                     <li class="wow fadeInDown" data-wow-delay="0.1s"><a class=""
-                            href="properties.html">Properties</a></li>
+                            href="{{ route('client.property.index') }}">Properties</a></li>
                     <li class="wow fadeInDown" data-wow-delay="0.1s"><a class=""
                             href="property.html">Property</a></li>
                     <li class="dropdown yamm-fw" data-wow-delay="0.1s">
@@ -361,7 +361,7 @@
     <script src="{{ url('') }}/cassets/js/modernizr-2.6.2.min.js"></script>
 
     <script src="{{ url('') }}/cassets/js/jquery-1.10.2.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="{{ url('') }}/bootstrap/js/bootstrap.min.js"></script>
     <script src="{{ url('') }}/cassets/js/bootstrap-select.min.js"></script>
     <script src="{{ url('') }}/cassets/js/bootstrap-hover-dropdown.js"></script>
 
