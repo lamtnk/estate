@@ -152,7 +152,7 @@
                                         </div>
                                     </fieldset>
 
-                                    <!-- Khu vực -->
+                                    {{-- <!-- Khu vực -->
                                     <fieldset>
                                         <div class="row">
                                             <div class="col-xs-12">
@@ -171,7 +171,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </fieldset>
+                                    </fieldset> --}}
 
                                     <!-- Dự án -->
                                     <fieldset>

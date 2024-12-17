@@ -391,7 +391,18 @@
                             </div>
                             <div class="panel-body search-widget">
                                 <form action="{{ route('client.property.index') }}" method="get" class="form-inline">
-                                    <!-- Khu vực -->
+                                    <!-- Tìm kiếm theo từ khóa -->
+                                    <fieldset>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <label for="keyword">Từ khóa:</label>
+                                                <input type="text" class="form-control" name="keyword"
+                                                    placeholder="Nhập từ khóa" value="{{ request('keyword') }}">
+                                            </div>
+                                        </div>
+                                    </fieldset>
+
+                                    {{-- <!-- Khu vực -->
                                     <fieldset>
                                         <div class="row">
                                             <div class="col-xs-12">
@@ -410,7 +421,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </fieldset>
+                                    </fieldset> --}}
 
                                     <!-- Dự án -->
                                     <fieldset>
