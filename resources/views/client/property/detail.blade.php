@@ -115,14 +115,20 @@
                                     </li>
 
                                     <li>
-                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Diện tích</span>
+                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Diện tích Đất</span>
                                         <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ $property->area }}</span>
+                                    </li>
+
+                                    <li>
+                                        <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Diện tích Xây Dựng</span>
+                                        <span
+                                            class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ $property->floor_1_area }}</span>
                                     </li>
 
                                     <li>
                                         <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Mặt tiền sử dụng</span>
                                         <span
-                                            class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ $property->floor_1_area }}</span>
+                                            class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ $property->frontage }}</span>
                                     </li>
 
                                     <li>
@@ -225,54 +231,32 @@
 
                     <div class="similar-post-section padding-top-40">
                         <div id="prop-smlr-slide_0">
-                            <div class="box-two proerty-item">
-                                <div class="item-thumb">
-                                    <a href="property-1.html"><img
-                                            src="{{ asset('cassets/img/similar/property-1.jpg') }}"></a>
+                            @foreach ($properties as $relatedProperty)
+                                <div class="box-two proerty-item">
+                                    <div class="item-thumb">
+                                        <a href="{{ route('client.property.detail', $relatedProperty->id) }}">
+                                            <img src="{{ asset($relatedProperty->primaryImage->image_path) }}">
+                                        </a>
+                                    </div>
+                                    <div class="item-entry overflow">
+                                        <h5><a href="{{ route('client.property.detail', $relatedProperty->id) }}">
+                                                {{ $relatedProperty->name }} </a></h5>
+                                        <div class="dot-hr"></div>
+                                        <span class="pull-left"><b>Diện tích:
+                                            </b>{{ $relatedProperty->area }}m2</span><br>
+                                        <span class="proerty pull-left">
+                                            @if ($relatedProperty->price_type == 1)
+                                                {{ number_format($relatedProperty->price, 0, ',', '.') }} VND
+                                            @elseif ($relatedProperty->price_type == 2)
+                                                {{ number_format($relatedProperty->price * $relatedProperty->area, 0, ',', '.') }}
+                                                VND
+                                            @else
+                                                Thỏa thuận
+                                            @endif
+                                        </span>
+                                    </div>
                                 </div>
-                                <div class="item-entry overflow">
-                                    <h5><a href="property-1.html"> Super nice villa </a></h5>
-                                    <div class="dot-hr"></div>
-                                    <span class="pull-left"><b> Area :</b> 120m </span>
-                                    <span class="proerty-price pull-right"> $ 300,000</span>
-                                </div>
-                            </div>
-                            <div class="box-two proerty-item">
-                                <div class="item-thumb">
-                                    <a href="property-1.html"><img
-                                            src="{{ asset('cassets/img/similar/property-2.jpg') }}"></a>
-                                </div>
-                                <div class="item-entry overflow">
-                                    <h5><a href="property-1.html"> Super nice villa </a></h5>
-                                    <div class="dot-hr"></div>
-                                    <span class="pull-left"><b> Area :</b> 120m </span>
-                                    <span class="proerty-price pull-right"> $ 300,000</span>
-                                </div>
-                            </div>
-                            <div class="box-two proerty-item">
-                                <div class="item-thumb">
-                                    <a href="property-1.html"><img
-                                            src="{{ asset('cassets/img/similar/property-3.jpg') }}"></a>
-                                </div>
-                                <div class="item-entry overflow">
-                                    <h5><a href="property-1.html"> Super nice villa </a></h5>
-                                    <div class="dot-hr"></div>
-                                    <span class="pull-left"><b> Area :</b> 120m </span>
-                                    <span class="proerty-price pull-right"> $ 300,000</span>
-                                </div>
-                            </div>
-                            <div class="box-two proerty-item">
-                                <div class="item-thumb">
-                                    <a href="property-1.html"><img
-                                            src="{{ asset('cassets/img/similar/property-1.jpg') }}"></a>
-                                </div>
-                                <div class="item-entry overflow">
-                                    <h5><a href="property-1.html"> Super nice villa </a></h5>
-                                    <div class="dot-hr"></div>
-                                    <span class="pull-left"><b> Area :</b> 120m </span>
-                                    <span class="proerty-price pull-right"> $ 300,000</span>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>

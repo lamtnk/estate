@@ -99,8 +99,8 @@
                                             <h5><a href="{{ route('client.property.detail', $property->id) }}">
                                                     {{ $property->name }} </a></h5>
                                             <div class="dot-hr"></div>
-                                            <span class="pull-left"><b>Diện tích :</b> {{ $property->area }}m </span>
-                                            <span class="proerty-price pull-right">
+                                            <span class="pull-left"><b>Diện tích: </b>{{ $property->area }}m2</span><br>
+                                            <span class="proerty-price pull-left">
                                                 @if ($property->price_type == 1)
                                                     {{ number_format($property->price, 0, ',', '.') }} VND
                                                 @elseif ($property->price_type == 2)
@@ -285,60 +285,33 @@
                             </div>
                             <div class="panel-body recent-property-widget">
                                 <ul>
-                                    <li>
-                                        <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                            <a href="single.html"><img src="cassets/img/demo/small-property-2.jpg"></a>
-                                            <span class="property-seeker">
-                                                <b class="b-1">A</b>
-                                                <b class="b-2">S</b>
-                                            </span>
-                                        </div>
-                                        <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                                            <h6> <a href="single.html">Super nice villa </a></h6>
-                                            <span class="property-price">3000000$</span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="col-md-3 col-sm-3  col-xs-3 blg-thumb p0">
-                                            <a href="single.html"><img src="cassets/img/demo/small-property-1.jpg"></a>
-                                            <span class="property-seeker">
-                                                <b class="b-1">A</b>
-                                                <b class="b-2">S</b>
-                                            </span>
-                                        </div>
-                                        <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                                            <h6> <a href="single.html">Super nice villa </a></h6>
-                                            <span class="property-price">3000000$</span>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                            <a href="single.html"><img src="cassets/img/demo/small-property-3.jpg"></a>
-                                            <span class="property-seeker">
-                                                <b class="b-1">A</b>
-                                                <b class="b-2">S</b>
-                                            </span>
-                                        </div>
-                                        <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                                            <h6> <a href="single.html">Super nice villa </a></h6>
-                                            <span class="property-price">3000000$</span>
-                                        </div>
-                                    </li>
-
-                                    <li>
-                                        <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
-                                            <a href="single.html"><img src="cassets/img/demo/small-property-2.jpg"></a>
-                                            <span class="property-seeker">
-                                                <b class="b-1">A</b>
-                                                <b class="b-2">S</b>
-                                            </span>
-                                        </div>
-                                        <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                                            <h6> <a href="single.html">Super nice villa </a></h6>
-                                            <span class="property-price">3000000$</span>
-                                        </div>
-                                    </li>
-
+                                    @foreach ($properties->take(4) as $property)
+                                        <li>
+                                            <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
+                                                <a href="{{ route('client.property.detail', $property->id) }}">
+                                                    <img src="{{ asset($property->primaryImage->image_path) }}">
+                                                </a>
+                                                <span class="property-seeker">
+                                                    <b class="b-1">A</b>
+                                                    <b class="b-2">S</b>
+                                                </span>
+                                            </div>
+                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
+                                                <h6><a href="{{ route('client.property.detail', $property->id) }}">
+                                                        {{ $property->name }} </a></h6>
+                                                <span class="property-price">
+                                                    @if ($property->price_type == 1)
+                                                        {{ number_format($property->price, 0, ',', '.') }} VND
+                                                    @elseif ($property->price_type == 2)
+                                                        {{ number_format($property->price * $property->area, 0, ',', '.') }}
+                                                        VND
+                                                    @else
+                                                        Thỏa thuận
+                                                    @endif
+                                                </span>
+                                            </div>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>

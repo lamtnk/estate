@@ -13,11 +13,6 @@ class PropertyService
         return Property::with(['images', 'primaryImage'])->paginate($perPage);
     }
 
-    public function storeProperty($data)
-    {
-        return Property::create($data); // Tạo Property
-    }
-
     /**
      * Lấy bất động sản theo ID.
      *
