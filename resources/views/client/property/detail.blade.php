@@ -33,6 +33,52 @@
             object-position: center;
             /* Canh giữa ảnh */
         }
+
+        /* Tùy chỉnh mũi tên điều hướng */
+        .lSAction>a {
+            font-size: 30px;
+            /* Kích thước biểu tượng mũi tên */
+            color: #333;
+            /* Màu sắc của mũi tên */
+            background: rgba(255, 255, 255, 0.7);
+            /* Nền mờ cho mũi tên */
+            border-radius: 50%;
+            /* Bo tròn góc */
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .lSAction>a:hover {
+            color: #fff;
+            /* Màu mũi tên khi hover */
+            background: #007bff;
+            /* Màu nền khi hover */
+        }
+
+        .lSAction>.lSPrev {
+            left: 10px;
+            /* Vị trí mũi tên trái */
+        }
+
+        .lSAction>.lSNext {
+            right: 10px;
+            /* Vị trí mũi tên phải */
+        }
+
+        .additional-details-list li {
+            display: flex;
+            align-items: stretch;
+            /* Đảm bảo các cột đều chiều cao */
+        }
+
+        .additional-details-list .add-d-title {
+            display: flex;
+            align-items: center;
+        }
     </style>
 @endsection
 @section('main')
@@ -239,8 +285,12 @@
                                         </a>
                                     </div>
                                     <div class="item-entry overflow">
-                                        <h5><a href="{{ route('client.property.detail', $relatedProperty->id) }}">
-                                                {{ $relatedProperty->name }} </a></h5>
+                                        <h6
+                                            style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 300px;">
+                                            <a href="{{ route('client.property.detail', $relatedProperty->id) }}">
+                                                {{ $relatedProperty->name }}
+                                            </a>
+                                        </h6>
                                         <div class="dot-hr"></div>
                                         <span class="pull-left"><b>Diện tích:
                                             </b>{{ $relatedProperty->area }}m2</span><br>
@@ -261,6 +311,7 @@
                     </div>
                 </div>
 
+                {{-- sidebar --}}
                 <div class="col-md-4 p0">
                     <aside class="sidebar sidebar-property blog-asside-right property-style2">
                         <div class="dealer-widget">
@@ -528,17 +579,18 @@
     <script>
         $(document).ready(function() {
             $('#image-gallery').lightSlider({
-                gallery: true,
-                item: 1,
-                thumbItem: 9,
-                slideMargin: 0,
-                speed: 500,
-                auto: true,
-                loop: true,
+                gallery: false, // Ẩn thumbnail
+                item: 1, // Hiển thị 1 ảnh trên slider
+                slideMargin: 0, // Loại bỏ khoảng cách giữa các slide
+                speed: 500, // Tốc độ chuyển slide
+                auto: true, // Tự động chạy slider
+                loop: true, // Lặp lại slider
+                controls: true, // Hiển thị nút điều hướng
+                prevHtml: '<i class="fa fa-chevron-left"></i>', // Mũi tên trái
+                nextHtml: '<i class="fa fa-chevron-right"></i>', // Mũi tên phải
                 onSliderLoad: function() {
                     $('#image-gallery').removeClass('cS-hidden');
-                },
-                thumbMargin: 10, // Thêm khoảng cách giữa các thumbnail
+                }
             });
         });
 

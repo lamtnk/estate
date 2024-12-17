@@ -96,8 +96,11 @@
                                         </div>
 
                                         <div class="item-entry overflow">
-                                            <h5><a href="{{ route('client.property.detail', $property->id) }}">
-                                                    {{ $property->name }} </a></h5>
+                                            <h5
+                                                style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 300px;">
+                                                <a href="{{ route('client.property.detail', $property->id) }}">{{ $property->name }}
+                                                </a>
+                                            </h5>
                                             <div class="dot-hr"></div>
                                             <span class="pull-left"><b>Diện tích: </b>{{ $property->area }}m2</span><br>
                                             <span class="proerty-price pull-left">
@@ -296,9 +299,12 @@
                                                     <b class="b-2">S</b>
                                                 </span>
                                             </div>
-                                            <div class="col-md-8 col-sm-8 col-xs-8 blg-entry">
-                                                <h6><a href="{{ route('client.property.detail', $property->id) }}">
-                                                        {{ $property->name }} </a></h6>
+                                            <div class="col-md-9 col-sm-9 col-xs-9 blg-entry">
+                                                <h6
+                                                    style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 300px;">
+                                                    <a href="{{ route('client.property.detail', $property->id) }}">
+                                                        {{ $property->name }} </a>
+                                                </h6>
                                                 <span class="property-price">
                                                     @if ($property->price_type == 1)
                                                         {{ number_format($property->price, 0, ',', '.') }} VND
