@@ -63,14 +63,10 @@ class PropertyController extends Controller
         // Lấy bất động sản theo id
         $property = $this->propertyService->getPropertyById($id);
 
-        // Lấy danh sách dự án và loại hình bất động sản để đổ select box
-        $propertyTypes = $this->propertyTypeService->getAllPropertyTypes();
-        $projects = $this->projectService->getAllProjects();
-
         // Lấy danh sách các bất động sản liên quan cùng dự án
         $filters = ['project_id' => $property->project_id]; // lọc theo cùng dự án
         $properties = $this->propertyService->searchProperties($filters, 12, 'created_at', 'DESC');
 
-        return view('client.property.detail', compact('property', 'properties', 'propertyTypes', 'projects'));
+        return view('client.property.detail', compact('property', 'properties'));
     }
 }
