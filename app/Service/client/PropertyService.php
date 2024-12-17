@@ -80,6 +80,14 @@ class PropertyService
             $query->where('bathrooms', '>=', $filters['bathrooms']);
         }
 
+        // **Thêm chức năng tìm kiếm theo từ khóa**
+        if (!empty($filters['keyword'])) {
+            $query->where(function ($q) use ($filters) {
+                $q->where('name', 'LIKE', '%' . $filters['keyword'] . '%')
+                    ->orWhere('description', 'LIKE', '%' . $filters['keyword'] . '%');
+            });
+        }
+
         // Sắp xếp theo cột và thứ tự
         // Sắp xếp theo giá
         if ($orderBy === 'price') {
