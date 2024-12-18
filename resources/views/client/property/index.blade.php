@@ -104,20 +104,29 @@
                                             <div class="dot-hr"></div>
                                             <span class="pull-left"><b>Diện tích: </b>{{ $property->area }}m2</span><br>
                                             <span class="proerty-price pull-left">
-                                                @if ($property->price_type == 1)
-                                                    {{ number_format($property->price, 0, ',', '.') }} VND
-                                                @elseif ($property->price_type == 2)
-                                                    {{ number_format($property->price * $property->area, 0, ',', '.') }}
-                                                    VND
+                                                @if ($property->deal_type == 'rent')
+                                                    {{ number_format($property->price, 0, ',', '.') }} đ/tháng
                                                 @else
-                                                    Thỏa thuận
+                                                    @if ($property->price_type == 1)
+                                                        {{ number_format($property->price, 0, ',', '.') }} đ
+                                                    @elseif ($property->price_type == 2)
+                                                        {{ number_format($property->price * $property->area, 0, ',', '.') }}
+                                                        đ
+                                                    @else
+                                                        Thỏa thuận
+                                                    @endif
                                                 @endif
                                             </span>
                                             <div class="property-icon">
-                                                <img src="cassets/img/icon/room.png">({{ $property->number_of_floors }})|
-                                                <img src="cassets/img/icon/bed.png">({{ $property->bedrooms }})|
-                                                <img src="cassets/img/icon/shawer.png">({{ $property->bathrooms }})|
-                                                <img src="cassets/img/icon/cars.png">({{ $property->parking }})
+                                                <img src="cassets/img/icon/room.png"> {{ $property->number_of_floors }}
+                                                tầng|
+                                                <img src="cassets/img/icon/bed.png"> {{ $property->bedrooms }} phòng ngủ
+                                            </div>
+                                            <div class="property-icon">
+                                                <img src="cassets/img/icon/shawer.png"> {{ $property->furniture_vn }}
+                                            </div>
+                                            <div class="property-icon">
+                                                <img src="cassets/img/icon/cars.png"> Hướng {{ $property->direction_vn }}
                                             </div>
                                         </div>
                                     </div>
@@ -224,12 +233,12 @@
                                     <fieldset class="padding-5">
                                         <div class="row">
                                             <div class="col-xs-6">
-                                                <label for="price-min">Giá bán từ (VND):</label>
+                                                <label for="price-min">Giá bán từ (đ):</label>
                                                 <input type="number" class="form-control" name="price_min"
                                                     placeholder="Từ" value="" min="0">
                                             </div>
                                             <div class="col-xs-6">
-                                                <label for="price-max">Giá bán đến (VND):</label>
+                                                <label for="price-max">Giá bán đến (đ):</label>
                                                 <input type="number" class="form-control" name="price_max"
                                                     placeholder="Đến" value="" min="0">
                                             </div>
@@ -306,13 +315,17 @@
                                                         {{ $property->name }} </a>
                                                 </h6>
                                                 <span class="property-price">
-                                                    @if ($property->price_type == 1)
-                                                        {{ number_format($property->price, 0, ',', '.') }} VND
-                                                    @elseif ($property->price_type == 2)
-                                                        {{ number_format($property->price * $property->area, 0, ',', '.') }}
-                                                        VND
+                                                    @if ($property->deal_type == 'rent')
+                                                        {{ number_format($property->price, 0, ',', '.') }} đ/tháng
                                                     @else
-                                                        Thỏa thuận
+                                                        @if ($property->price_type == 1)
+                                                            {{ number_format($property->price, 0, ',', '.') }} đ
+                                                        @elseif ($property->price_type == 2)
+                                                            {{ number_format($property->price * $property->area, 0, ',', '.') }}
+                                                            đ
+                                                        @else
+                                                            Thỏa thuận
+                                                        @endif
                                                     @endif
                                                 </span>
                                             </div>

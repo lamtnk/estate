@@ -113,19 +113,24 @@
                                             <h1 class="property-title">{{ $property->name }}</h1>
 
                                             <span class="property-price">
-                                                @if ($property->price_type == 1)
-                                                    {{ number_format($property->price, 0, ',', '.') }} VND
-                                                @elseif ($property->price_type == 2)
-                                                    {{ number_format($property->price * $property->area, 0, ',', '.') }} VND
+                                                @if ($property->deal_type == 'rent')
+                                                    {{ number_format($property->price, 0, ',', '.') }} đ/tháng
                                                 @else
-                                                    Thỏa thuận
+                                                    @if ($property->price_type == 1)
+                                                        {{ number_format($property->price, 0, ',', '.') }} đ
+                                                    @elseif ($property->price_type == 2)
+                                                        {{ number_format($property->price * $property->area, 0, ',', '.') }}
+                                                        đ
+                                                    @else
+                                                        Thỏa thuận
+                                                    @endif
                                                 @endif
                                             </span>
                                         </div>
 
                                         <div class="property-meta entry-meta clearfix">
 
-                                            <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
+                                            <div class="col-xs-6 col-sm-6 col-md-6 p-b-15">
                                                 <span class="property-info-icon icon-tag">
                                                     @if ($property->deal_type == 'sell')
                                                         <img src="{{ asset('cassets/img/icon/sale-orange.png') }}">
@@ -143,7 +148,7 @@
                                                 </span>
                                             </div>
 
-                                            <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
+                                            <div class="col-xs-6 col-sm-6 col-md-6 p-b-15">
                                                 <span class="property-info-icon icon-bed">
                                                     <img src="{{ asset('cassets/img/icon/os-orange.png') }}">
                                                 </span>
@@ -154,7 +159,7 @@
                                                 </span>
                                             </div>
 
-                                            <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
+                                            <div class="col-xs-6 col-sm-6 col-md-6 p-b-15">
                                                 <span class="property-info icon-area">
                                                     <img src="{{ asset('cassets/img/icon/room-orange.png') }}">
                                                 </span>
@@ -166,7 +171,7 @@
                                                 </span>
                                             </div>
 
-                                            <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
+                                            <div class="col-xs-6 col-sm-6 col-md-6 p-b-15">
                                                 <span class="property-info-icon icon-bed">
                                                     <img src="{{ asset('cassets/img/icon/bed-orange.png') }}">
                                                 </span>
@@ -176,23 +181,23 @@
                                                 </span>
                                             </div>
 
-                                            <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
+                                            <div class="col-xs-6 col-sm-6 col-md-6 p-b-15">
                                                 <span class="property-info-icon icon-bath">
                                                     <img src="{{ asset('cassets/img/icon/shawer-orange.png') }}">
                                                 </span>
                                                 <span class="property-info-entry">
-                                                    <span class="property-info-label">Phòng tắm</span>
-                                                    <span class="property-info-value">{{ $property->bathrooms }}</span>
+                                                    <span class="property-info-label">Nội thất</span>
+                                                    <span class="property-info-value">{{ $property->furniture_vn }}</span>
                                                 </span>
                                             </div>
 
-                                            <div class="col-xs-4 col-sm-4 col-md-4 p-b-15">
+                                            <div class="col-xs-6 col-sm-6 col-md-6 p-b-15">
                                                 <span class="property-info-icon icon-garage">
                                                     <img src="{{ asset('cassets/img/icon/cars-orange.png') }}">
                                                 </span>
                                                 <span class="property-info-entry">
-                                                    <span class="property-info-label">Chỗ đỗ xe</span>
-                                                    <span class="property-info-value">{{ $property->parking }}</span>
+                                                    <span class="property-info-label">Hướng</span>
+                                                    <span class="property-info-value">{{ $property->direction_vn }}</span>
                                                 </span>
                                             </div>
 
@@ -272,14 +277,15 @@
                                 </li>
 
                                 <li>
-                                    <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Số phòng tắm</span>
-                                    <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ $property->bathrooms }}
-                                        phòng</span>
+                                    <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Nội thất</span>
+                                    <span
+                                        class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ $property->furniture_vn }}</span>
                                 </li>
 
                                 <li>
-                                    <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Chỗ đỗ xe</span>
-                                    <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ $property->parking }}</span>
+                                    <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Hướng Nhà</span>
+                                    <span
+                                        class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ $property->direction_vn }}</span>
                                 </li>
 
                                 <li>
@@ -373,13 +379,17 @@
                                             <span class="pull-left"><b>Diện tích:
                                                 </b>{{ $relatedProperty->area }}m2</span><br>
                                             <span class="proerty pull-left">
-                                                @if ($relatedProperty->price_type == 1)
-                                                    {{ number_format($relatedProperty->price, 0, ',', '.') }} VND
-                                                @elseif ($relatedProperty->price_type == 2)
-                                                    {{ number_format($relatedProperty->price * $relatedProperty->area, 0, ',', '.') }}
-                                                    VND
+                                                @if ($relatedProperty->deal_type == 'rent')
+                                                    {{ number_format($relatedProperty->price, 0, ',', '.') }} đ/tháng
                                                 @else
-                                                    Thỏa thuận
+                                                    @if ($relatedProperty->price_type == 1)
+                                                        {{ number_format($relatedProperty->price, 0, ',', '.') }} đ
+                                                    @elseif ($relatedProperty->price_type == 2)
+                                                        {{ number_format($relatedProperty->price * $relatedProperty->area, 0, ',', '.') }}
+                                                        đ
+                                                    @else
+                                                        Thỏa thuận
+                                                    @endif
                                                 @endif
                                             </span>
                                         </div>
