@@ -123,10 +123,11 @@
                                                 <img src="cassets/img/icon/bed.png"> {{ $property->bedrooms }} phòng ngủ
                                             </div>
                                             <div class="property-icon">
-                                                <img src="cassets/img/icon/shawer.png"> {{ $property->furniture_vn }}
+                                                <img src="cassets/img/icon/sofa.png"> {{ $property->furniture_vn }}
                                             </div>
                                             <div class="property-icon">
-                                                <img src="cassets/img/icon/cars.png"> Hướng {{ $property->direction_vn }}
+                                                <img src="cassets/img/icon/compass.png"> Hướng
+                                                {{ $property->direction_vn }}
                                             </div>
                                         </div>
                                     </div>
