@@ -270,9 +270,28 @@
                                                     placeholder="Số phòng ngủ" value="" min="1">
                                             </div>
                                             <div class="col-xs-6">
-                                                <label for="min-baths">Số phòng tắm:</label>
-                                                <input type="number" class="form-control" name="bathrooms"
-                                                    placeholder="Số phòng tắm" value="" min="1">
+                                                <label for="min-baths">Nội thất:</label>
+                                                <select name="furniture" class="selectpicker" title="Nội thất">
+                                                    <option value="">Tất cả</option>
+                                                    <option value="Bare Shell">Bàn giao thô</option>
+                                                    <option value="Basic Furnished">Nội thất cơ bản</option>
+                                                    <option value="Fully Furnished">Nội thất đầy đủ</option>
+                                                    <option value="Luxury Furnished">Nội thất cao cấp</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <label for="min-baths">Hướng:</label>
+                                                <select name="direction" class="selectpicker" title="Hướng">
+                                                    <option value="">Tất cả</option>
+                                                    <option value="East">Đông</option>
+                                                    <option value="West">Tây</option>
+                                                    <option value="South">Nam</option>
+                                                    <option value="North">Bắc</option>
+                                                    <option value="Southeast">Đông Nam</option>
+                                                    <option value="Northeast">Đông Bắc</option>
+                                                    <option value="Southwest">Tây Nam</option>
+                                                    <option value="Northwest">Tây Bắc</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </fieldset>

@@ -70,9 +70,14 @@ class PropertyService
             $query->where('bedrooms', '>=', $filters['bedrooms']);
         }
 
-        // Bộ lọc theo số phòng tắm
-        if (!empty($filters['bathrooms'])) {
-            $query->where('bathrooms', '>=', $filters['bathrooms']);
+        // Bộ lọc theo nội thất
+        if (!empty($filters['furniture'])) {
+            $query->where('furniture', $filters['furniture']);
+        }
+
+        // Bộ lọc theo hướng nhà
+        if (!empty($filters['direction'])) {
+            $query->where('direction', $filters['direction']);
         }
 
         // **Thêm chức năng tìm kiếm theo từ khóa**

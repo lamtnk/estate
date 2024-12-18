@@ -37,7 +37,8 @@ class PropertyController extends Controller
             'area_min' => $request->input('area_min'),
             'area_max' => $request->input('area_max'),
             'bedrooms' => $request->input('bedrooms'),
-            'bathrooms' => $request->input('bathrooms'),
+            'furniture' => $request->input('furniture'),
+            'direction' => $request->input('direction'),
             'keyword' => $request->input('keyword'), // Thêm từ khóa
         ];
 
