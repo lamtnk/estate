@@ -13,6 +13,17 @@
             /* Căn giữa ảnh */
         }
 
+        .additional-details-list li {
+            display: flex;
+            align-items: stretch;
+            /* Đảm bảo các cột đều chiều cao */
+        }
+
+        .additional-details-list .add-d-title {
+            display: flex;
+            align-items: center;
+        }
+
         /* Tùy chỉnh mũi tên điều hướng */
         .lSAction>a {
             font-size: 30px;
@@ -225,90 +236,104 @@
 
                             <h4 class="s-property-title">Thông Tin Chi Tiết</h4>
 
-                            <ul class="additional-details-list clearfix">
-                                <li>
-                                    <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Thuộc dự án</span>
-                                    <span
-                                        class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ $property->project->name }}</span>
-                                </li>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <ul class="row additional-details-list clearfix">
+                                        <li>
+                                            <span class="col-xs-6 col-sm-5 col-md-5 add-d-title">Thuộc dự án</span>
+                                            <span
+                                                class="col-xs-6 col-sm-7 col-md-7 add-d-entry">{{ $property->project->name }}</span>
+                                        </li>
 
-                                <li>
-                                    <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Loại hình bất động sản</span>
-                                    <span
-                                        class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ $property->propertyType->name }}</span>
-                                </li>
-                                <li>
-                                    <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Mã bất động sản</span>
-                                    <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ $property->unit_code }}</span>
-                                </li>
+                                        <li>
+                                            <span class="col-xs-6 col-sm-5 col-md-5 add-d-title">Loại hình bất động
+                                                sản</span>
+                                            <span
+                                                class="col-xs-6 col-sm-7 col-md-7 add-d-entry">{{ $property->propertyType->name }}</span>
+                                        </li>
+                                        <li>
+                                            <span class="col-xs-6 col-sm-5 col-md-5 add-d-title">Mã bất động sản</span>
+                                            <span
+                                                class="col-xs-6 col-sm-7 col-md-7 add-d-entry">{{ $property->unit_code }}</span>
+                                        </li>
 
-                                <li>
-                                    <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Diện tích Đất</span>
-                                    <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ $property->area }} m2</span>
-                                </li>
+                                        <li>
+                                            <span class="col-xs-6 col-sm-5 col-md-5 add-d-title">Diện tích Đất</span>
+                                            <span class="col-xs-6 col-sm-7 col-md-7 add-d-entry">{{ $property->area }}
+                                                m2</span>
+                                        </li>
 
-                                <li>
-                                    <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Diện tích Xây Dựng</span>
-                                    <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ $property->floor_1_area }}
-                                        m2</span>
-                                </li>
+                                        <li>
+                                            <span class="col-xs-6 col-sm-5 col-md-5 add-d-title">Diện tích Xây Dựng</span>
+                                            <span
+                                                class="col-xs-6 col-sm-7 col-md-7 add-d-entry">{{ $property->floor_1_area }}
+                                                m2</span>
+                                        </li>
 
-                                <li>
-                                    <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Mặt tiền sử dụng</span>
-                                    <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ $property->frontage }} mặt
-                                        tiền</span>
-                                </li>
+                                        <li>
+                                            <span class="col-xs-6 col-sm-5 col-md-5 add-d-title">Mặt tiền sử dụng</span>
+                                            <span class="col-xs-6 col-sm-7 col-md-7 add-d-entry">{{ $property->frontage }}
+                                                mặt
+                                                tiền</span>
+                                        </li>
+                                    </ul>
+                                </div>
 
-                                <li>
-                                    <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Số tầng</span>
-                                    <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ $property->number_of_floors }}
-                                        tầng</span>
-                                </li>
+                                <div class="col-md-6">
+                                    <ul class="row additional-details-list clearfix">
+                                        <li>
+                                            <span class="col-xs-6 col-sm-5 col-md-5 add-d-title">Số tầng</span>
+                                            <span
+                                                class="col-xs-6 col-sm-7 col-md-7 add-d-entry">{{ $property->number_of_floors }}
+                                                tầng</span>
+                                        </li>
 
-                                <li>
-                                    <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Số phòng ngủ</span>
-                                    <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ $property->bedrooms }}
-                                        phòng</span>
-                                </li>
+                                        <li>
+                                            <span class="col-xs-6 col-sm-5 col-md-5 add-d-title">Số phòng ngủ</span>
+                                            <span class="col-xs-6 col-sm-7 col-md-7 add-d-entry">{{ $property->bedrooms }}
+                                                phòng</span>
+                                        </li>
 
-                                <li>
-                                    <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Nội thất</span>
-                                    <span
-                                        class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ $property->furniture_vn }}</span>
-                                </li>
+                                        <li>
+                                            <span class="col-xs-6 col-sm-5 col-md-5 add-d-title">Nội thất</span>
+                                            <span
+                                                class="col-xs-6 col-sm-7 col-md-7 add-d-entry">{{ $property->furniture_vn }}</span>
+                                        </li>
 
-                                <li>
-                                    <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Hướng Nhà</span>
-                                    <span
-                                        class="col-xs-6 col-sm-8 col-md-8 add-d-entry">{{ $property->direction_vn }}</span>
-                                </li>
+                                        <li>
+                                            <span class="col-xs-6 col-sm-5 col-md-5 add-d-title">Hướng Nhà</span>
+                                            <span
+                                                class="col-xs-6 col-sm-7 col-md-7 add-d-entry">{{ $property->direction_vn }}</span>
+                                        </li>
 
-                                <li>
-                                    <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Tình trạng</span>
-                                    <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">
-                                        @if ($property->status == 'red book')
-                                            Đã có sổ đỏ
-                                        @elseif ($property->status == 'pending red book')
-                                            Đang chờ sổ đỏ
-                                        @elseif ($property->status == 'sale contract')
-                                            Hợp đồng mua bán
-                                        @else
-                                            Trích đo
-                                        @endif
-                                    </span>
-                                </li>
+                                        <li>
+                                            <span class="col-xs-6 col-sm-5 col-md-5 add-d-title">Tình trạng</span>
+                                            <span class="col-xs-6 col-sm-7 col-md-7 add-d-entry">
+                                                @if ($property->status == 'red book')
+                                                    Đã có sổ đỏ
+                                                @elseif ($property->status == 'pending red book')
+                                                    Đang chờ sổ đỏ
+                                                @elseif ($property->status == 'sale contract')
+                                                    Hợp đồng mua bán
+                                                @else
+                                                    Trích đo
+                                                @endif
+                                            </span>
+                                        </li>
 
-                                <li>
-                                    <span class="col-xs-6 col-sm-4 col-md-4 add-d-title">Loại hình giao dịch</span>
-                                    <span class="col-xs-6 col-sm-8 col-md-8 add-d-entry">
-                                        @if ($property->deal_type == 'sell')
-                                            Giao bán
-                                        @else
-                                            Cho thuê
-                                        @endif
-                                    </span>
-                                </li>
-                            </ul>
+                                        <li>
+                                            <span class="col-xs-6 col-sm-5 col-md-5 add-d-title">Loại hình giao dịch</span>
+                                            <span class="col-xs-6 col-sm-7 col-md-7 add-d-entry">
+                                                @if ($property->deal_type == 'sell')
+                                                    Giao bán
+                                                @else
+                                                    Cho thuê
+                                                @endif
+                                            </span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                         <!-- End additional-details area  -->
 
