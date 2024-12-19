@@ -8,6 +8,7 @@ use App\Http\Controllers\admin\ProjectController;
 use App\Http\Controllers\admin\PropertyController;
 use App\Http\Controllers\admin\PropertyImageController;
 use App\Http\Controllers\admin\TagController;
+use App\Http\Controllers\client\PropertyController as ClientPropertyController;
 use App\Models\News;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,11 @@ Route::get('/', function () {
 });
     Route::get('/login', [LoginController::class, 'index'])->name('login.view');
     Route::post('/login', [LoginController::class,'login'])->name('login');
+
+Route::prefix('/property')->group(function () {
+    Route::get('/', [ClientPropertyController::class, 'index'])->name('client.property.index');
+    Route::get('/{id}', [ClientPropertyController::class, 'detail'])->name('client.property.detail');
+});
 
 Route::prefix('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('indexAdmin');
@@ -76,3 +82,5 @@ Route::prefix('admin')->group(function () {
         Route::get('/', [ContactController::class, 'index'])->name('admin.contact.index');
     });
 });
+
+Route::prefix('client')->group(function () {});

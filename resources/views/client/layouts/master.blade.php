@@ -29,8 +29,12 @@
     <link rel="stylesheet" href="{{ url('') }}/cassets/css/owl.carousel.css">
     <link rel="stylesheet" href="{{ url('') }}/cassets/css/owl.theme.css">
     <link rel="stylesheet" href="{{ url('') }}/cassets/css/owl.transitions.css">
+    <link rel="stylesheet" href="{{ url('') }}/cassets/css/lightslider.min.css">
     <link rel="stylesheet" href="{{ url('') }}/cassets/css/style.css">
     <link rel="stylesheet" href="{{ url('') }}/cassets/css/responsive.css">
+
+    <!-- Thêm CSS từ section 'styles' nếu có -->
+    @yield('styles')
 </head>
 
 <body>
@@ -79,7 +83,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><img src="{{ url('') }}/cassets/img/logo.png" width="10%" alt=""></a>
+                <a class="navbar-brand" href="index.html"><img src="{{ url('') }}/cassets/img/logo.png"
+                        width="10%" alt=""></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -87,8 +92,8 @@
                 <div class="button navbar-right">
                     <button class="navbar-btn nav-button wow bounceInRight login"
                         onclick=" window.open('register.html')" data-wow-delay="0.4s">Login</button>
-                    <button class="navbar-btn nav-button wow fadeInRight" onclick=" window.open('submit-property.html')"
-                        data-wow-delay="0.5s">Submit</button>
+                    <button class="navbar-btn nav-button wow fadeInRight"
+                        onclick=" window.open('submit-property.html')" data-wow-delay="0.5s">Submit</button>
                 </div>
                 <ul class="main-nav nav navbar-nav navbar-right">
                     <li class="dropdown ymm-sw " data-wow-delay="0.1s">
@@ -112,7 +117,7 @@
                     </li>
 
                     <li class="wow fadeInDown" data-wow-delay="0.1s"><a class=""
-                            href="properties.html">Properties</a></li>
+                            href="{{ route('client.property.index') }}">Properties</a></li>
                     <li class="wow fadeInDown" data-wow-delay="0.1s"><a class=""
                             href="property.html">Property</a></li>
                     <li class="dropdown yamm-fw" data-wow-delay="0.1s">
@@ -213,8 +218,8 @@
                             <h4>About us </h4>
                             <div class="footer-title-line"></div>
 
-                            <img src="{{ url('') }}/cassets/img/footer-logo.png" alt="" class="wow pulse"
-                                data-wow-delay="1s">
+                            <img src="{{ url('') }}/cassets/img/footer-logo.png" alt=""
+                                class="wow pulse" data-wow-delay="1s">
                             <p>Lorem ipsum dolor cum necessitatibus su quisquam molestias. Vel unde, blanditiis.</p>
                             <ul class="footer-adress">
                                 <li><i class="pe-7s-map-marker strong"> </i> 9089 your adress her</li>
@@ -356,7 +361,7 @@
     <script src="{{ url('') }}/cassets/js/modernizr-2.6.2.min.js"></script>
 
     <script src="{{ url('') }}/cassets/js/jquery-1.10.2.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="{{ url('') }}/bootstrap/js/bootstrap.min.js"></script>
     <script src="{{ url('') }}/cassets/js/bootstrap-select.min.js"></script>
     <script src="{{ url('') }}/cassets/js/bootstrap-hover-dropdown.js"></script>
 
@@ -369,9 +374,11 @@
 
     <script src="{{ url('') }}/cassets/js/icheck.min.js"></script>
     <script src="{{ url('') }}/cassets/js/price-range.js"></script>
-
+    <script type="text/javascript" src="{{ url('') }}/cassets/js/lightslider.min.js"></script>
     <script src="{{ url('') }}/cassets/js/main.js"></script>
 
+    <!-- Thêm script JS từ section 'scripts' nếu có -->
+    @yield('scripts')
 </body>
 
 </html>

@@ -101,33 +101,67 @@
                                     </div>
 
                                     <div class="row mb-3">
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <label for="frontage" class="form-label">Mặt Tiền Sử Dụng</label>
                                             <input type="number" class="form-control" id="frontage" name="frontage"
                                                 value="{{ old('frontage') }}" required>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-md-4">
                                             <label for="number_of_floors" class="form-label">Số tầng</label>
                                             <input type="number" class="form-control" id="number_of_floors"
                                                 name="number_of_floors" value="{{ old('number_of_floors') }}">
                                         </div>
-                                    </div>
-
-                                    <div class="row mb-3">
                                         <div class="col-md-4">
                                             <label for="bedrooms" class="form-label">Số Phòng Ngủ</label>
                                             <input type="number" class="form-control" id="bedrooms" name="bedrooms"
                                                 value="{{ old('bedrooms') }}" required>
                                         </div>
-                                        <div class="col-md-4">
-                                            <label for="bathrooms" class="form-label">Số Phòng Tắm</label>
-                                            <input type="number" class="form-control" id="bathrooms" name="bathrooms"
-                                                value="{{ old('bathrooms') }}" required>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="furniture" class="form-label">Nội Thất</label>
+                                            <select class="form-select" id="furniture" name="furniture">
+                                                <option value="Bare Shell"
+                                                    {{ old('furniture') == 'Bare Shell' ? 'selected' : '' }}>
+                                                    Bàn giao thô</option>
+                                                <option value="Basic Furnished"
+                                                    {{ old('furniture') == 'Basic Furnished' ? 'selected' : '' }}>
+                                                    Nội thất cơ bản</option>
+                                                <option value="Fully Furnished"
+                                                    {{ old('furniture') == 'Fully Furnished' ? 'selected' : '' }}>
+                                                    Nội thất đầy đủ</option>
+                                                <option value="Luxury Furnished"
+                                                    {{ old('furniture') == 'Luxury Furnished' ? 'selected' : '' }}>
+                                                    Nội thất cao cấp</option>
+                                            </select>
                                         </div>
-                                        <div class="col-md-4">
-                                            <label for="parking" class="form-label">Chỗ Đậu Xe</label>
-                                            <input type="number" class="form-control" id="parking" name="parking"
-                                                value="{{ old('parking') }}">
+                                        <div class="col-md-6">
+                                            <label for="direction" class="form-label">Hướng Nhà</label>
+                                            <select class="form-select" id="direction" name="direction">
+                                                <option value="East" {{ old('direction') == 'East' ? 'selected' : '' }}>
+                                                    Đông</option>
+                                                <option value="West" {{ old('direction') == 'West' ? 'selected' : '' }}>
+                                                    Tây</option>
+                                                <option value="South"
+                                                    {{ old('direction') == 'South' ? 'selected' : '' }}>
+                                                    Nam</option>
+                                                <option value="North"
+                                                    {{ old('direction') == 'North' ? 'selected' : '' }}>
+                                                    Bắc</option>
+                                                <option value="Southeast"
+                                                    {{ old('direction') == 'Southeast' ? 'selected' : '' }}>
+                                                    Đông Nam</option>
+                                                <option value="Northeast"
+                                                    {{ old('direction') == 'Northeast' ? 'selected' : '' }}>
+                                                    Đông Bắc</option>
+                                                <option value="Southwest"
+                                                    {{ old('direction') == 'Southwest' ? 'selected' : '' }}>
+                                                    Tây Nam</option>
+                                                <option value="Northwest"
+                                                    {{ old('direction') == 'Northwest' ? 'selected' : '' }}>
+                                                    Tây Bắc</option>
+                                            </select>
                                         </div>
                                     </div>
 
@@ -162,6 +196,11 @@
 
                                     <div class="row mb-3">
                                         <div class="col-md-3">
+                                            <label for="price" class="form-label">Giá Bất Động Sản</label>
+                                            <input type="number" class="form-control" id="price" name="price"
+                                                value="{{ old('price') }}" required>
+                                        </div>
+                                        <div class="col-md-3" id="price_type_form">
                                             <label for="price_type" class="form-label">Đơn vị</label>
                                             <select class="form-select" id="price_type" name="price_type">
                                                 <option value="1" {{ old('price_type') == '1' ? 'selected' : '' }}>
@@ -171,11 +210,6 @@
                                                 <option value="3" {{ old('price_type') == '3' ? 'selected' : '' }}>
                                                     Thỏa thuận</option>
                                             </select>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <label for="price" class="form-label">Giá Bất Động Sản</label>
-                                            <input type="number" class="form-control" id="price" name="price"
-                                                value="{{ old('price') }}" required>
                                         </div>
                                         <div class="col-md-6">
                                             <label for="" class="form-label"></label>
@@ -233,9 +267,11 @@
             });
 
             document.addEventListener('DOMContentLoaded', function() {
+                const priceTypeForm = document.getElementById('price_type_form');
                 const priceTypeSelect = document.getElementById('price_type');
                 const priceInput = document.getElementById('price');
                 const areaInput = document.getElementById('area'); // Lấy diện tích đất
+                const dealTypeSelect = document.getElementById('deal_type');
                 const calculatedPrice = document.getElementById('calculated-price');
                 const priceCalculationResult = document.getElementById('price-calculation-result');
 
@@ -249,27 +285,37 @@
                 }
 
                 function updatePriceInfo() {
-                    const selectedValue = priceTypeSelect.value;
+                    const selectedDealType = dealTypeSelect.value; // Loại hình giao dịch
+                    const selectedPriceType = priceTypeSelect.value; // Đơn vị giá
                     const priceValue = parseFloat(priceInput.value) || 0;
                     const areaValue = parseFloat(areaInput.value) || 1; // Giá trị mặc định tránh chia cho 0
 
-                    calculatedPrice.style.display = 'none'; // Ẩn mặc định
+                    calculatedPrice.style.display = 'none'; // Ẩn thông báo giá mặc định
 
-                    // Khi chọn "Thỏa thuận", vô hiệu hóa ô nhập giá và đặt giá trị bằng 0
-                    if (selectedValue === '3') { // Thỏa thuận
-                        priceInput.readOnly = true;
-                        priceInput.value = 0; // Đặt giá trị của ô input là 0 khi bị readOnly
-                        calculatedPrice.style.display = 'none';
+                    // Logic khi loại hình giao dịch là "Cho thuê"
+                    if (selectedDealType === 'rent') {
+                        priceTypeSelect.value = '1'; // Đặt giá trị VND
+                        priceTypeForm.disabled = true; // Ẩn trường select đơn vị
+                        priceInput.readOnly = false; // Cho phép nhập giá
+                        calculatedPrice.style.display = 'block';
+                        priceCalculationResult.textContent = `Giá thuê: ${formatVND(priceValue)}/tháng`;
                     } else {
-                        priceInput.readOnly = false; // Kích hoạt lại ô nhập giá
-                        if (selectedValue === '1') { // VND
-                            calculatedPrice.style.display = 'block';
-                            const pricePerSquareMeter = priceValue / areaValue;
-                            priceCalculationResult.textContent = `Giá trên m2: ${formatVND(pricePerSquareMeter)}`;
-                        } else if (selectedValue === '2') { // m2
-                            calculatedPrice.style.display = 'block';
-                            const totalPrice = priceValue * areaValue;
-                            priceCalculationResult.textContent = `Tổng giá bất động sản: ${formatVND(totalPrice)}`;
+                        priceTypeForm.disabled = false; // Hiện trường select đơn vị
+                        if (selectedPriceType === '3') { // Nếu là "Thỏa thuận"
+                            priceInput.readOnly = true; // Vô hiệu hóa nhập giá
+                            priceInput.value = 0; // Đặt giá trị về 0
+                            calculatedPrice.style.display = 'none'; // Ẩn thông báo giá
+                        } else {
+                            priceInput.readOnly = false; // Kích hoạt lại ô nhập giá
+                            if (selectedPriceType === '1') { // VND
+                                calculatedPrice.style.display = 'block';
+                                const pricePerSquareMeter = priceValue / areaValue;
+                                priceCalculationResult.textContent = `Giá trên m2: ${formatVND(pricePerSquareMeter)}`;
+                            } else if (selectedPriceType === '2') { // m2
+                                calculatedPrice.style.display = 'block';
+                                const totalPrice = priceValue * areaValue;
+                                priceCalculationResult.textContent = `Tổng giá bất động sản: ${formatVND(totalPrice)}`;
+                            }
                         }
                     }
                 }
@@ -278,9 +324,10 @@
                 priceTypeSelect.addEventListener('change', updatePriceInfo);
                 priceInput.addEventListener('input', updatePriceInfo);
                 areaInput.addEventListener('input', updatePriceInfo);
+                dealTypeSelect.addEventListener('change', updatePriceInfo);
 
                 // Kích hoạt logic ban đầu nếu đã có giá trị
-                priceTypeSelect.dispatchEvent(new Event('change'));
+                dealTypeSelect.dispatchEvent(new Event('change'));
             });
         </script>
     @endsection
