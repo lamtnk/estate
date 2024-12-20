@@ -61,6 +61,44 @@
             object-position: center;
             /* Căn giữa ảnh */
         }
+
+        #contact-form-widget {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        #contact-form-toggle {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        #contact-form-content {
+            display: none;
+            width: 300px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        #contact-form-content h4 {
+            margin-bottom: 10px;
+        }
+
+        #contact-form-content .form-group {
+            margin-bottom: 10px;
+        }
+
+        #contact-form-content .btn {
+            width: 100%;
+        }
     </style>
 @endsection
 @section('main')
@@ -78,6 +116,15 @@
     <!-- property area -->
     <div class="content-area single-property" style="background-color: #FCFCFC;">&nbsp;
         <div class="container">
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @elseif (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
 
             <div class="clearfix padding-top-20">
 
@@ -425,6 +472,37 @@
 
         </div>
     </div>
+
+    <div id="contact-form-widget">
+        <button id="contact-form-toggle">
+            <h6><img src="{{ asset('cassets/img/icon/phone.png') }}"> Liên hệ với chúng tôi</h6>
+        </button>
+        <div id="contact-form-content">
+            <form id="contact-form" method="POST" action="{{ route('client.property.detail.submit', $property->id) }}">
+                <form id="contact-form" method="POST">
+                    @csrf
+                    <input type="hidden" name="property_id" value="{{ $property->id }}">
+                    <div class="form-group">
+                        <label for="name">Họ Tên:</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Số Điện Thoại:</label>
+                        <input type="tel" id="phone" name="phone" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Địa chỉ Email:</label>
+                        <input type="email" id="email" name="email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Nội Dung:</label>
+                        <textarea id="message" name="message" class="form-control" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Gửi</button>
+                </form>
+        </div>
+    </div>
+
 @endsection
 
 @section('scripts')
@@ -443,6 +521,12 @@
                 onSliderLoad: function() {
                     $('#image-gallery').removeClass('cS-hidden');
                 }
+            });
+        });
+
+        $(document).ready(function() {
+            $('#contact-form-toggle').click(function() {
+                $('#contact-form-content').slideToggle();
             });
         });
     </script>

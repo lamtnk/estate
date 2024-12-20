@@ -4,6 +4,7 @@ namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
 use App\Service\client\ProjectService;
+use App\Service\client\PropertyRequestService;
 use App\Service\client\PropertyService;
 use App\Service\client\PropertyTypeService;
 use Illuminate\Http\Request;
@@ -13,12 +14,14 @@ class PropertyController extends Controller
     private $propertyService;
     private $propertyTypeService;
     private $projectService;
+    private $propertyRequestService;
 
-    public function __construct(PropertyService $propertyService, PropertyTypeService $propertyTypeService, ProjectService $projectService)
+    public function __construct(PropertyService $propertyService, PropertyTypeService $propertyTypeService, ProjectService $projectService, PropertyRequestService $propertyRequestService)
     {
         $this->propertyService = $propertyService;
         $this->propertyTypeService = $propertyTypeService;
         $this->projectService = $projectService;
+        $this->propertyRequestService = $propertyRequestService;
     }
 
     public function index(Request $request)
@@ -69,5 +72,27 @@ class PropertyController extends Controller
         $properties = $this->propertyService->searchProperties($filters, 12, 'created_at', 'DESC');
 
         return view('client.property.detail', compact('property', 'properties'));
+    }
+
+    public function submitPropertyRequest(Request $request)
+    {
+        $validateData = $request->validate([
+            'property_id' => 'required',
+            'name' => 'required',
+            'phone' => 'required',
+            'email' => 'nullable',
+            'message' => 'nullable',
+        ]);
+
+        // Nếu Validate thành công thì gọi đến Service để lưu thông tin liên hệ của khách hàng
+        try {
+            $this->propertyRequestService->storePropertyRequest($validateData);
+        } catch (\Throwable $th) {
+            // Nếu có lỗi khi gửi thông tin liên hệ thì quay lại form và thông báo lỗi
+            return redirect()->back()->with('error', 'Lỗi trong quá trình gửi thông tin liên hệ');
+        }
+
+        // Chuyển hướng về danh sách bất động sản với thông báo thành công
+        return redirect()->route('client.property.detail', $validateData['property_id'])->with('success', 'Thông tin liên hệ được gửi thành công!');
     }
 }
