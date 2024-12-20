@@ -21,7 +21,7 @@ class PropertyService
      */
     public function getPropertyById($id)
     {
-        return Property::with(['images', 'propertyType', 'project'])->findOrFail($id);
+        return Property::with(['images', 'primaryImage', 'propertyType', 'project'])->findOrFail($id);
     }
 
     // tìm kiếm bất động sản theo bộ lọc

@@ -91,7 +91,8 @@
                                     <div class="box-two proerty-item">
                                         <div class="item-thumb">
                                             <a href="{{ route('client.property.detail', $property->id) }}">
-                                                <img src="{{ asset($property->primaryImage->image_path) }}">
+                                                <img
+                                                    src="{{ asset($property->primaryImage->image_path ?? 'https://placehold.co/600x400') }}">
                                             </a>
                                         </div>
 
@@ -321,7 +322,8 @@
                                         <li>
                                             <div class="col-md-3 col-sm-3 col-xs-3 blg-thumb p0">
                                                 <a href="{{ route('client.property.detail', $property->id) }}">
-                                                    <img src="{{ asset($property->primaryImage->image_path) }}">
+                                                    <img
+                                                        src="{{ asset($property->primaryImage->image_path ?? 'https://placehold.co/600x400') }}">
                                                 </a>
                                                 <span class="property-seeker">
                                                     <b class="b-1">A</b>

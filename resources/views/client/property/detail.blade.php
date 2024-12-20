@@ -5,7 +5,7 @@
         #image-gallery img {
             width: 100%;
             /* Chiều rộng đầy đủ của slider */
-            height: 600px;
+            height: 350px;
             /* Bạn có thể điều chỉnh chiều cao theo ý muốn */
             object-fit: cover;
             /* Đảm bảo ảnh không bị méo và giữ tỷ lệ */
@@ -62,42 +62,14 @@
             /* Căn giữa ảnh */
         }
 
-        #contact-form-widget {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-
         #contact-form-toggle {
             background-color: #007bff;
             color: #fff;
             border: none;
-            padding: 10px 15px;
+            padding: 0px 15px;
+            margin: 0px;
             cursor: pointer;
             border-radius: 5px;
-        }
-
-        #contact-form-content {
-            display: none;
-            width: 300px;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 15px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        #contact-form-content h4 {
-            margin-bottom: 10px;
-        }
-
-        #contact-form-content .form-group {
-            margin-bottom: 10px;
-        }
-
-        #contact-form-content .btn {
-            width: 100%;
         }
     </style>
 @endsection
@@ -128,9 +100,9 @@
 
             <div class="clearfix padding-top-20">
 
-                <div class="col-md-12 single-property-content prp-style-1">
+                <div class="single-property-content prp-style-1">
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <div class="light-slide-item">
                                 <div class="clearfix">
                                     <div class="favorite-and-print">
@@ -143,133 +115,182 @@
                                     </div>
 
                                     <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
-                                        @foreach ($property->images as $image)
-                                            <li data-thumb="{{ asset($image->image_path) }}">
-                                                <img src="{{ asset($image->image_path) }}" alt="Property Image" />
+                                        @if ($property->images != null)
+                                            @foreach ($property->images as $image)
+                                                <li data-thumb="{{ asset($image->image_path) }}">
+                                                    <img src="{{ asset($image->image_path) }}" alt="Property Image" />
+                                                </li>
+                                            @endforeach
+                                        @else
+                                            <li data-thumb="{{ asset('https://placehold.co/600x400') }}">
+                                                <img src="{{ asset('https://placehold.co/600x400') }}"
+                                                    alt="Property Image" />
                                             </li>
-                                        @endforeach
+                                        @endif
+
                                     </ul>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-md-6">
+                            <div class="single-property-header">
+                                <h1 class="property-title">{{ $property->name }}</h1>
+
+                                <div>
+                                    <span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-geo-alt-fill text-danger" viewBox="0 0 16 16">
+                                            <path
+                                                d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
+                                        </svg>
+                                        {{ $property->project->location }}
+                                    </span>
+                                </div>
+
+                                <div>
+                                    <span style="margin: 0px 5px">Mã Căn: <b>{{ $property->unit_code }}</b></span>
+                                    <span style="margin: 0px 5px">Dự Án: <b>{{ $property->project->name }}</b></span>
+                                </div>
+                                <hr style="margin: 10px 0">
+
+                                <span class="property-price">
+                                    @if ($property->deal_type == 'rent')
+                                        {{ number_format($property->price, 0, ',', '.') }} đ/tháng
+                                    @else
+                                        @if ($property->price_type == 1)
+                                            {{ number_format($property->price, 0, ',', '.') }} đ
+                                        @elseif ($property->price_type == 2)
+                                            {{ number_format($property->price * $property->area, 0, ',', '.') }}
+                                            đ
+                                        @else
+                                            Giá thỏa thuận
+                                        @endif
+                                    @endif
+                                </span>
+
+                            </div>
+                            <hr style="margin: 10px 0">
+
+                            <div class="property-meta entry-meta clearfix" style="padding: 10px 0px">
+
+                                <div class="col-xs-3 col-sm-3 col-md-3 p-b-15" style="padding: 0px">
+                                    <span class="property-info icon-area">
+                                        <img src="{{ asset('cassets/img/icon/room-orange.png') }}">
+                                    </span>
+                                    <span class="property-info-entry">
+                                        <span class="property-info-label">Diện tích</span>
+                                        <span class="property-info-value">
+                                            {{ $property->area }}<bclass="property-info-unit">m2</bclass=>
+                                        </span>
+                                    </span>
+                                </div>
+
+                                <div class="col-xs-3 col-sm-3 col-md-3 p-b-15" style="padding: 0px">
+                                    <span class="property-info-icon icon-bed">
+                                        <img src="{{ asset('cassets/img/icon/bed-orange.png') }}">
+                                    </span>
+                                    <span class="property-info-entry">
+                                        <span class="property-info-label">Phòng ngủ</span>
+                                        <span class="property-info-value">{{ $property->bedrooms }}</span>
+                                    </span>
+                                </div>
+
+                                <div class="col-xs-3 col-sm-3 col-md-3 p-b-15" style="padding: 0px">
+                                    <span class="property-info-icon icon-garage">
+                                        <img src="{{ asset('cassets/img/icon/compass-orange.png') }}">
+                                    </span>
+                                    <span class="property-info-entry">
+                                        <span class="property-info-label">Hướng</span>
+                                        <span class="property-info-value">{{ $property->direction_vn }}</span>
+                                    </span>
+                                </div>
+
+                                <div class="col-xs-3 col-sm-3 col-md-3 p-b-15" style="padding: 0px">
+                                    <span class="property-info-icon icon-bath">
+                                        <img src="{{ asset('cassets/img/icon/sofa-orange.png') }}">
+                                    </span>
+                                    <span class="property-info-entry">
+                                        <span class="property-info-label">Nội thất</span>
+                                        <span class="property-info-value">{{ $property->furniture_vn }}</span>
+                                    </span>
+                                </div>
+
+                            </div>
+                            <!-- .property-meta -->
+
+                            <button id="contact-form-toggle" data-toggle="modal" data-target="#contactFormModal">
+                                <h6><img src="{{ asset('cassets/img/icon/phone.png') }}"> Liên hệ</h6>
+                            </button>
+                        </div>
                     </div><br>
 
                     <div class="single-property-wrapper">
-                        <div class="single-property-header">
-                            <h1 class="property-title">{{ $property->name }}</h1>
 
-                            <span class="property-price">
-                                @if ($property->deal_type == 'rent')
-                                    {{ number_format($property->price, 0, ',', '.') }} đ/tháng
-                                @else
-                                    @if ($property->price_type == 1)
-                                        {{ number_format($property->price, 0, ',', '.') }} đ
-                                    @elseif ($property->price_type == 2)
-                                        {{ number_format($property->price * $property->area, 0, ',', '.') }}
-                                        đ
-                                    @else
-                                        Thỏa thuận
-                                    @endif
-                                @endif
-                            </span>
+                        <div class="section additional-details">
+
+                            <h4 class="s-property-title">Thông Tin Chung</h4>
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <td><strong>Thuộc dự án</strong></td>
+                                        <td>{{ $property->project->name }}</td>
+                                        <td><strong>Mặt tiền</strong></td>
+                                        <td>{{ $property->frontage }} mặt</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Loại hình</strong></td>
+                                        <td>{{ $property->propertyType->name }}</td>
+                                        <td><strong>Phòng ngủ</strong></td>
+                                        <td>{{ $property->bedrooms }} phòng</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Mã căn</strong></td>
+                                        <td>{{ $property->unit_code }}</td>
+                                        <td><strong>Hướng nhà</strong></td>
+                                        <td>{{ $property->direction_vn }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Diện tích đất</strong></td>
+                                        <td>{{ $property->area }} m2</td>
+                                        <td><strong>Nội thất</strong></td>
+                                        <td>{{ $property->furniture_vn }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Diện tích xây dựng</strong></td>
+                                        <td>{{ $property->floor_1_area }} m2</td>
+                                        <td><strong>Tình trạng</strong></td>
+                                        <td>
+                                            @if ($property->status == 'red book')
+                                                Đã có sổ đỏ
+                                            @elseif ($property->status == 'pending red book')
+                                                Đang chờ sổ đỏ
+                                            @elseif ($property->status == 'sale contract')
+                                                Hợp đồng mua bán
+                                            @else
+                                                Trích đo
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Số tầng</strong></td>
+                                        <td>{{ $property->number_of_floors }} tầng</td>
+                                        <td><strong>Giao dịch</strong></td>
+                                        <td>
+                                            @if ($property->deal_type == 'sell')
+                                                Giao bán
+                                            @else
+                                                Cho thuê
+                                            @endif
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <hr>
-
-                        <div class="property-meta entry-meta clearfix">
-
-                            <div class="col-xs-3 col-sm-3 col-md-3 p-b-15">
-                                <span class="property-info-icon icon-bed">
-                                    <img src="{{ asset('cassets/img/icon/calendar-orange.png') }}">
-                                </span>
-                                <span class="property-info-entry">
-                                    <span class="property-info-label">Ngày đăng</span>
-                                    <span class="property-info-value">{{ $property->created_at->format('d/m/Y') }}</span>
-                                </span>
-                            </div>
-
-                            <div class="col-xs-3 col-sm-3 col-md-3 p-b-15">
-                                <span class="property-info-icon icon-bed">
-                                    <img src="{{ asset('cassets/img/icon/today-orange.png') }}">
-                                </span>
-                                <span class="property-info-entry">
-                                    <span class="property-info-label">Cập nhật</span>
-                                    <span class="property-info-value">{{ $property->updated_at->format('d/m/Y') }}</span>
-                                </span>
-                            </div>
-
-                            <div class="col-xs-3 col-sm-3 col-md-3 p-b-15">
-                                <span class="property-info-icon icon-tag">
-                                    @if ($property->deal_type == 'sell')
-                                        <img src="{{ asset('cassets/img/icon/sale-orange.png') }}">
-                                    @else
-                                        <img src="{{ asset('cassets/img/icon/rent-orange.png') }}">
-                                    @endif
-                                </span>
-                                <span class="property-info-entry">
-                                    <span class="property-info-label">Hợp đồng</span>
-                                    @if ($property->deal_type == 'sell')
-                                        <span class="property-info-value">Giao bán</span>
-                                    @else
-                                        <span class="property-info-value">Cho thuê</span>
-                                    @endif
-                                </span>
-                            </div>
-
-                            <div class="col-xs-3 col-sm-3 col-md-3 p-b-15">
-                                <span class="property-info-icon icon-bed">
-                                    <img src="{{ asset('cassets/img/icon/home-orange.png') }}">
-                                </span>
-                                <span class="property-info-entry">
-                                    <span class="property-info-label">Loại nhà đất</span>
-                                    <span class="property-info-value">{{ $property->propertyType->name }}</span>
-                                </span>
-                            </div>
-
-                            <div class="col-xs-3 col-sm-3 col-md-3 p-b-15">
-                                <span class="property-info icon-area">
-                                    <img src="{{ asset('cassets/img/icon/room-orange.png') }}">
-                                </span>
-                                <span class="property-info-entry">
-                                    <span class="property-info-label">Diện tích</span>
-                                    <span class="property-info-value">
-                                        {{ $property->area }}<bclass="property-info-unit">m2</bclass=>
-                                    </span>
-                                </span>
-                            </div>
-
-                            <div class="col-xs-3 col-sm-3 col-md-3 p-b-15">
-                                <span class="property-info-icon icon-bed">
-                                    <img src="{{ asset('cassets/img/icon/bed-orange.png') }}">
-                                </span>
-                                <span class="property-info-entry">
-                                    <span class="property-info-label">Phòng ngủ</span>
-                                    <span class="property-info-value">{{ $property->bedrooms }}</span>
-                                </span>
-                            </div>
-
-                            <div class="col-xs-3 col-sm-3 col-md-3 p-b-15">
-                                <span class="property-info-icon icon-bath">
-                                    <img src="{{ asset('cassets/img/icon/sofa-orange.png') }}">
-                                </span>
-                                <span class="property-info-entry">
-                                    <span class="property-info-label">Nội thất</span>
-                                    <span class="property-info-value">{{ $property->furniture_vn }}</span>
-                                </span>
-                            </div>
-
-                            <div class="col-xs-3 col-sm-3 col-md-3 p-b-15">
-                                <span class="property-info-icon icon-garage">
-                                    <img src="{{ asset('cassets/img/icon/compass-orange.png') }}">
-                                </span>
-                                <span class="property-info-entry">
-                                    <span class="property-info-label">Hướng</span>
-                                    <span class="property-info-value">{{ $property->direction_vn }}</span>
-                                </span>
-                            </div>
-
-                        </div>
-                        <hr>
-                        <!-- .property-meta -->
+                        <!-- End additional-details area  -->
 
                         <div class="section">
                             <h4 class="s-property-title">Mô Tả</h4>
@@ -278,111 +299,6 @@
                             </div>
                         </div>
                         <!-- End description area  -->
-
-                        <div class="section additional-details">
-
-                            <h4 class="s-property-title">Thông Tin Chi Tiết</h4>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <ul class="row additional-details-list clearfix">
-                                        <li>
-                                            <span class="col-xs-6 col-sm-5 col-md-5 add-d-title">Thuộc dự án</span>
-                                            <span
-                                                class="col-xs-6 col-sm-7 col-md-7 add-d-entry">{{ $property->project->name }}</span>
-                                        </li>
-
-                                        <li>
-                                            <span class="col-xs-6 col-sm-5 col-md-5 add-d-title">Loại hình bất động
-                                                sản</span>
-                                            <span
-                                                class="col-xs-6 col-sm-7 col-md-7 add-d-entry">{{ $property->propertyType->name }}</span>
-                                        </li>
-                                        <li>
-                                            <span class="col-xs-6 col-sm-5 col-md-5 add-d-title">Mã bất động sản</span>
-                                            <span
-                                                class="col-xs-6 col-sm-7 col-md-7 add-d-entry">{{ $property->unit_code }}</span>
-                                        </li>
-
-                                        <li>
-                                            <span class="col-xs-6 col-sm-5 col-md-5 add-d-title">Diện tích Đất</span>
-                                            <span class="col-xs-6 col-sm-7 col-md-7 add-d-entry">{{ $property->area }}
-                                                m2</span>
-                                        </li>
-
-                                        <li>
-                                            <span class="col-xs-6 col-sm-5 col-md-5 add-d-title">Diện tích Xây Dựng</span>
-                                            <span
-                                                class="col-xs-6 col-sm-7 col-md-7 add-d-entry">{{ $property->floor_1_area }}
-                                                m2</span>
-                                        </li>
-
-                                        <li>
-                                            <span class="col-xs-6 col-sm-5 col-md-5 add-d-title">Mặt tiền sử dụng</span>
-                                            <span class="col-xs-6 col-sm-7 col-md-7 add-d-entry">{{ $property->frontage }}
-                                                mặt
-                                                tiền</span>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="col-md-6">
-                                    <ul class="row additional-details-list clearfix">
-                                        <li>
-                                            <span class="col-xs-6 col-sm-5 col-md-5 add-d-title">Số tầng</span>
-                                            <span
-                                                class="col-xs-6 col-sm-7 col-md-7 add-d-entry">{{ $property->number_of_floors }}
-                                                tầng</span>
-                                        </li>
-
-                                        <li>
-                                            <span class="col-xs-6 col-sm-5 col-md-5 add-d-title">Số phòng ngủ</span>
-                                            <span class="col-xs-6 col-sm-7 col-md-7 add-d-entry">{{ $property->bedrooms }}
-                                                phòng</span>
-                                        </li>
-
-                                        <li>
-                                            <span class="col-xs-6 col-sm-5 col-md-5 add-d-title">Nội thất</span>
-                                            <span
-                                                class="col-xs-6 col-sm-7 col-md-7 add-d-entry">{{ $property->furniture_vn }}</span>
-                                        </li>
-
-                                        <li>
-                                            <span class="col-xs-6 col-sm-5 col-md-5 add-d-title">Hướng Nhà</span>
-                                            <span
-                                                class="col-xs-6 col-sm-7 col-md-7 add-d-entry">{{ $property->direction_vn }}</span>
-                                        </li>
-
-                                        <li>
-                                            <span class="col-xs-6 col-sm-5 col-md-5 add-d-title">Tình trạng</span>
-                                            <span class="col-xs-6 col-sm-7 col-md-7 add-d-entry">
-                                                @if ($property->status == 'red book')
-                                                    Đã có sổ đỏ
-                                                @elseif ($property->status == 'pending red book')
-                                                    Đang chờ sổ đỏ
-                                                @elseif ($property->status == 'sale contract')
-                                                    Hợp đồng mua bán
-                                                @else
-                                                    Trích đo
-                                                @endif
-                                            </span>
-                                        </li>
-
-                                        <li>
-                                            <span class="col-xs-6 col-sm-5 col-md-5 add-d-title">Loại hình giao dịch</span>
-                                            <span class="col-xs-6 col-sm-7 col-md-7 add-d-entry">
-                                                @if ($property->deal_type == 'sell')
-                                                    Giao bán
-                                                @else
-                                                    Cho thuê
-                                                @endif
-                                            </span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End additional-details area  -->
 
                         <div class="section property-features">
                             <h4 class="s-property-title">Nội dung chi tiết</h4>
@@ -432,7 +348,8 @@
                                     <div class="box-two proerty-item">
                                         <div class="item-thumb">
                                             <a href="{{ route('client.property.detail', $relatedProperty->id) }}">
-                                                <img src="{{ asset($relatedProperty->primaryImage->image_path) }}">
+                                                <img
+                                                    src="{{ asset($relatedProperty->primaryImage->image_path ?? 'https://placehold.co/600x400') }}">
                                             </a>
                                         </div>
                                         <div class="item-entry overflow">
@@ -473,36 +390,38 @@
         </div>
     </div>
 
-    <div id="contact-form-widget">
-        <button id="contact-form-toggle">
-            <h6><img src="{{ asset('cassets/img/icon/phone.png') }}"> Liên hệ với chúng tôi</h6>
-        </button>
-        <div id="contact-form-content">
-            <form id="contact-form" method="POST" action="{{ route('client.property.detail.submit', $property->id) }}">
-                <form id="contact-form" method="POST">
-                    @csrf
-                    <input type="hidden" name="property_id" value="{{ $property->id }}">
-                    <div class="form-group">
-                        <label for="name">Họ Tên:</label>
-                        <input type="text" id="name" name="name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Số Điện Thoại:</label>
-                        <input type="tel" id="phone" name="phone" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Địa chỉ Email:</label>
-                        <input type="email" id="email" name="email" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Nội Dung:</label>
-                        <textarea id="message" name="message" class="form-control" rows="3"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Gửi</button>
-                </form>
+    <!-- Modal -->
+    <div class="modal fade" id="contactFormModal" tabindex="-1" role="dialog" aria-labelledby="contactFormModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form id="contact-form" method="POST"
+                        action="{{ route('client.property.detail.submit', $property->id) }}">
+                        @csrf
+                        <input type="hidden" name="property_id" value="{{ $property->id }}">
+                        <div class="form-group">
+                            <label for="name">Họ Tên:</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Số Điện Thoại:</label>
+                            <input type="tel" id="phone" name="phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Địa chỉ Email:</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Nội Dung:</label>
+                            <textarea id="message" name="message" class="form-control" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Gửi</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-
 @endsection
 
 @section('scripts')
@@ -521,12 +440,6 @@
                 onSliderLoad: function() {
                     $('#image-gallery').removeClass('cS-hidden');
                 }
-            });
-        });
-
-        $(document).ready(function() {
-            $('#contact-form-toggle').click(function() {
-                $('#contact-form-content').slideToggle();
             });
         });
     </script>

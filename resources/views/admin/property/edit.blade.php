@@ -238,13 +238,18 @@
                                         </textarea>
                                     </div>
                                     <div class="mb-3">
+                                        <label for="image" class="form-label">Ảnh bất động sản</label>
+                                        <input class="form-control" type="file" id="image" name="image"
+                                            accept="image/*">
+                                    </div>
+                                    <div class="mb-3">
                                         <label for="content" class="form-label">Nội Dung Chi Tiết</label>
                                         <div id="summernote" class="form-control" name="content">
                                             {!! old('content', $property->content) !!}
                                         </div>
                                     </div>
                                     <input type="hidden" name="content" id="content">
-                                    <button type="submit" class="btn btn-primary">Cập Nhật Dự Án</button>
+                                    <button type="submit" class="btn btn-primary">Cập Nhật Bất Động Sản</button>
                                 </form>
                             </div>
                         </div>
