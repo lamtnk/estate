@@ -79,8 +79,11 @@ class PropertyController extends Controller
         $validateData = $request->validate([
             'property_id' => 'required',
             'name' => 'required',
-            'phone' => 'required',
             'email' => 'required',
+            'phone' => 'required',
+            'purpose' => 'required',
+            'date' => 'required',
+            'time' => 'required',
             'message' => 'nullable',
         ]);
 

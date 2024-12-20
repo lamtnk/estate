@@ -5,7 +5,7 @@
         #image-gallery img {
             width: 100%;
             /* Chiều rộng đầy đủ của slider */
-            height: 350px;
+            height: 380px;
             /* Bạn có thể điều chỉnh chiều cao theo ý muốn */
             object-fit: cover;
             /* Đảm bảo ảnh không bị méo và giữ tỷ lệ */
@@ -62,7 +62,7 @@
             /* Căn giữa ảnh */
         }
 
-        #contact-form-toggle {
+        .contact-form-toggle {
             background-color: #007bff;
             color: #fff;
             border: none;
@@ -70,6 +70,31 @@
             margin: 0px;
             cursor: pointer;
             border-radius: 5px;
+        }
+
+        .contact-form-toggle:hover {
+            background-color: #0056b3;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+
+        select.form-select,
+        input.form-control {
+            width: 100%;
+            padding: 0.375rem 0.75rem;
+            font-size: 1.5rem;
+            height: calc(4rem + 2px);
+            border: 1px solid #ced4da;
+            border-radius: 0.375rem;
+            background-color: #fff;
+        }
+
+        select.form-select:focus,
+        input.form-control:focus {
+            border-color: #007bff;
+            outline: none;
+            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
         }
     </style>
 @endsection
@@ -115,19 +140,18 @@
                                     </div>
 
                                     <ul id="image-gallery" class="gallery list-unstyled cS-hidden">
-                                        @if ($property->images != null)
+                                        @if ($property->images->isEmpty())
+                                            <li data-thumb="{{ asset('https://placehold.co/600x400') }}">
+                                                <img src="{{ asset('https://placehold.co/600x400') }}"
+                                                    alt="Property Image" />
+                                            </li>
+                                        @else
                                             @foreach ($property->images as $image)
                                                 <li data-thumb="{{ asset($image->image_path) }}">
                                                     <img src="{{ asset($image->image_path) }}" alt="Property Image" />
                                                 </li>
                                             @endforeach
-                                        @else
-                                            <li data-thumb="{{ asset('https://placehold.co/600x400') }}">
-                                                <img src="{{ asset('https://placehold.co/600x400') }}"
-                                                    alt="Property Image" />
-                                            </li>
                                         @endif
-
                                     </ul>
                                 </div>
                             </div>
@@ -192,7 +216,7 @@
                                     </span>
                                     <span class="property-info-entry">
                                         <span class="property-info-label">Phòng ngủ</span>
-                                        <span class="property-info-value">{{ $property->bedrooms }}</span>
+                                        <span class="property-info-value">{{ $property->bedrooms }} phòng</span>
                                     </span>
                                 </div>
 
@@ -219,7 +243,7 @@
                             </div>
                             <!-- .property-meta -->
 
-                            <button id="contact-form-toggle" data-toggle="modal" data-target="#contactFormModal">
+                            <button class="contact-form-toggle" data-toggle="modal" data-target="#contactFormModal">
                                 <h6><img src="{{ asset('cassets/img/icon/phone.png') }}"> Liên hệ</h6>
                             </button>
                         </div>
@@ -400,23 +424,49 @@
                         action="{{ route('client.property.detail.submit', $property->id) }}">
                         @csrf
                         <input type="hidden" name="property_id" value="{{ $property->id }}">
+
                         <div class="form-group">
-                            <label for="name">Họ Tên:</label>
-                            <input type="text" id="name" name="name" class="form-control" required>
+                            <input type="text" id="name" name="name" class="form-control"
+                                placeholder="Họ và Tên" required>
                         </div>
+
                         <div class="form-group">
-                            <label for="phone">Số Điện Thoại:</label>
-                            <input type="tel" id="phone" name="phone" class="form-control" required>
+                            <input type="email" id="email" name="email" class="form-control"
+                                placeholder="Email" required>
                         </div>
+
                         <div class="form-group">
-                            <label for="email">Địa chỉ Email:</label>
-                            <input type="email" id="email" name="email" class="form-control" required>
+                            <input type="tel" id="phone" name="phone" class="form-control"
+                                placeholder="Số điện thoại" required>
                         </div>
+
                         <div class="form-group">
-                            <label for="message">Nội Dung:</label>
-                            <textarea id="message" name="message" class="form-control" rows="3"></textarea>
+                            <select class="form-select" id="purpose" name="purpose" required>
+                                <option value="">Mục đích mua</option>
+                                <option value="residential">Mua để ở</option>
+                                <option value="investment">Mua để đầu tư</option>
+                            </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Gửi</button>
+
+                        <label for="">Thời gian nhận hỗ trợ tư vấn</label>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <input type="date" id="date" name="date" class="form-control"
+                                    placeholder="Ngày" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="time" id="time" name="time" class="form-control"
+                                    placeholder="Giờ" required>
+                            </div>
+                        </div>
+
+                        <label for="">Yêu cầu tư vấn</label>
+                        <div class="form-group">
+                            <textarea id="message" name="message" class="form-control" rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="contact-form-toggle">
+                            <h6>Gửi</h6>
+                        </button>
                     </form>
                 </div>
             </div>

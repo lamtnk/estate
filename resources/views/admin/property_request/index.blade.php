@@ -40,10 +40,11 @@
                                 <tr>
                                     <th class="col-2">Bất Động Sản</th>
                                     <th class="col-1">Họ Tên</th>
-                                    <th class="col-1">Số Điện Thoại</th>
                                     <th class="col-2">Địa chỉ Email</th>
-                                    <th class="col-4">Tin nhắn</th>
-                                    <th class="col-2">Thời gian</th>
+                                    <th class="col-1">Số Điện Thoại</th>
+                                    <th class="col-1">Mục đích mua</th>
+                                    <th class="col-2">Thời gian tư vấn</th>
+                                    <th class="col-3">Tin nhắn</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -51,10 +52,13 @@
                                     <tr>
                                         <td>{{ $propertyRequest->property->name }}</td>
                                         <td>{{ $propertyRequest->name }}</td>
-                                        <td>{{ $propertyRequest->phone }}</td>
                                         <td>{{ $propertyRequest->email }}</td>
+                                        <td>{{ $propertyRequest->phone }}</td>
+                                        <td>
+                                            {{ $propertyRequest->purpose == 'residential' ? 'Mua để ở' : 'Mua để đầu tư' }}
+                                        </td>
+                                        <td>{{ $propertyRequest->formatted_datetime }}</td>
                                         <td>{{ $propertyRequest->message }}</td>
-                                        <td>{{ $propertyRequest->created_at }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
