@@ -56,6 +56,12 @@ class NewsService
         return $news;
     }
 
+    public function searchNews($keyword)
+    {
+        return News::where('title', 'LIKE', '%' . $keyword . '%')
+            ->orWhere('content', 'LIKE', '%' . $keyword . '%')
+            ->get();
+    }
 
     public function deleteNews($id)
     {
@@ -69,5 +75,12 @@ class NewsService
 
         // Xóa bài viết
         $news->delete();
+    }
+
+    public function getNewsByTag($tagId)
+    {
+        return News::whereHas('tags', function ($query) use ($tagId) {
+            $query->where('tags.id', $tagId);
+        })->get();
     }
 }

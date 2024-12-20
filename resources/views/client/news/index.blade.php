@@ -65,9 +65,9 @@
                             <h3 class="panel-title">Tìm kiếm</h3>
                         </div>
                         <div class="panel-body">
-                            <form role="search">
+                            <form role="search" action="{{ route('client.news.search') }}" method="GET">
                                 <div class="input-group">
-                                    <input class="form-control" placeholder="Search" type="text">
+                                    <input class="form-control" placeholder="Search" type="text" name="query">
                                     <span class="input-group-btn">
                                         <button type="submit" class="btn btn-smal">
                                             <i class="fa fa-search"></i>
@@ -86,7 +86,8 @@
                         <div class="panel-body">
                             <ul class="tag-cloud">
                                 @foreach ($tags as $tag)
-                                    <li><a href="#"><i class="fa fa-tags"></i> {{ $tag->name }}</a></li>
+                                    <li><a href="{{ route('client.news.filterByTag', ['tag' => $tag->id]) }}"><i
+                                                class="fa fa-tags"></i> {{ $tag->name }}</a></li>
                                 @endforeach
                             </ul>
                         </div>

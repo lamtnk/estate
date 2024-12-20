@@ -7,6 +7,7 @@ use App\Models\Property;
 use App\Service\admin\NewsService;
 use App\Service\admin\PropertyService;
 use App\Service\admin\TagService;
+use Illuminate\Http\Request;
 
 class NewController extends Controller
 {
@@ -32,5 +33,20 @@ class NewController extends Controller
         $new = $this->newService->getNewsById($id);
         $properties = $new->Project->Properties()->with('primaryImage')->get();
         return view('client.news.detail', compact('new', 'properties'));
+    }
+
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+        $news = $this->newService->searchNews($query);
+        $tags = $this->tagService->getAllActiveTags();
+        return view('client.news.index', compact('news', 'tags'));
+    }
+
+    public function filterByTag($tagId)
+    {
+        $news = $this->newService->getNewsByTag($tagId);
+        $tags = $this->tagService->getAllActiveTags();
+        return view('client.news.index', compact('news', 'tags'));
     }
 }

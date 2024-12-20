@@ -30,8 +30,14 @@ Route::get('/login', [LoginController::class, 'index'])->name('login.view');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 
 Route::prefix('client')->group(function () {
-    Route::get('/', [NewController::class, 'index'])->name('client.news.index');
-    Route::get('/detail/{id}', [NewController::class, 'show'])->name('client.news.detail');
+
+    // Route Tin tức
+    Route::prefix('news')->group(function () {
+        Route::get('/', [NewController::class, 'index'])->name('client.news.index');
+        Route::get('/detail/{id}', [NewController::class, 'show'])->name('client.news.detail');
+        Route::get('/search', [NewController::class, 'search'])->name('client.news.search');
+        Route::get('/tag/{tag}', [NewController::class, 'filterByTag'])->name('client.news.filterByTag');
+    });
 });
 Route::prefix('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('indexAdmin');

@@ -151,26 +151,6 @@
                         </div>
                     </div>
 
-                    <div class="panel panel-default sidebar-menu wow  fadeInRight animated">
-                        <div class="panel-heading">
-                            <h3 class="panel-title">Tìm kiếm</h3>
-                        </div>
-                        <div class="panel-body">
-                            <form role="search">
-                                <div class="input-group">
-                                    <input class="form-control" placeholder="Search" type="text">
-                                    <span class="input-group-btn">
-                                        <button type="submit" class="btn btn-smal">
-                                            <i class="fa fa-search"></i>
-                                        </button>
-                                    </span>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-
-
-
                     <div class="panel panel-default sidebar-menu wow fadeInRight animated">
                         <div class="panel-heading">
                             <h3 class="panel-title">Gợi ý các mẫu</h3>
@@ -201,13 +181,13 @@
 
                     <div class="panel sidebar-menu wow  fadeInRight animated">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Các thẻ liên quan</h3>
+                            <h3 class="panel-title">Các thẻ</h3>
                         </div>
                         <div class="panel-body">
                             <ul class="tag-cloud">
-                                @foreach ($new->tags as $item)
-                                    <li><a href="#"><i class="fa fa-tags"></i> {{ $item->name }}</a>
-                                    </li>
+                                @foreach ($new->tags as $tag)
+                                    <li><a href="{{ route('client.news.filterByTag', ['tag' => $tag->id]) }}"><i
+                                                class="fa fa-tags"></i> {{ $tag->name }}</a></li>
                                 @endforeach
                             </ul>
                         </div>
