@@ -80,7 +80,7 @@ class PropertyController extends Controller
             'property_id' => 'required',
             'name' => 'required',
             'phone' => 'required',
-            'email' => 'nullable',
+            'email' => 'required',
             'message' => 'nullable',
         ]);
 

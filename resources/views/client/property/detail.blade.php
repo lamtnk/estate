@@ -492,7 +492,7 @@
                     </div>
                     <div class="form-group">
                         <label for="email">Địa chỉ Email:</label>
-                        <input type="email" id="email" name="email" class="form-control">
+                        <input type="email" id="email" name="email" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label for="message">Nội Dung:</label>

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('property_id')->constrained('properties')->onDelete('cascade'); // Liên kết với bảng properties
             $table->string('name');
-            $table->string('email')->nullable();
+            $table->string('email');
             $table->string('phone');
             $table->text('message')->nullable();
             $table->timestamps();
