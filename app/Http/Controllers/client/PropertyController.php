@@ -81,10 +81,12 @@ class PropertyController extends Controller
             'name' => 'required',
             'email' => 'required',
             'phone' => 'required',
-            'purpose' => 'required',
+            'message' => 'nullable',
             'date' => 'required',
             'time' => 'required',
-            'message' => 'nullable',
+            'purpose' => 'required',
+            'visit_type' => 'required',
+            'request_type' => 'required',
         ]);
 
         // Nếu Validate thành công thì gọi đến Service để lưu thông tin liên hệ của khách hàng

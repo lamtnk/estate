@@ -14,10 +14,12 @@ class PropertyRequest extends Model
         'name',
         'email',
         'phone',
-        'purpose',
+        'message',
         'date',
         'time',
-        'message',
+        'purpose',
+        'visit_type',
+        'request_type',
     ];
 
     public function getFormattedDatetimeAttribute()

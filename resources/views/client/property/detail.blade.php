@@ -5,7 +5,7 @@
         #image-gallery img {
             width: 100%;
             /* Chiều rộng đầy đủ của slider */
-            height: 380px;
+            height: 360px;
             /* Bạn có thể điều chỉnh chiều cao theo ý muốn */
             object-fit: cover;
             /* Đảm bảo ảnh không bị méo và giữ tỷ lệ */
@@ -62,7 +62,7 @@
             /* Căn giữa ảnh */
         }
 
-        .contact-form-toggle {
+        .form-toggle {
             background-color: #007bff;
             color: #fff;
             border: none;
@@ -70,9 +70,10 @@
             margin: 0px;
             cursor: pointer;
             border-radius: 5px;
+            min-width: 175px;
         }
 
-        .contact-form-toggle:hover {
+        .form-toggle:hover {
             background-color: #0056b3;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transform: translateY(-2px);
@@ -243,9 +244,22 @@
                             </div>
                             <!-- .property-meta -->
 
-                            <button class="contact-form-toggle" data-toggle="modal" data-target="#contactFormModal">
-                                <h6><img src="{{ asset('cassets/img/icon/phone.png') }}"> Liên hệ</h6>
+                            <button class="form-toggle">
+                                <a href="tel:0123456789" style="color: #fff;">
+                                    <h6><img src="{{ asset('cassets/img/icon/phone.png') }}"> Gọi ngay 24/7</h6>
+                                </a>
                             </button>
+
+                            <button class="form-toggle" data-toggle="modal" data-target="#consultationFormModal"
+                                style="background-color: #dc3545">
+                                <h6><img src="{{ asset('cassets/img/icon/email.png') }}"> Nhận tư vấn</h6>
+                            </button>
+
+                            <button class="form-toggle" data-toggle="modal" data-target="#visitFormModal"
+                                style="background-color: #198754">
+                                <h6><img src="{{ asset('cassets/img/icon/calendar.png') }}"> Tham quan</h6>
+                            </button>
+
                         </div>
                     </div><br>
 
@@ -414,16 +428,19 @@
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="contactFormModal" tabindex="-1" role="dialog" aria-labelledby="contactFormModalLabel"
-        aria-hidden="true">
+    <!-- Modal consultation Submit -->
+    <div class="modal fade" id="consultationFormModal" tabindex="-1" role="dialog"
+        aria-labelledby="consultationFormModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-body">
                     <form id="contact-form" method="POST"
                         action="{{ route('client.property.detail.submit', $property->id) }}">
                         @csrf
+                        <h3 class="text-center">Gửi yêu cầu tư vấn</h3><br>
                         <input type="hidden" name="property_id" value="{{ $property->id }}">
+                        <input type="hidden" name="visit_type" value="none">
+                        <input type="hidden" name="request_type" value="consultation">
 
                         <div class="form-group">
                             <input type="text" id="name" name="name" class="form-control"
@@ -464,7 +481,7 @@
                         <div class="form-group">
                             <textarea id="message" name="message" class="form-control" rows="4"></textarea>
                         </div>
-                        <button type="submit" class="contact-form-toggle">
+                        <button type="submit" class="form-toggle">
                             <h6>Gửi</h6>
                         </button>
                     </form>
@@ -472,6 +489,71 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal visit Submit -->
+    <div class="modal fade" id="visitFormModal" tabindex="-1" role="dialog" aria-labelledby="visitFormModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form id="contact-form" method="POST"
+                        action="{{ route('client.property.detail.submit', $property->id) }}">
+                        @csrf
+                        <h3 class="text-center">Đăng ký thăm quan căn hộ</h3><br>
+                        <input type="hidden" name="property_id" value="{{ $property->id }}">
+                        <input type="hidden" name="purpose" value="none">
+                        <input type="hidden" name="request_type" value="visit">
+
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" class="form-control"
+                                placeholder="Họ và Tên" required>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" class="form-control"
+                                placeholder="Email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="tel" id="phone" name="phone" class="form-control"
+                                placeholder="Số điện thoại" required>
+                        </div>
+
+                        <label for="">Hình thức tham quan</label>
+                        <div class="form-group">
+                            <select class="form-select" id="visit_type" name="visit_type" required>
+                                <option value="">Hình thức thăm quan</option>
+                                <option value="direct">Trải nghiệm thực tế</option>
+                                <option value="video call">Call video trực tiếp</option>
+                            </select>
+                        </div>
+
+                        <label for="">Thời gian tham quan</label>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <input type="date" id="date" name="date" class="form-control"
+                                    placeholder="Ngày" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <input type="time" id="time" name="time" class="form-control"
+                                    placeholder="Giờ" required>
+                            </div>
+                        </div>
+
+                        <label for="">Ghi chú</label>
+                        <div class="form-group">
+                            <textarea id="message" name="message" class="form-control" rows="4"></textarea>
+                        </div>
+
+                        <button type="submit" class="form-toggle">
+                            <h6>Gửi</h6>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('scripts')

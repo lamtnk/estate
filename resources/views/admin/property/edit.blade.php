@@ -99,7 +99,7 @@
                                         <div class="col-md-6">
                                             <label for="floor_1_area" class="form-label">Diện Tích Xây Dựng (m2)</label>
                                             <input type="number" class="form-control" id="floor_1_area" name="floor_1_area"
-                                                value="{{ old('floor_1_area', $property->floor_1_area) }}">
+                                                value="{{ old('floor_1_area', $property->floor_1_area) }}" required>
                                         </div>
                                     </div>
 
@@ -113,7 +113,8 @@
                                             <label for="number_of_floors" class="form-label">Số tầng</label>
                                             <input type="number" class="form-control" id="number_of_floors"
                                                 name="number_of_floors"
-                                                value="{{ old('number_of_floors', $property->number_of_floors) }}">
+                                                value="{{ old('number_of_floors', $property->number_of_floors) }}"
+                                                required>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="bedrooms" class="form-label">Số Phòng Ngủ</label>
@@ -233,22 +234,33 @@
 
                                     <div class="mb-3">
                                         <label for="description" class="form-label">Mô Tả</label>
-                                        <textarea class="form-control" id="description" name="description" rows="5">
+                                        <textarea class="form-control" id="description" name="description" rows="5" required>
                                             {{ old('description', $property->description) }}
                                         </textarea>
                                     </div>
+
                                     <div class="mb-3">
                                         <label for="image" class="form-label">Ảnh bất động sản</label>
                                         <input class="form-control" type="file" id="image" name="image"
-                                            accept="image/*">
+                                            accept="image/*" {{ $property->primaryImage == null ? 'required' : '' }}>
+                                        <div id="image-preview-container" class="mt-3"
+                                            style="display:none; text-align: center;">
+                                            <img id="image-preview"
+                                                src="{{ asset($property->primaryImage->image_path ?? '') }}"
+                                                alt="Image preview" alt="Image preview"
+                                                style="max-width: 100%; max-height: 500px; display: block; margin: 0 auto; object-fit: contain;">
+                                        </div>
                                     </div>
+
                                     <div class="mb-3">
                                         <label for="content" class="form-label">Nội Dung Chi Tiết</label>
                                         <div id="summernote" class="form-control" name="content">
                                             {!! old('content', $property->content) !!}
                                         </div>
                                     </div>
+
                                     <input type="hidden" name="content" id="content">
+
                                     <button type="submit" class="btn btn-primary">Cập Nhật Bất Động Sản</button>
                                 </form>
                             </div>
@@ -342,6 +354,40 @@
 
                 // Kích hoạt logic ban đầu nếu đã có giá trị
                 dealTypeSelect.dispatchEvent(new Event('change'));
+            });
+
+            document.addEventListener('DOMContentLoaded', function() {
+                const previewContainer = document.getElementById('image-preview-container');
+                const previewImage = document.getElementById('image-preview');
+                const imageInput = document.getElementById('image');
+
+                // Hiển thị ảnh mặc định khi mở form
+                if (previewImage.src && previewImage.src !== 'https://placehold.co/600x400') {
+                    previewContainer.style.display = 'block'; // Hiển thị ảnh nếu có ảnh mặc định
+                }
+
+                // Lắng nghe sự kiện change khi người dùng chọn ảnh mới
+                imageInput.addEventListener('change', function(event) {
+                    const file = event.target.files[0];
+
+                    if (file) {
+                        const reader = new FileReader();
+
+                        reader.onload = function(e) {
+                            previewImage.src = e.target.result; // Cập nhật src của ảnh mới
+                            previewContainer.style.display = 'block'; // Hiển thị khu vực xem trước
+                        };
+
+                        reader.readAsDataURL(file); // Đọc tệp ảnh và chuyển đổi thành URL để hiển thị
+                    } else {
+                        // Nếu không có tệp ảnh mới, kiểm tra xem có ảnh cũ không
+                        if (previewImage.src) {
+                            previewContainer.style.display = 'block'; // Giữ ảnh cũ hiển thị
+                        } else {
+                            previewContainer.style.display = 'none'; // Ẩn khu vực xem trước nếu không có ảnh
+                        }
+                    }
+                });
             });
         </script>
     @endsection

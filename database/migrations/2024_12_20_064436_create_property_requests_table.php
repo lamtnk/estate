@@ -17,10 +17,12 @@ return new class extends Migration
             $table->string('name'); // tên người gửi yêu cầu liên hệ
             $table->string('email'); // địa chỉ email
             $table->string('phone'); // số điện thoại
-            $table->enum('purpose', ['residential', 'investment ']); // mục đích mua (để ở, đầu tư)
-            $table->date('date'); // ngày hỗ trợ tư vấn
-            $table->time('time'); // giờ hỗ trợ tư vấn
             $table->text('message')->nullable(); // nội dung tin nhắn
+            $table->date('date'); // ngày
+            $table->time('time'); // giờ
+            $table->enum('purpose', ['residential', 'investment', 'none']); // mục đích mua (để ở, đầu tư)
+            $table->enum('visit_type', ['direct ', 'video call', 'none']); // Hình thức tham quan (trực tiếp, video call)
+            $table->enum('request_type', ['consultation', 'visit']); // loại yêu cầu
             $table->timestamps();
         });
     }
