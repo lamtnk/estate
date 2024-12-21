@@ -2052,11 +2052,12 @@ single property page
 .property-info-entry .property-info-label {
     font-size: 13px;
     display: block;
+    font-weight: bold;
     line-height: 15px;
     text-transform: uppercase;
 }
 .property-info-entry .property-info-value {
-    font-size: 18px;    
+    font-size: 16px;    
     line-height: 24px;
     white-space: nowrap;
 } 
