@@ -96,7 +96,7 @@
                                         <div class="col-md-6">
                                             <label for="floor_1_area" class="form-label">Diện Tích Xây Dựng (m2)</label>
                                             <input type="number" class="form-control" id="floor_1_area" name="floor_1_area"
-                                                value="{{ old('floor_1_area') }}">
+                                                value="{{ old('floor_1_area') }}" required>
                                         </div>
                                     </div>
 
@@ -109,7 +109,7 @@
                                         <div class="col-md-4">
                                             <label for="number_of_floors" class="form-label">Số tầng</label>
                                             <input type="number" class="form-control" id="number_of_floors"
-                                                name="number_of_floors" value="{{ old('number_of_floors') }}">
+                                                name="number_of_floors" value="{{ old('number_of_floors') }}" required>
                                         </div>
                                         <div class="col-md-4">
                                             <label for="bedrooms" class="form-label">Số Phòng Ngủ</label>
@@ -222,19 +222,28 @@
 
                                     <div class="mb-3">
                                         <label for="description" class="form-label">Mô Tả</label>
-                                        <textarea class="form-control" id="description" name="description" rows="5">{{ old('description') }}</textarea>
+                                        <textarea class="form-control" id="description" name="description" rows="5" required>{{ old('description') }}</textarea>
                                     </div>
+
                                     <div class="mb-3">
                                         <label for="image" class="form-label">Ảnh bất động sản</label>
                                         <input class="form-control" type="file" id="image" name="image"
                                             accept="image/*" required>
+                                        <div id="image-preview-container" class="mt-3"
+                                            style="display:none; text-align: center;">
+                                            <img id="image-preview" src="" alt="Image preview"
+                                                style="max-width: 100%; max-height: 500px; display: block; margin: 0 auto; object-fit: contain;">
+                                        </div>
                                     </div>
+
                                     <div class="mb-3">
                                         <label for="content" class="form-label">Nội Dung Chi Tiết</label>
                                         <div id="summernote" class="form-control" name="content">{{ old('content') }}
                                         </div>
                                     </div>
+
                                     <input type="hidden" name="content" id="content">
+
                                     <button type="submit" class="btn btn-primary">Thêm Bất Động Sản</button>
                                 </form>
                             </div>
@@ -295,12 +304,12 @@
                     // Logic khi loại hình giao dịch là "Cho thuê"
                     if (selectedDealType === 'rent') {
                         priceTypeSelect.value = '1'; // Đặt giá trị VND
-                        priceTypeForm.disabled = true; // Ẩn trường select đơn vị
+                        priceTypeForm.hidden = true; // Ẩn trường select đơn vị
                         priceInput.readOnly = false; // Cho phép nhập giá
                         calculatedPrice.style.display = 'block';
                         priceCalculationResult.textContent = `Giá thuê: ${formatVND(priceValue)}/tháng`;
                     } else {
-                        priceTypeForm.disabled = false; // Hiện trường select đơn vị
+                        priceTypeForm.hidden = false; // Hiện trường select đơn vị
                         if (selectedPriceType === '3') { // Nếu là "Thỏa thuận"
                             priceInput.readOnly = true; // Vô hiệu hóa nhập giá
                             priceInput.value = 0; // Đặt giá trị về 0
@@ -328,6 +337,25 @@
 
                 // Kích hoạt logic ban đầu nếu đã có giá trị
                 dealTypeSelect.dispatchEvent(new Event('change'));
+            });
+
+            document.getElementById('image').addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                const previewContainer = document.getElementById('image-preview-container');
+                const previewImage = document.getElementById('image-preview');
+
+                if (file) {
+                    const reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        previewImage.src = e.target.result; // Cập nhật src của ảnh
+                        previewContainer.style.display = 'block'; // Hiển thị khu vực xem trước
+                    };
+
+                    reader.readAsDataURL(file); // Đọc tệp ảnh và chuyển đổi thành URL để hiển thị
+                } else {
+                    previewContainer.style.display = 'none'; // Ẩn khu vực xem trước nếu không có tệp ảnh
+                }
             });
         </script>
     @endsection

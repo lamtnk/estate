@@ -46,8 +46,8 @@
 
                         <li class="sidebar-item  {{ request()->routeIs('index') ? 'active' : '' }}">
                             {{-- <a href="{{ route('index') }}" class='sidebar-link'> --}}
-                                <i class="bi bi-grid-fill"></i>
-                                <span>Dashboard</span>
+                            <i class="bi bi-grid-fill"></i>
+                            <span>Dashboard</span>
                             </a>
                         </li>
 
@@ -69,6 +69,14 @@
                             <a href="{{ route('admin.contact.index') }}" class='sidebar-link'>
                                 <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                                 <span>Liên hệ</span>
+                            </a>
+                        </li>
+
+                        <li
+                            class="sidebar-item {{ request()->routeIs('admin.property-request.index') ? 'active' : '' }}">
+                            <a href="{{ route('admin.property-request.index') }}" class='sidebar-link'>
+                                <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                <span>Yêu cầu</span>
                             </a>
                         </li>
 
