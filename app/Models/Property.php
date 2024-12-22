@@ -22,8 +22,8 @@ class Property extends Model
         'deal_type',
         'number_of_floors',
         'bedrooms',
-        'bathrooms',
-        'parking',
+        'furniture',
+        'direction',
         'description',
         'content',
         'status',
@@ -50,5 +50,35 @@ class Property extends Model
     public function primaryImage()
     {
         return $this->hasOne(PropertyImage::class, 'property_id')->where('is_primary', true);
+    }
+
+    // Chuyển nội thất sang tiếng việt
+    public function getFurnitureVnAttribute()
+    {
+        $furnitureMapping = [
+            'Bare Shell' => 'Bàn giao thô',
+            'Basic Furnished' => 'Nội thất cơ bản',
+            'Fully Furnished' => 'Nội thất đầy đủ',
+            'Luxury Furnished' => 'Nội thất cao cấp'
+        ];
+
+        return $furnitureMapping[$this->furniture] ?? $this->furniture;
+    }
+
+    // Chuyển tên phương hướng sang tiếng việt
+    public function getDirectionVnAttribute()
+    {
+        $directionMapping = [
+            'East' => 'Đông',
+            'West' => 'Tây',
+            'South' => 'Nam',
+            'North' => 'Bắc',
+            'Southeast' => 'Đông Nam',
+            'Northeast' => 'Đông Bắc',
+            'Southwest' => 'Tây Nam',
+            'Northwest' => 'Tây Bắc'
+        ];
+
+        return $directionMapping[$this->direction] ?? $this->direction;
     }
 }

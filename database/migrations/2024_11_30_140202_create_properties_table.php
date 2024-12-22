@@ -22,8 +22,8 @@ class CreatePropertiesTable extends Migration
             $table->enum('deal_type', ['sell', 'rent']); // Loại hình giao dịch
             $table->integer('number_of_floors'); // Số tầng
             $table->integer('bedrooms'); // Số phòng ngủ
-            $table->integer('bathrooms'); // Số phòng tắm
-            $table->integer('parking')->nullable(); // Chỗ đậu xe
+            $table->enum('furniture', ['Bare Shell', 'Basic Furnished', 'Fully Furnished', 'Luxury Furnished']); // Mức độ nội thất bàn giao
+            $table->enum('direction', ['East', 'West', 'South', 'North', 'Southeast', 'Northeast', 'Southwest', 'Northwest'])->nullable(); // Hướng nhà
             $table->text('description'); // Mô tả chi tiết (bao gồm tính năng)
             $table->longText('content')->nullable();
             $table->enum('status', ['red book', 'pending red book', 'sale contract', 'land measurement extract']); // Tình trạng pháp lý

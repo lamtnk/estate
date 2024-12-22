@@ -23,8 +23,8 @@ class PropertySeeder extends Seeder
             'deal_type' => 'sell',
             'number_of_floors' => 1,
             'bedrooms' => 4,
-            'bathrooms' => 4,
-            'parking' => 2, // Có 2 chỗ đậu xe
+            'furniture' => 'Luxury Furnished', // Nội thất cao cấp
+            'direction' => 'East', // Nhà hướng đông
             'description' => 'This is a luxurious villa located in the city center with a swimming pool, garden, and security...',
             'status' => 'red book',
             'unit_code' => 'VILLA-001', // Mã căn cho bất động sản
@@ -62,8 +62,8 @@ class PropertySeeder extends Seeder
             'deal_type' => 'sell',
             'number_of_floors' => 1,
             'bedrooms' => 2,
-            'bathrooms' => 2,
-            'parking' => 1, // Có 1 chỗ đậu xe
+            'furniture' => 'Basic Furnished', // Nội thất cơ bản
+            'direction' => 'South', // Nhà hướng nam
             'description' => 'This modern apartment is located near the beach, offering stunning sea views and all modern amenities.',
             'status' => 'red book',
             'unit_code' => 'APT-002', // Mã căn cho bất động sản
@@ -101,8 +101,8 @@ class PropertySeeder extends Seeder
             'deal_type' => 'sell',
             'number_of_floors' => 1,
             'bedrooms' => 2,
-            'bathrooms' => 1,
-            'parking' => 1, // Có 1 chỗ đậu xe
+            'furniture' => 'Bare Shell', // Bàn giao thôthô
+            'direction' => 'North', // Nhà hướng bắc
             'description' => 'A cozy 2-bedroom apartment located in the quiet suburbs, perfect for families.',
             'status' => 'red book',
             'unit_code' => 'APT-003', // Mã căn cho bất động sản

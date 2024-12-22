@@ -53,8 +53,8 @@ class PropertyController extends Controller
             'deal_type' => 'required',
             'number_of_floors' => 'required',
             'bedrooms' => 'required',
-            'bathrooms' => 'required',
-            'parking' => 'required',
+            'furniture' => 'required',
+            'direction' => 'required',
             'description' => 'required',
             'content' => 'required',
             'status' => 'required',
@@ -101,16 +101,21 @@ class PropertyController extends Controller
             'deal_type' => 'required',
             'number_of_floors' => 'required',
             'bedrooms' => 'required',
-            'bathrooms' => 'required',
-            'parking' => 'required',
+            'furniture' => 'required',
+            'direction' => 'required',
             'description' => 'required',
             'content' => 'required',
             'status' => 'required',
+            'image' => 'nullable',
         ]);
 
-        // Neu Validate thanh cong thi goi den Service de luu bat dong san
+        // Lấy tệp ảnh từ request
+        $image = $request->file('image');  // Đây là đối tượng UploadedFile
+
+        // Nếu Validate thành công thì gọi đến Service để cập nhật bất động sản
         try {
             $this->propertyService->updateProperty($id, $validateData);
+            $this->propertyImageService->changePrimaryImage($id, $image, true); // Lưu ảnh chính mới của bất động sản
         } catch (\Throwable $th) {
             // Neu co loi khi sửa thi quay lai form va thong bao loi
             return redirect()->back()->with('error', 'Lỗi trong quá trình sửa bất động sản');
