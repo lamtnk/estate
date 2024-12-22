@@ -28,9 +28,9 @@ class PropertyRequestController extends Controller
         return redirect()->route('admin.property-request.index');
     }
 
-    public function markAllSeen()
+    public function markAllSeen($requestType)
     {
-        $this->propertyRequestService->markAllSeen();
+        $this->propertyRequestService->markAllSeen($requestType);
         return redirect()->route('admin.property-request.index');
     }
 }

@@ -29,8 +29,10 @@ class PropertyRequestService
     }
 
     // đánh dấu đã xem mọi yêu cầu
-    public function markAllSeen()
+    public function markAllSeen($requestType)
     {
-        PropertyRequest::where('status', 0)->update(['status' => 1]);
+        PropertyRequest::where('request_type', $requestType)
+            ->where('status', 0)
+            ->update(['status' => 1]);
     }
 }
