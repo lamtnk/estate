@@ -24,7 +24,7 @@ class PropertyRequestService
     public function toggleStatus($id)
     {
         $propertyRequest = PropertyRequest::findOrFail($id);
-        $propertyRequest->status = $propertyRequest->status == 1 ? 0 : 1;
+        $propertyRequest->status = !$propertyRequest->status;
         $propertyRequest->save();
     }
 
