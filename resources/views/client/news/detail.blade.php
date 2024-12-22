@@ -129,7 +129,7 @@
 
                             <div class="row wow fadeInLeft animated">
                                 <div class="col-sm-12 text-right">
-                                    <button class="btn btn-primary"><i class="fa fa-comment-o"></i>Gửi phản hồi</button>
+                                    <button class="btn btn-primary"><i class="fa fa-comment-o"></i> Gửi phản hồi</button>
                                 </div>
                             </div>
                         </form>

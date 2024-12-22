@@ -24,7 +24,7 @@ class NewController extends Controller
     {
         $properties = $this->propertyService->getAllProperties();
         $tags = $this->tagService->getAllActiveTags();
-        $news = $this->newService->getAll();
+        $news = $this->newService->getAllPaginated(5); // Ensure this returns a paginated result
         return view('client.news.index', compact('news', 'tags', 'properties'));
     }
 

@@ -83,4 +83,9 @@ class NewsService
             $query->where('tags.id', $tagId);
         })->get();
     }
+
+    public function getAllPaginated($perPage)
+    {
+        return News::orderBy('published_at', 'desc')->paginate($perPage); // Ensure this returns a paginated result
+    }
 }

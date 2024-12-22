@@ -34,14 +34,16 @@
                                         style="width: 100%; height: 350px;">
                                 </a>
                             </div>
-                            <p class="intro">{{ $item->content }}</p>
                             <p class="read-more">
                                 <a href="{{ route('client.news.detail', ['id' => $item->id]) }}"
                                     class="btn btn-default btn-border"
-                                    style="background-color: rgb(255, 255, 0); color: black;">Continue reading</a>
+                                    style="background-color: rgb(255, 255, 0); color: black;">Đọc thêm</a>
                             </p>
                         </section>
                     @endforeach
+                    <div class="pagination-wrapper text-right" style="font-size: 1.2em; ">
+                        {{ $news->links('pagination::bootstrap-4') }}
+                    </div>
                 </div>
                 {{-- ASIDE-Right --}}
                 <div class="blog-asside-right col-md-3">
