@@ -441,6 +441,7 @@
                         <input type="hidden" name="property_id" value="{{ $property->id }}">
                         <input type="hidden" name="visit_type" value="none">
                         <input type="hidden" name="request_type" value="consultation">
+                        <input type="hidden" name="status" value="0">
 
                         <div class="form-group">
                             <input type="text" id="name" name="name" class="form-control"
@@ -503,6 +504,7 @@
                         <input type="hidden" name="property_id" value="{{ $property->id }}">
                         <input type="hidden" name="purpose" value="none">
                         <input type="hidden" name="request_type" value="visit">
+                        <input type="hidden" name="status" value="0">
 
                         <div class="form-group">
                             <input type="text" id="name" name="name" class="form-control"

@@ -35,56 +35,127 @@
                                 {{ session('error') }}
                             </div>
                         @endif
-                        <table class="table table-striped table-bordered" id="table1">
-                            <thead>
-                                <tr>
-                                    <th class="col-2">Bất Động Sản</th>
-                                    <th class="col-1">Họ Tên</th>
-                                    <th class="col-2">Địa chỉ Email</th>
-                                    <th class="col-1">Số Điện Thoại</th>
-                                    <th class="col-1">Thời gian</th>
-                                    <th class="col-1">Loại yêu cầu</th>
-                                    <th class="col-1">Mục đích mua</th>
-                                    <th class="col-1">Hình thức thăm quan</th>
-                                    <th class="col-2">Ghi chú</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($propertyRequests as $propertyRequest)
-                                    <tr>
-                                        <td>{{ $propertyRequest->property->name }}</td>
-                                        <td>{{ $propertyRequest->name }}</td>
-                                        <td>{{ $propertyRequest->email }}</td>
-                                        <td>{{ $propertyRequest->phone }}</td>
-                                        <td>{{ $propertyRequest->formatted_datetime }}</td>
-                                        <td>
-                                            {{ $propertyRequest->request_type == 'consultation' ? 'Tư vấn' : 'Thăm quan' }}
-                                        </td>
-                                        <td>
-                                            @if ($propertyRequest->purpose == 'residential')
-                                                Mua để ởở
-                                            @elseif ($propertyRequest->purpose == 'investment')
-                                                Mua để đầu tư
-                                            @else
-                                                -
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if ($propertyRequest->visit_type == 'direct')
-                                                Trải nghiệm thực tế
-                                            @elseif ($propertyRequest->visit_type == 'video call')
-                                                Call video trực tiếp
-                                            @else
-                                                -
-                                            @endif
-                                        </td>
-                                        <td>{{ $propertyRequest->message }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <!-- Tabs Navigation -->
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="tab1-tab" data-bs-toggle="tab"
+                                        data-bs-target="#tab1" type="button" role="tab" aria-controls="tab1"
+                                        aria-selected="true">Tư vấn</button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="tab2-tab" data-bs-toggle="tab" data-bs-target="#tab2"
+                                        type="button" role="tab" aria-controls="tab2" aria-selected="false">Tham
+                                        quan</button>
+                                </li>
+                            </ul>
+
+                            <a href="{{ route('admin.property-request.markAllSeen') }}" class="btn btn-primary">Đánh dấu tất
+                                cả đã xem</a>
+                        </div>
+
+                        <!-- Tabs Content -->
+                        <div class="tab-content" id="myTabContent">
+
+                            <!-- Tab 1 Content -->
+                            <div class="tab-pane fade show active" id="tab1" role="tabpanel"
+                                aria-labelledby="tab1-tab">
+                                <table class="table table-striped table-bordered custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-2">Bất Động Sản</th>
+                                            <th class="col-1">Họ Tên</th>
+                                            <th class="col-2">Địa chỉ Email</th>
+                                            <th class="col-1">Số Điện Thoại</th>
+                                            <th class="col-1">Thời gian</th>
+                                            <th class="col-1">Mục đích mua</th>
+                                            <th class="col-2">Ghi chú</th>
+                                            <th class="col-1">Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($consultationRequests as $consultationRequest)
+                                            <tr>
+                                                <td>{{ $consultationRequest->property->name }}</td>
+                                                <td>{{ $consultationRequest->name }}</td>
+                                                <td>{{ $consultationRequest->email }}</td>
+                                                <td>{{ $consultationRequest->phone }}</td>
+                                                <td>{{ $consultationRequest->formatted_datetime }}</td>
+                                                <td>
+                                                    @if ($consultationRequest->purpose == 'residential')
+                                                        Mua để ởở
+                                                    @elseif ($consultationRequest->purpose == 'investment')
+                                                        Mua để đầu tư
+                                                    @endif
+                                                <td>{{ $consultationRequest->message }}</td>
+                                                <td>
+                                                    <a href="{{ route('admin.property-request.toggleStatus', $consultationRequest->id) }}"
+                                                        class="{{ $consultationRequest->status == 0 ? 'btn btn-danger' : 'btn btn-success' }}">
+                                                        {{ $consultationRequest->status == 0 ? 'Chưa xem' : 'Đã xem' }}
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <!-- Tab 2 Content -->
+                            <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+                                <table class="table table-striped table-bordered custom-table">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-2">Bất Động Sản</th>
+                                            <th class="col-1">Họ Tên</th>
+                                            <th class="col-2">Địa chỉ Email</th>
+                                            <th class="col-1">Số Điện Thoại</th>
+                                            <th class="col-1">Thời gian</th>
+                                            <th class="col-1">Hình thức thăm quan</th>
+                                            <th class="col-2">Ghi chú</th>
+                                            <th class="col-1">Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($visistRequests as $visistRequest)
+                                            <tr>
+                                                <td>{{ $visistRequest->property->name }}</td>
+                                                <td>{{ $visistRequest->name }}</td>
+                                                <td>{{ $visistRequest->email }}</td>
+                                                <td>{{ $visistRequest->phone }}</td>
+                                                <td>{{ $visistRequest->formatted_datetime }}</td>
+                                                <td>
+                                                    @if ($visistRequest->visit_type == 'direct')
+                                                        Trải nghiệm thực tế
+                                                    @elseif ($visistRequest->visit_type == 'video call')
+                                                        Call video trực tiếp
+                                                    @endif
+                                                </td>
+                                                <td>{{ $visistRequest->message }}</td>
+                                                <td>
+                                                    <a href="{{ route('admin.property-request.toggleStatus', $visistRequest->id) }}"
+                                                        class="{{ $visistRequest->status == 0 ? 'btn btn-danger' : 'btn btn-success' }}">
+                                                        {{ $visistRequest->status == 0 ? 'Chưa xem' : 'Đã xem' }}
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
             </section>
         </div>
-    @endsection
+    </div>
+@endsection
+
+@section('scripts')
+    <script>
+        document.querySelectorAll('.custom-table').forEach((table) => {
+            new simpleDatatables.DataTable(table);
+        });
+    </script>
+@endsection

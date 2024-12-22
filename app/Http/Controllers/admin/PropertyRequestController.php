@@ -17,7 +17,20 @@ class PropertyRequestController extends Controller
 
     public function index()
     {
-        $propertyRequests = $this->propertyRequestService->getAllPropertyRequests();
-        return view('admin.property_request.index', compact('propertyRequests'));
+        $consultationRequests = $this->propertyRequestService->getAllConsultationRequests();
+        $visistRequests = $this->propertyRequestService->getAllVisitRequests();
+        return view('admin.property_request.index', compact('consultationRequests', 'visistRequests'));
+    }
+
+    public function toggleStatus($id)
+    {
+        $this->propertyRequestService->toggleStatus($id);
+        return redirect()->route('admin.property-request.index');
+    }
+
+    public function markAllSeen()
+    {
+        $this->propertyRequestService->markAllSeen();
+        return redirect()->route('admin.property-request.index');
     }
 }
