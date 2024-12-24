@@ -115,7 +115,7 @@
             }
 
             .fixed-action-buttons .form-toggle {
-                min-width: 140px;
+                min-width: 130px;
             }
 
             .fixed-action-buttons .form-toggle h6 {
