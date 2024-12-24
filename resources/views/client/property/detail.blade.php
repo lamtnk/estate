@@ -115,11 +115,11 @@
             }
 
             .fixed-action-buttons .form-toggle {
-                min-width: 100px;
+                min-width: 140px;
             }
 
             .fixed-action-buttons .form-toggle h6 {
-                font-size: 12px;
+                font-size: 11px;
             }
         }
 
