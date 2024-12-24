@@ -54,17 +54,14 @@
                         <div class="row comment">
                             <div class="col-sm-3 col-md-2 text-center-xs">
                                 <p>
-                                    <img src="assets/img/client-face1.png" class="img-responsive img-circle" alt="">
+                                    <img src="{{url('')}}/cassets/img/client-face1.png" class="img-responsive img-circle" alt="">
                                 </p>
                             </div>
                             <div class="col-sm-9 col-md-10">
-                                <h5 class="text-uppercase">Julie Alma</h5>
+                                <h5 class="text-uppercase">Trung Luân</h5>
                                 <p class="posted"><i class="fa fa-clock-o"></i> September 23, 2011 at 12:00 am</p>
-                                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
-                                    egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.
-                                    Donec eu libero sit amet quam egestas semper.
-                                    Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-                                <p class="reply"><a href="#"><i class="fa fa-reply"></i> Reply</a>
+                                <p>Rất bổ ích</p>
+                                {{-- <p class="reply"><a href="#"><i class="fa fa-reply"></i> Reply</a> --}}
                                 </p>
                             </div>
                         </div>
@@ -75,18 +72,15 @@
 
                             <div class="col-sm-3 col-md-2 text-center-xs">
                                 <p>
-                                    <img src="assets/img/client-face2.png" class="img-responsive img-circle" alt="">
+                                    <img src="{{url('')}}/cassets/img/client-face2.png" class="img-responsive img-circle" alt="">
                                 </p>
                             </div>
 
                             <div class="col-sm-9 col-md-10">
-                                <h5 class="text-uppercase">Louise Armero</h5>
+                                <h5 class="text-uppercase">Trung Hiếu</h5>
                                 <p class="posted"><i class="fa fa-clock-o"></i> September 23, 2012 at 12:00 am</p>
-                                <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis
-                                    egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante.
-                                    Donec eu libero sit amet quam egestas semper.
-                                    Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
-                                <p class="reply"><a href="#"><i class="fa fa-reply"></i> Reply</a>
+                                <p>Bài viết rất hay</p>
+                                {{-- <p class="reply"><a href="#"><i class="fa fa-reply"></i> Reply</a> --}}
                                 </p>
                             </div>
 
@@ -94,7 +88,7 @@
                         <!-- /.comment -->
                     </section>
                     {{-- Form Comment --}}
-                    <section id="comment-form" class="add-comments">
+                    {{-- <section id="comment-form" class="add-comments">
                         <h4 class="text-uppercase wow fadeInLeft animated">Để lại bình luận</h4>
                         <form>
                             <div class="row wow fadeInLeft animated">
@@ -133,7 +127,7 @@
                                 </div>
                             </div>
                         </form>
-                    </section>
+                    </section> --}}
                 </div>
 
 

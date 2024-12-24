@@ -36,7 +36,7 @@ Route::prefix('/property')->group(function () {
     Route::get('/{id}', [ClientPropertyController::class, 'detail'])->name('client.property.detail');
     Route::post('/{id}', [ClientPropertyController::class, 'submitPropertyRequest'])->name('client.property.detail.submit');
 });
-Route::prefix('client')->group(function () {
+Route::prefix('/')->group(function () {
 
     // Route Tin tức
     Route::prefix('news')->group(function () {
