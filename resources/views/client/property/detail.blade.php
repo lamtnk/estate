@@ -97,6 +97,42 @@
             outline: none;
             box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
         }
+
+        /* Ẩn nút trên thông tin chung khi ở điện thoại */
+        @media (max-width: 768px) {
+            .property-action-buttons {
+                display: none;
+            }
+
+            .fixed-action-buttons {
+                position: fixed;
+                bottom: 10px;
+                left: 0;
+                width: 100%;
+                z-index: 1000;
+                display: flex;
+                justify-content: space-around;
+            }
+
+            .fixed-action-buttons .form-toggle {
+                min-width: 100px;
+            }
+
+            .fixed-action-buttons .form-toggle h6 {
+                font-size: 12px;
+            }
+        }
+
+        /* Hiển thị nút trên thông tin chung khi ở máy tính */
+        @media (min-width: 769px) {
+            .fixed-action-buttons {
+                display: none;
+            }
+
+            .property-action-buttons {
+                display: block;
+            }
+        }
     </style>
 @endsection
 @section('main')
@@ -244,21 +280,23 @@
                             </div>
                             <!-- .property-meta -->
 
-                            <button class="form-toggle">
-                                <a href="tel:0123456789" style="color: #fff;">
-                                    <h6><img src="{{ asset('cassets/img/icon/phone.png') }}"> Gọi ngay 24/7</h6>
-                                </a>
-                            </button>
+                            <div class="property-action-buttons">
+                                <button class="form-toggle">
+                                    <a href="tel:0123456789" style="color: #fff;">
+                                        <h6><img src="{{ asset('cassets/img/icon/phone.png') }}"> Gọi ngay 24/7</h6>
+                                    </a>
+                                </button>
 
-                            <button class="form-toggle" data-toggle="modal" data-target="#consultationFormModal"
-                                style="background-color: #dc3545">
-                                <h6><img src="{{ asset('cassets/img/icon/email.png') }}"> Nhận tư vấn</h6>
-                            </button>
+                                <button class="form-toggle" data-toggle="modal" data-target="#consultationFormModal"
+                                    style="background-color: #dc3545">
+                                    <h6><img src="{{ asset('cassets/img/icon/email.png') }}"> Nhận tư vấn</h6>
+                                </button>
 
-                            <button class="form-toggle" data-toggle="modal" data-target="#visitFormModal"
-                                style="background-color: #198754">
-                                <h6><img src="{{ asset('cassets/img/icon/calendar.png') }}"> Tham quan</h6>
-                            </button>
+                                <button class="form-toggle" data-toggle="modal" data-target="#visitFormModal"
+                                    style="background-color: #198754">
+                                    <h6><img src="{{ asset('cassets/img/icon/calendar.png') }}"> Tham quan</h6>
+                                </button>
+                            </div>
 
                         </div>
                     </div><br>
@@ -554,6 +592,23 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div class="fixed-action-buttons">
+        <button class="form-toggle">
+            <a href="tel:0123456789" style="color: #fff;">
+                <h6><img src="{{ asset('cassets/img/icon/phone-small.png') }}"> Gọi ngay 24/7</h6>
+            </a>
+        </button>
+
+        <button class="form-toggle" data-toggle="modal" data-target="#consultationFormModal"
+            style="background-color: #dc3545">
+            <h6><img src="{{ asset('cassets/img/icon/email-small.png') }}"> Nhận tư vấn</h6>
+        </button>
+
+        <button class="form-toggle" data-toggle="modal" data-target="#visitFormModal" style="background-color: #198754">
+            <h6><img src="{{ asset('cassets/img/icon/calendar-small.png') }}"> Tham quan</h6>
+        </button>
     </div>
 
 @endsection
