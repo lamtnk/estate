@@ -81,4 +81,19 @@ class Property extends Model
 
         return $directionMapping[$this->direction] ?? $this->direction;
     }
+
+    // Accessor để định dạng giá (tỷ, triệu, nghìn) khi truy cập vào thuộc tính `price_formatted`
+    public function getPriceFormattedAttribute()
+    {
+        $price = $this->price; // Giá của bất động sản
+
+        if ($price >= 1_000_000_000) {
+            return number_format($price / 1_000_000_000, 1, ',', '.') . ' tỷ';
+        } elseif ($price >= 1_000_000) {
+            return number_format($price / 1_000_000, 1, ',', '.') . ' triệu';
+        } elseif ($price >= 1_000) {
+            return number_format($price / 1_000, 1, ',', '.') . ' nghìn';
+        }
+        return number_format($price, 0, ',', '.');
+    }
 }

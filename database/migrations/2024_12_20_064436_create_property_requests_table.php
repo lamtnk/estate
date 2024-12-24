@@ -23,6 +23,7 @@ return new class extends Migration
             $table->enum('purpose', ['residential', 'investment', 'none']); // mục đích mua (để ở, đầu tư)
             $table->enum('visit_type', ['direct ', 'video call', 'none']); // Hình thức tham quan (trực tiếp, video call)
             $table->enum('request_type', ['consultation', 'visit']); // loại yêu cầu
+            $table->boolean('status'); // Tình trạng yêu cầu (chưa xem, đã xem)
             $table->timestamps();
         });
     }

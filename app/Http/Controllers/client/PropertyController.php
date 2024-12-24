@@ -87,6 +87,7 @@ class PropertyController extends Controller
             'purpose' => 'required',
             'visit_type' => 'required',
             'request_type' => 'required',
+            'status' => 'required',
         ]);
 
         // Nếu Validate thành công thì gọi đến Service để lưu thông tin liên hệ của khách hàng
