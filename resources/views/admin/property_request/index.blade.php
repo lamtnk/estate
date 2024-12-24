@@ -82,7 +82,7 @@
                                                 <td>{{ $consultationRequest->formatted_datetime }}</td>
                                                 <td>
                                                     @if ($consultationRequest->purpose == 'residential')
-                                                        Mua để ởở
+                                                        Mua để ở
                                                     @elseif ($consultationRequest->purpose == 'investment')
                                                         Mua để đầu tư
                                                     @endif
