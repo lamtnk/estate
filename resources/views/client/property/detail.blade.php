@@ -217,13 +217,12 @@
 
                                 <span class="property-price">
                                     @if ($property->deal_type == 'rent')
-                                        {{ number_format($property->price, 0, ',', '.') }} đ/tháng
+                                        {{ $property->price_formatted }} /tháng
                                     @else
                                         @if ($property->price_type == 1)
-                                            {{ number_format($property->price, 0, ',', '.') }} đ
+                                            {{ $property->price_formatted }}
                                         @elseif ($property->price_type == 2)
-                                            {{ number_format($property->price * $property->area, 0, ',', '.') }}
-                                            đ
+                                            {{ $property->price_formatted * $property->area }}
                                         @else
                                             Giá thỏa thuận
                                         @endif
@@ -437,18 +436,17 @@
                                             </h5>
                                             <div class="dot-hr"></div>
                                             <span class="pull-left"><b>Diện tích:
-                                                </b>{{ $relatedProperty->area }}m2</span><br>
-                                            <span class="proerty pull-left">
+                                                </b>{{ $relatedProperty->area }}m2</span>
+                                            <span class="proerty pull-right">
                                                 @if ($relatedProperty->deal_type == 'rent')
-                                                    {{ number_format($relatedProperty->price, 0, ',', '.') }} đ/tháng
+                                                    {{ $relatedProperty->price_formatted }} /tháng
                                                 @else
                                                     @if ($relatedProperty->price_type == 1)
-                                                        {{ number_format($relatedProperty->price, 0, ',', '.') }} đ
+                                                        {{ $relatedProperty->price_formatted }}
                                                     @elseif ($relatedProperty->price_type == 2)
-                                                        {{ number_format($relatedProperty->price * $relatedProperty->area, 0, ',', '.') }}
-                                                        đ
+                                                        {{ $relatedProperty->price_formatted * $relatedProperty->area }}
                                                     @else
-                                                        Thỏa thuận
+                                                        Giá thỏa thuận
                                                     @endif
                                                 @endif
                                             </span>
