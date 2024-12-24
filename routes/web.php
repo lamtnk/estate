@@ -9,6 +9,7 @@ use App\Http\Controllers\admin\PropertyController;
 use App\Http\Controllers\admin\PropertyImageController;
 use App\Http\Controllers\admin\PropertyRequestController;
 use App\Http\Controllers\admin\TagController;
+use App\Http\Controllers\client\NewController;
 use App\Http\Controllers\client\PropertyController as ClientPropertyController;
 use App\Models\News;
 use Illuminate\Support\Facades\Route;
@@ -35,7 +36,16 @@ Route::prefix('/property')->group(function () {
     Route::get('/{id}', [ClientPropertyController::class, 'detail'])->name('client.property.detail');
     Route::post('/{id}', [ClientPropertyController::class, 'submitPropertyRequest'])->name('client.property.detail.submit');
 });
+Route::prefix('/')->group(function () {
 
+    // Route Tin tức
+    Route::prefix('news')->group(function () {
+        Route::get('/', [NewController::class, 'index'])->name('client.news.index');
+        Route::get('/detail/{id}', [NewController::class, 'show'])->name('client.news.detail');
+        Route::get('/search', [NewController::class, 'search'])->name('client.news.search');
+        Route::get('/tag/{tag}', [NewController::class, 'filterByTag'])->name('client.news.filterByTag');
+    });
+});
 Route::prefix('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('indexAdmin');
 
