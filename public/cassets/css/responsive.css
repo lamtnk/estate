@@ -83,9 +83,6 @@
     .header-social ul li a{
         font-size: 12px;
     }
-    .navbar .container{
-        padding: 10px 15px;
-    }
     .navbar{
         min-height: 75px;
     }
@@ -105,9 +102,6 @@
     .navbar-nav > li > a{
         padding-left: 15px;
         padding-right: 6px;
-    }
-    .main-nav{
-        padding-top: 4px;
     }
     .navbar-default .navbar-nav > li > a.active::after{
         bottom: -2px;
@@ -413,9 +407,6 @@
     .header-social ul li a {
         font-size: 12px;
     }
-    .navbar .container {
-        padding: 10px 15px;
-    }
     .navbar {
         min-height: 75px;
     }
@@ -435,9 +426,6 @@
     .navbar-nav > li > a {
         padding-left: 15px;
         padding-right: 6px;
-    }
-    .main-nav {
-        padding-top: 4px;
     }
     .navbar-default .navbar-nav > li > a.active::after {
         bottom: -2px;
@@ -597,9 +585,6 @@
     .navbar-nav > li > a {
         padding-left: 6px;
         padding-right: 6px;
-    }
-    .main-nav {
-        padding-top: 4px;
     }
     .navbar-default .navbar-nav > li > a.active::after {
         bottom: -15px;
