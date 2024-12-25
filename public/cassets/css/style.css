@@ -734,12 +734,6 @@ label small{
 .navbar-nav.navbar-right:last-child{
     margin-right: 20px
 }
-.navbar-brand {
-
-}
-.main-nav {
-    padding-top: 10px;
-}
 .button.navbar-right {
     padding-top: 10px;
 }
@@ -773,9 +767,6 @@ label small{
     background-repeat: repeat-x;
     border-radius: 4px;
     box-shadow: none;
-}
-.navbar .container{
-    padding-top: 15px
 }
 .navbar-default {
     background-image: none;
