@@ -96,6 +96,8 @@ Route::prefix('admin')->group(function () {
 
     Route::prefix('property-request')->group(function () {
         Route::get('/', [PropertyRequestController::class, 'index'])->name('admin.property-request.index');
+        Route::get('/{id}/toggle-status', [PropertyRequestController::class, 'toggleStatus'])->name('admin.property-request.toggleStatus');
+        Route::get('/{request_type}/mark-all-seen', [PropertyRequestController::class, 'markAllSeen'])->name('admin.property-request.markAllSeen');
     });
 });
 

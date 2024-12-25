@@ -20,6 +20,7 @@ class PropertyRequest extends Model
         'purpose',
         'visit_type',
         'request_type',
+        'status',
     ];
 
     public function getFormattedDatetimeAttribute()

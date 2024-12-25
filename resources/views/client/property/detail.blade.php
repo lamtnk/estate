@@ -97,6 +97,55 @@
             outline: none;
             box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
         }
+
+        /* Ẩn nút trên thông tin chung khi ở điện thoại */
+        @media (max-width: 1280px) {
+            .property-action-buttons {
+                display: none;
+            }
+
+            .fixed-action-buttons {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                /* Chiếm toàn bộ chiều ngang màn hình */
+                z-index: 1000;
+                display: flex;
+                justify-content: space-between;
+                /* Căn đều các nút */
+                background-color: #fff;
+                /* Nền để phân biệt với nội dung */
+                padding: 10px;
+                /* Khoảng cách xung quanh */
+            }
+
+            .fixed-action-buttons .form-toggle {
+                flex: 1;
+                /* Đảm bảo các nút có chiều rộng bằng nhau */
+                margin: 0 3px;
+                /* Khoảng cách giữa các nút */
+                text-align: center;
+                /* Căn giữa nội dung */
+                min-width: 32%;
+            }
+
+
+            .fixed-action-buttons .form-toggle h6 {
+                font-size: 8px;
+            }
+        }
+
+        /* Hiển thị nút trên thông tin chung khi ở máy tính */
+        @media (min-width: 1281px) {
+            .fixed-action-buttons {
+                display: none;
+            }
+
+            .property-action-buttons {
+                display: block;
+            }
+        }
     </style>
 @endsection
 @section('main')
@@ -164,11 +213,7 @@
 
                                 <div>
                                     <span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                            fill="currentColor" class="bi bi-geo-alt-fill text-danger" viewBox="0 0 16 16">
-                                            <path
-                                                d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6" />
-                                        </svg>
+                                        <img src="{{ asset('cassets/img/icon/location.png') }}">
                                         {{ $property->project->location }}
                                     </span>
                                 </div>
@@ -181,13 +226,12 @@
 
                                 <span class="property-price">
                                     @if ($property->deal_type == 'rent')
-                                        {{ number_format($property->price, 0, ',', '.') }} đ/tháng
+                                        {{ $property->price_formatted }} /tháng
                                     @else
                                         @if ($property->price_type == 1)
-                                            {{ number_format($property->price, 0, ',', '.') }} đ
+                                            {{ $property->price_formatted }}
                                         @elseif ($property->price_type == 2)
-                                            {{ number_format($property->price * $property->area, 0, ',', '.') }}
-                                            đ
+                                            {{ $property->price_formatted * $property->area }}
                                         @else
                                             Giá thỏa thuận
                                         @endif
@@ -244,26 +288,36 @@
                             </div>
                             <!-- .property-meta -->
 
-                            <button class="form-toggle">
-                                <a href="tel:0123456789" style="color: #fff;">
-                                    <h6><img src="{{ asset('cassets/img/icon/phone.png') }}"> Gọi ngay 24/7</h6>
-                                </a>
-                            </button>
+                            <div class="property-action-buttons">
+                                <button class="form-toggle">
+                                    <a href="tel:0123456789" style="color: #fff;">
+                                        <h6><img src="{{ asset('cassets/img/icon/phone.png') }}"> Gọi ngay 24/7</h6>
+                                    </a>
+                                </button>
 
-                            <button class="form-toggle" data-toggle="modal" data-target="#consultationFormModal"
-                                style="background-color: #dc3545">
-                                <h6><img src="{{ asset('cassets/img/icon/email.png') }}"> Nhận tư vấn</h6>
-                            </button>
+                                <button class="form-toggle" data-toggle="modal" data-target="#consultationFormModal"
+                                    style="background-color: #dc3545">
+                                    <h6><img src="{{ asset('cassets/img/icon/email.png') }}"> Nhận tư vấn</h6>
+                                </button>
 
-                            <button class="form-toggle" data-toggle="modal" data-target="#visitFormModal"
-                                style="background-color: #198754">
-                                <h6><img src="{{ asset('cassets/img/icon/calendar.png') }}"> Tham quan</h6>
-                            </button>
+                                <button class="form-toggle" data-toggle="modal" data-target="#visitFormModal"
+                                    style="background-color: #198754">
+                                    <h6><img src="{{ asset('cassets/img/icon/calendar.png') }}"> Tham quan</h6>
+                                </button>
+                            </div>
 
                         </div>
                     </div><br>
 
                     <div class="single-property-wrapper">
+
+                        <div class="section">
+                            <h4 class="s-property-title">Mô Tả</h4>
+                            <div class="s-property-content">
+                                <p>{{ $property->description }}</p>
+                            </div>
+                        </div>
+                        <!-- End description area  -->
 
                         <div class="section additional-details">
 
@@ -330,14 +384,6 @@
                         </div>
                         <!-- End additional-details area  -->
 
-                        <div class="section">
-                            <h4 class="s-property-title">Mô Tả</h4>
-                            <div class="s-property-content">
-                                <p>{{ $property->description }}</p>
-                            </div>
-                        </div>
-                        <!-- End description area  -->
-
                         <div class="section property-features">
                             <h4 class="s-property-title">Nội dung chi tiết</h4>
                             {!! $property->content !!}
@@ -399,18 +445,17 @@
                                             </h5>
                                             <div class="dot-hr"></div>
                                             <span class="pull-left"><b>Diện tích:
-                                                </b>{{ $relatedProperty->area }}m2</span><br>
-                                            <span class="proerty pull-left">
+                                                </b>{{ $relatedProperty->area }}m2</span>
+                                            <span class="proerty pull-right">
                                                 @if ($relatedProperty->deal_type == 'rent')
-                                                    {{ number_format($relatedProperty->price, 0, ',', '.') }} đ/tháng
+                                                    {{ $relatedProperty->price_formatted }} /tháng
                                                 @else
                                                     @if ($relatedProperty->price_type == 1)
-                                                        {{ number_format($relatedProperty->price, 0, ',', '.') }} đ
+                                                        {{ $relatedProperty->price_formatted }}
                                                     @elseif ($relatedProperty->price_type == 2)
-                                                        {{ number_format($relatedProperty->price * $relatedProperty->area, 0, ',', '.') }}
-                                                        đ
+                                                        {{ $relatedProperty->price_formatted * $relatedProperty->area }}
                                                     @else
-                                                        Thỏa thuận
+                                                        Giá thỏa thuận
                                                     @endif
                                                 @endif
                                             </span>
@@ -423,6 +468,24 @@
                     </div>
                 </div>
 
+            </div>
+
+            <div class="fixed-action-buttons">
+                <button class="form-toggle">
+                    <a href="tel:0123456789" style="color: #fff;">
+                        <h6><img src="{{ asset('cassets/img/icon/phone-small.png') }}"> Gọi ngay 24/7</h6>
+                    </a>
+                </button>
+
+                <button class="form-toggle" data-toggle="modal" data-target="#consultationFormModal"
+                    style="background-color: #dc3545">
+                    <h6><img src="{{ asset('cassets/img/icon/email-small.png') }}"> Nhận tư vấn</h6>
+                </button>
+
+                <button class="form-toggle" data-toggle="modal" data-target="#visitFormModal"
+                    style="background-color: #198754">
+                    <h6><img src="{{ asset('cassets/img/icon/calendar-small.png') }}"> Tham quan</h6>
+                </button>
             </div>
 
         </div>
@@ -441,6 +504,7 @@
                         <input type="hidden" name="property_id" value="{{ $property->id }}">
                         <input type="hidden" name="visit_type" value="none">
                         <input type="hidden" name="request_type" value="consultation">
+                        <input type="hidden" name="status" value="0">
 
                         <div class="form-group">
                             <input type="text" id="name" name="name" class="form-control"
@@ -503,6 +567,7 @@
                         <input type="hidden" name="property_id" value="{{ $property->id }}">
                         <input type="hidden" name="purpose" value="none">
                         <input type="hidden" name="request_type" value="visit">
+                        <input type="hidden" name="status" value="0">
 
                         <div class="form-group">
                             <input type="text" id="name" name="name" class="form-control"
