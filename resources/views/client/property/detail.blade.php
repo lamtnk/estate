@@ -99,7 +99,7 @@
         }
 
         /* Ẩn nút trên thông tin chung khi ở điện thoại */
-        @media (max-width: 1024px) {
+        @media (max-width: 1280px) {
             .property-action-buttons {
                 display: none;
             }
@@ -137,7 +137,7 @@
         }
 
         /* Hiển thị nút trên thông tin chung khi ở máy tính */
-        @media (min-width: 1025px) {
+        @media (min-width: 1281px) {
             .fixed-action-buttons {
                 display: none;
             }
