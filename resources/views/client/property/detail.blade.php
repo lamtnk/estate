@@ -99,32 +99,45 @@
         }
 
         /* Ẩn nút trên thông tin chung khi ở điện thoại */
-        @media (max-width: 768px) {
+        @media (max-width: 1024px) {
             .property-action-buttons {
                 display: none;
             }
 
             .fixed-action-buttons {
                 position: fixed;
-                bottom: 10px;
+                bottom: 0;
                 left: 0;
                 width: 100%;
+                /* Chiếm toàn bộ chiều ngang màn hình */
                 z-index: 1000;
                 display: flex;
-                justify-content: space-around;
+                justify-content: space-between;
+                /* Căn đều các nút */
+                background-color: #fff;
+                /* Nền để phân biệt với nội dung */
+                padding: 10px;
+                /* Khoảng cách xung quanh */
             }
 
             .fixed-action-buttons .form-toggle {
-                min-width: 130px;
+                flex: 1;
+                /* Đảm bảo các nút có chiều rộng bằng nhau */
+                margin: 0 3px;
+                /* Khoảng cách giữa các nút */
+                text-align: center;
+                /* Căn giữa nội dung */
+                min-width: 32%;
             }
 
+
             .fixed-action-buttons .form-toggle h6 {
-                font-size: 11px;
+                font-size: 8px;
             }
         }
 
         /* Hiển thị nút trên thông tin chung khi ở máy tính */
-        @media (min-width: 769px) {
+        @media (min-width: 1025px) {
             .fixed-action-buttons {
                 display: none;
             }
@@ -298,6 +311,14 @@
 
                     <div class="single-property-wrapper">
 
+                        <div class="section">
+                            <h4 class="s-property-title">Mô Tả</h4>
+                            <div class="s-property-content">
+                                <p>{{ $property->description }}</p>
+                            </div>
+                        </div>
+                        <!-- End description area  -->
+
                         <div class="section additional-details">
 
                             <h4 class="s-property-title">Thông Tin Chung</h4>
@@ -362,14 +383,6 @@
                             </table>
                         </div>
                         <!-- End additional-details area  -->
-
-                        <div class="section">
-                            <h4 class="s-property-title">Mô Tả</h4>
-                            <div class="s-property-content">
-                                <p>{{ $property->description }}</p>
-                            </div>
-                        </div>
-                        <!-- End description area  -->
 
                         <div class="section property-features">
                             <h4 class="s-property-title">Nội dung chi tiết</h4>
@@ -455,6 +468,24 @@
                     </div>
                 </div>
 
+            </div>
+
+            <div class="fixed-action-buttons">
+                <button class="form-toggle">
+                    <a href="tel:0123456789" style="color: #fff;">
+                        <h6><img src="{{ asset('cassets/img/icon/phone-small.png') }}"> Gọi ngay 24/7</h6>
+                    </a>
+                </button>
+
+                <button class="form-toggle" data-toggle="modal" data-target="#consultationFormModal"
+                    style="background-color: #dc3545">
+                    <h6><img src="{{ asset('cassets/img/icon/email-small.png') }}"> Nhận tư vấn</h6>
+                </button>
+
+                <button class="form-toggle" data-toggle="modal" data-target="#visitFormModal"
+                    style="background-color: #198754">
+                    <h6><img src="{{ asset('cassets/img/icon/calendar-small.png') }}"> Tham quan</h6>
+                </button>
             </div>
 
         </div>
@@ -586,23 +617,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="fixed-action-buttons">
-        <button class="form-toggle">
-            <a href="tel:0123456789" style="color: #fff;">
-                <h6><img src="{{ asset('cassets/img/icon/phone-small.png') }}"> Gọi ngay 24/7</h6>
-            </a>
-        </button>
-
-        <button class="form-toggle" data-toggle="modal" data-target="#consultationFormModal"
-            style="background-color: #dc3545">
-            <h6><img src="{{ asset('cassets/img/icon/email-small.png') }}"> Nhận tư vấn</h6>
-        </button>
-
-        <button class="form-toggle" data-toggle="modal" data-target="#visitFormModal" style="background-color: #198754">
-            <h6><img src="{{ asset('cassets/img/icon/calendar-small.png') }}"> Tham quan</h6>
-        </button>
     </div>
 
 @endsection
