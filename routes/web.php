@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\LoginController;
 use App\Http\Controllers\admin\NewsController;
 use App\Http\Controllers\admin\ProjectController;
+use App\Http\Controllers\admin\ProjectImageController;
 use App\Http\Controllers\admin\PropertyController;
 use App\Http\Controllers\admin\PropertyImageController;
 use App\Http\Controllers\admin\PropertyRequestController;
@@ -65,6 +66,10 @@ Route::prefix('admin')->group(function () {
         Route::get('edit/{id}', [ProjectController::class, 'edit'])->name('admin.project.edit');
         Route::put('edit/{id}', [ProjectController::class, 'update'])->name('admin.project.update');
         Route::post('/hide/{status}', [ProjectController::class, 'index'])->name('admin.project.hide');
+        Route::get('/{projectId}/images', [ProjectImageController::class, 'index'])->name('admin.project.images.index');
+        Route::post('/{projectId}/images/store', [ProjectImageController::class, 'store'])->name('admin.project.images.store');
+        Route::get('/{projectId}/images/delete/{id}', [ProjectImageController::class, 'delete'])->name('admin.project.images.delete');
+        Route::get('/{projectId}/images/deleteAll', [ProjectImageController::class, 'deleteAll'])->name('admin.project.images.deleteAll');
     });
 
     Route::prefix('property')->group(function () {
