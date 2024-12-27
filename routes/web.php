@@ -5,11 +5,13 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\LoginController;
 use App\Http\Controllers\admin\NewsController;
 use App\Http\Controllers\admin\ProjectController;
+use App\Http\Controllers\admin\ProjectImageController;
 use App\Http\Controllers\admin\PropertyController;
 use App\Http\Controllers\admin\PropertyImageController;
 use App\Http\Controllers\admin\PropertyRequestController;
 use App\Http\Controllers\admin\TagController;
 use App\Http\Controllers\client\NewController;
+use App\Http\Controllers\client\ProjectController as ClientProjectController;
 use App\Http\Controllers\client\PropertyController as ClientPropertyController;
 use App\Models\News;
 use Illuminate\Support\Facades\Route;
@@ -31,11 +33,6 @@ Route::get('/', function () {
 Route::get('/login', [LoginController::class, 'index'])->name('login.view');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 
-Route::prefix('/property')->group(function () {
-    Route::get('/', [ClientPropertyController::class, 'index'])->name('client.property.index');
-    Route::get('/{id}', [ClientPropertyController::class, 'detail'])->name('client.property.detail');
-    Route::post('/{id}', [ClientPropertyController::class, 'submitPropertyRequest'])->name('client.property.detail.submit');
-});
 Route::prefix('/')->group(function () {
 
     // Route Tin tức
@@ -44,6 +41,17 @@ Route::prefix('/')->group(function () {
         Route::get('/detail/{id}', [NewController::class, 'show'])->name('client.news.detail');
         Route::get('/search', [NewController::class, 'search'])->name('client.news.search');
         Route::get('/tag/{tag}', [NewController::class, 'filterByTag'])->name('client.news.filterByTag');
+    });
+
+    Route::prefix('property')->group(function () {
+        Route::get('/', [ClientPropertyController::class, 'index'])->name('client.property.index');
+        Route::get('/{id}', [ClientPropertyController::class, 'detail'])->name('client.property.detail');
+        Route::post('/{id}', [ClientPropertyController::class, 'submitPropertyRequest'])->name('client.property.detail.submit');
+    });
+
+    Route::prefix('project')->group(function () {
+        Route::get('/', [ClientProjectController::class, 'index'])->name('client.project.index');
+        Route::get('/{id}', [ClientProjectController::class, 'detail'])->name('client.project.detail');
     });
 });
 Route::prefix('admin')->group(function () {
@@ -65,6 +73,10 @@ Route::prefix('admin')->group(function () {
         Route::get('edit/{id}', [ProjectController::class, 'edit'])->name('admin.project.edit');
         Route::put('edit/{id}', [ProjectController::class, 'update'])->name('admin.project.update');
         Route::post('/hide/{status}', [ProjectController::class, 'index'])->name('admin.project.hide');
+        Route::get('/{projectId}/images', [ProjectImageController::class, 'index'])->name('admin.project.images.index');
+        Route::post('/{projectId}/images/store', [ProjectImageController::class, 'store'])->name('admin.project.images.store');
+        Route::get('/{projectId}/images/delete/{id}', [ProjectImageController::class, 'delete'])->name('admin.project.images.delete');
+        Route::get('/{projectId}/images/deleteAll', [ProjectImageController::class, 'deleteAll'])->name('admin.project.images.deleteAll');
     });
 
     Route::prefix('property')->group(function () {

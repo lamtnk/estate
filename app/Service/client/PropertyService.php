@@ -7,7 +7,13 @@ use Illuminate\Http\Request;
 
 class PropertyService
 {
-    public function getAllProperties($perPage)
+    public function getAllProperties()
+    {
+        // Lấy dữ liệu với phân trang
+        return Property::all();
+    }
+
+    public function getPropertiesByPaginate($perPage)
     {
         // Lấy dữ liệu với phân trang
         return Property::with(['images', 'primaryImage'])->paginate($perPage);
