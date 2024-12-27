@@ -24,14 +24,15 @@
     <link href="{{ url('') }}/cassets/css/animate.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="{{ url('') }}/cassets/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="{{ url('') }}/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ url('') }}/cassets/css/icheck.min_all.css">
+    <link rel="stylesheet" href="{{ url('') }}/assets/css/pages/icheck.min_all.css">
     <link rel="stylesheet" href="{{ url('') }}/cassets/css/price-range.css">
     <link rel="stylesheet" href="{{ url('') }}/cassets/css/owl.carousel.css">
     <link rel="stylesheet" href="{{ url('') }}/cassets/css/owl.theme.css">
     <link rel="stylesheet" href="{{ url('') }}/cassets/css/owl.transitions.css">
     <link rel="stylesheet" href="{{ url('') }}/cassets/css/lightslider.min.css">
-    <link rel="stylesheet" href="{{ url('') }}/cassets/css/style.css">
+    <link rel="stylesheet" href="{{ url('') }}/assets/css/pages/style.css">
     <link rel="stylesheet" href="{{ url('') }}/cassets/css/responsive.css">
+
 
     <!-- Thêm CSS từ section 'styles' nếu có -->
     @yield('styles')
@@ -214,15 +215,20 @@
 
                             <div class="social pull-right">
                                 <ul>
-                                    <li><a class="wow fadeInUp animated" href="https://www.facebook.com/p/T%C3%A0i-L%E1%BB%99c-Property-61561046392320/?locale=nn_NO"><i
+                                    <li><a class="wow fadeInUp animated"
+                                            href="https://www.facebook.com/p/T%C3%A0i-L%E1%BB%99c-Property-61561046392320/?locale=nn_NO"><i
                                                 class="fa fa-twitter"></i></a></li>
-                                    <li><a class="wow fadeInUp animated" href="https://www.facebook.com/p/T%C3%A0i-L%E1%BB%99c-Property-61561046392320/?locale=nn_NO"
+                                    <li><a class="wow fadeInUp animated"
+                                            href="https://www.facebook.com/p/T%C3%A0i-L%E1%BB%99c-Property-61561046392320/?locale=nn_NO"
                                             data-wow-delay="0.2s"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a class="wow fadeInUp animated" href="hhttps://www.facebook.com/p/T%C3%A0i-L%E1%BB%99c-Property-61561046392320/?locale=nn_NO"
+                                    <li><a class="wow fadeInUp animated"
+                                            href="hhttps://www.facebook.com/p/T%C3%A0i-L%E1%BB%99c-Property-61561046392320/?locale=nn_NO"
                                             data-wow-delay="0.3s"><i class="fa fa-google-plus"></i></a></li>
-                                    <li><a class="wow fadeInUp animated" href="https://www.facebook.com/p/T%C3%A0i-L%E1%BB%99c-Property-61561046392320/?locale=nn_NO"
+                                    <li><a class="wow fadeInUp animated"
+                                            href="https://www.facebook.com/p/T%C3%A0i-L%E1%BB%99c-Property-61561046392320/?locale=nn_NO"
                                             data-wow-delay="0.4s"><i class="fa fa-instagram"></i></a></li>
-                                    <li><a class="wow fadeInUp animated" href="https://www.facebook.com/p/T%C3%A0i-L%E1%BB%99c-Property-61561046392320/?locale=nn_NO"
+                                    <li><a class="wow fadeInUp animated"
+                                            href="https://www.facebook.com/p/T%C3%A0i-L%E1%BB%99c-Property-61561046392320/?locale=nn_NO"
                                             data-wow-delay="0.6s"><i class="fa fa-dribbble"></i></a></li>
                                 </ul>
                             </div>
