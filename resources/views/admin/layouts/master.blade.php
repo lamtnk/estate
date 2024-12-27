@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DataTable - Mazer Admin Dashboard</title>
+    <title>Tài Lộc Property</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -31,13 +31,13 @@
                 <div class="sidebar-header">
                     <div class="d-flex justify-content-between">
                         <div class="logo">
-                            <a href="index.html"><img src="{{ url('') }}/assets/images/logo/logo.png"
+                            <a href="#"><img src="{{ url('') }}/cassets/img/logo.png"
                                     alt="Logo" srcset=""></a>
                         </div>
-                        <div class="toggler">
+                        {{-- <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i
-                                    class="bi bi-x bi-middle"></i></a>
-                        </div>
+                                    class="bi bi-x bi-middle"></i> Tài Lộc</a>
+                        </div> --}}
                     </div>
                 </div>
                 <div class="sidebar-menu">
@@ -47,7 +47,7 @@
                         <li class="sidebar-item  {{ request()->routeIs('index') ? 'active' : '' }}">
                             {{-- <a href="{{ route('index') }}" class='sidebar-link'> --}}
                             <i class="bi bi-grid-fill"></i>
-                            <span>Dashboard</span>
+                            <span>Chức năng</span>
                             </a>
                         </li>
 
@@ -89,11 +89,11 @@
         <footer>
             <div class="footer clearfix mb-0 text-muted">
                 <div class="float-start">
-                    <p>2021 &copy; Mazer</p>
+                    <p>Xưởng thực hành FPT Polytechnic Hải Phòng</p>
                 </div>
                 <div class="float-end">
                     <p>Crafted with <span class="text-danger"><i class="bi bi-heart"></i></span> by <a
-                            href="http://ahmadsaugi.com">A. Saugi</a></p>
+                            href="https://caodang.fpt.edu.vn/">FPL Hải Phòng</a></p>
                 </div>
             </div>
         </footer>

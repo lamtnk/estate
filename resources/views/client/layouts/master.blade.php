@@ -92,14 +92,15 @@
             <div class="collapse navbar-collapse yamm" id="navigation">
                 <ul class="main-nav nav navbar-nav navbar-right">
                     <li class="wow fadeInDown" data-wow-delay="0.1s"><a class=""
-                            href="{{ route('client.property.index') }}">Trang chủ</a></li>
+                            href="{{ route('client.home.index') }}">Trang chủ</a></li>
                     <li class="wow fadeInDown" data-wow-delay="0.1s"><a class=""
                             href="{{ route('client.project.index') }}">Dự án</a></li>
                     <li class="wow fadeInDown" data-wow-delay="0.1s"><a class=""
                             href="{{ route('client.property.index') }}">Bất động sản</a></li>
                     <li class="wow fadeInDown" data-wow-delay="0.1s"><a class=""
                             href="{{ route('client.news.index') }}">Tin tức</a></li>
-                    <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="contact.html">Liên hệ</a></li>
+                    <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="{{ route('client.contact.index') }}">Liên
+                            hệ</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->

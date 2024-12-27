@@ -58,7 +58,7 @@
                             <div class="col-md-12 ">
                                 <div class="search-row">
                                     <div class="col-sm-3">
-                                        <label for="price-range">Khoảng giá ($):</label>
+                                        <label for="price-range">Khoảng giá (VNĐ):</label>
                                         <input type="text" class="span2" value="" data-slider-min="0"
                                             data-slider-max="600" data-slider-step="5" data-slider-value="[0,450]"
                                             id="price-range"><br />
@@ -88,82 +88,6 @@
                                             id="min-bed"><br />
                                         <b class="pull-left color">1</b>
                                         <b class="pull-right color">120</b>
-                                    </div>
-                                </div>
-                                <div class="search-row">
-                                    <div class="col-sm-3">
-                                        <div class="custom-checkbox">
-                                            <label>
-                                                <input type="checkbox" class="form-check-input" name="fireplace"
-                                                    style="margin-right: 10px;">
-                                                Lò sưởi (3100)
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="custom-checkbox">
-                                            <label>
-                                                <input type="checkbox" class="form-check-input" style="margin-right: 10px;">
-                                                Bồn rửa đôi (500)
-                                            </label>
-
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="custom-checkbox">
-                                            <label>
-                                                <input type="checkbox" class="form-check-input"
-                                                    style="margin-right: 10px;"> Cửa chớp chống bão (99)
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="custom-checkbox">
-                                            <label>
-                                                <input type="checkbox" class="form-check-input"
-                                                    style="margin-right: 10px;"> Hồ bơi (1190)
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="custom-checkbox">
-                                            <label>
-                                                <input type="checkbox" class="form-check-input"
-                                                    style="margin-right: 10px;"> 2 tầng (4600)
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="custom-checkbox">
-                                            <label>
-                                                <input type="checkbox" class="form-check-input"
-                                                    style="margin-right: 10px;"> Lối thoát hiểm (200)
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="custom-checkbox">
-                                            <label>
-                                                <input type="checkbox" class="form-check-input"
-                                                    style="margin-right: 10px;"> Phòng giặt (10073)
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="custom-checkbox">
-                                            <label>
-                                                <input type="checkbox" class="form-check-input"
-                                                    style="margin-right: 10px;"> Đường chạy bộ (1503)
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <div class="custom-checkbox">
-                                            <label>
-                                                <input type="checkbox" class="form-check-input"
-                                                    style="margin-right: 10px;"> Trần nhà cao 26' (1200)
-                                            </label>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -216,10 +140,10 @@
                                     <i class="fa fa-th"></i>
                                 </div>
                                 <div class="more-entry overflow">
-                                    <h5><a href="property-1.html">CHƯA THỂ QUYẾT ĐỊNH ? </a></h5>
+                                    <h5><a href="{{ route('client.property.index') }}">CHƯA THỂ QUYẾT ĐỊNH ? </a></h5>
                                     <h5 class="tree-sub-ttl">Xem tất cả bất động sản</h5>
-                                    <button class="btn border-btn more-black" value="All properties">Tất cả bất động
-                                        sản</button>
+                                    <a class="btn border-btn more-black" href="{{ route('client.property.index') }}" value="All properties">Tất cả bất động
+                                        sản</a>
                                 </div>
                             </div>
                         </div>
@@ -239,7 +163,7 @@
                                 <div class="row">
                                     <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
                                         <!-- /.feature title -->
-                                        <h2>GARO ESTATE </h2>
+                                        <h2>Tài Lộc Property </h2>
                                     </div>
                                 </div>
                             </div>
@@ -252,7 +176,7 @@
                                             <div class="welcome-icon">
                                                 <i class="pe-7s-home pe-4x"></i>
                                             </div>
-                                            <h3>Bất động sản</h3>
+                                            <h3>Đa dạng bất động sản</h3>
                                         </div>
                                     </div>
                                     <div class="col-xs-6 m-padding">
@@ -260,7 +184,7 @@
                                             <div class="welcome-icon">
                                                 <i class="pe-7s-users pe-4x"></i>
                                             </div>
-                                            <h3>Nhiều khách hàng</h3>
+                                            <h3>Lượng lớn khách hàng</h3>
                                         </div>
                                     </div>
 
@@ -282,7 +206,7 @@
                                             <div class="welcome-icon">
                                                 <i class="pe-7s-help2 pe-4x"></i>
                                             </div>
-                                            <h3>Hỗ trợ</h3>
+                                            <h3>Hỗ trợ 24/7</h3>
                                         </div>
                                     </div>
                                 </div>
@@ -310,7 +234,7 @@
                                 <div class="item">
                                     <div class="client-text">
                                         <p>Chúng tôi rất hài lòng. </p>
-                                        <h4><strong>Ohidul Islam, </strong><i>Nhà thiết kế web</i></h4>
+                                        <h4><strong>Trung Luân </strong><i>Nhà thiết kế web</i></h4>
                                     </div>
                                     <div class="client-face wow fadeInRight" data-wow-delay=".9s">
                                         <img src="{{ url('') }}/cassets/img/client-face1.png" alt="">
@@ -318,8 +242,8 @@
                                 </div>
                                 <div class="item">
                                     <div class="client-text">
-                                        <p>Chúng tôi rất hài lòng.</p>
-                                        <h4><strong>Ohidul Islam, </strong><i>Nhà thiết kế web</i></h4>
+                                        <p>Tôi cực kỳ ấn tượng với phong cách làm việc của công ty</p>
+                                        <h4><strong>Khánh Huy </strong><i>Khách hàng</i></h4>
                                     </div>
                                     <div class="client-face">
                                         <img src="{{ url('') }}/cassets/img/client-face2.png" alt="">
@@ -327,8 +251,8 @@
                                 </div>
                                 <div class="item">
                                     <div class="client-text">
-                                        <p>Chúng tôi rất hài lòng.</p>
-                                        <h4><strong>Ohidul Islam, </strong><i>Nhà thiết kế web</i></h4>
+                                        <p>Một trải nghiệm tuyệt vời khi được tư vấn và trải nghiệm tại đây</p>
+                                        <h4><strong>Nguyễn Minh </strong><i>Khách hàng</i></h4>
                                     </div>
                                     <div class="client-face">
                                         <img src="{{ url('') }}/cassets/img/client-face1.png" alt="">
@@ -336,8 +260,8 @@
                                 </div>
                                 <div class="item">
                                     <div class="client-text">
-                                        <p>Chúng tôi rất hài lòng.</p>
-                                        <h4><strong>Ohidul Islam, </strong><i>Nhà thiết kế web</i></h4>
+                                        <p>Làm việc rất chuyên nghiệp, đúng giờ, tôn trọng khách hàng.</p>
+                                        <h4><strong>Trung Hiếu </strong><i>Giáo viên</i></h4>
                                     </div>
                                     <div class="client-face">
                                         <img src="{{ url('') }}/cassets/img/client-face2.png" alt="">
@@ -368,7 +292,7 @@
                                     <div class="count-item-circle">
                                         <span class="pe-7s-users"></span>
                                     </div>
-                                    <div class="chart" data-percent="5000">
+                                    <div class="chart" data-percent="1000">
                                         <h2 class="percent" id="counter">0</h2>
                                         <h5>KHÁCH HÀNG HÀI LÒNG</h5>
                                     </div>
@@ -390,7 +314,7 @@
                                     <div class="count-item-circle">
                                         <span class="pe-7s-flag"></span>
                                     </div>
-                                    <div class="chart" data-percent="120">
+                                    <div class="chart" data-percent="30">
                                         <h2 class="percent" id="counter2">0</h2>
                                         <h5>Thành phố đã đăng ký</h5>
                                     </div>
@@ -402,7 +326,7 @@
                                         <span class="pe-7s-graph2"></span>
                                     </div>
                                     <div class="chart" data-percent="5000">
-                                        <h2 class="percent" id="counter3">5000</h2>
+                                        <h2 class="percent" id="counter3">0</h2>
                                         <h5>CHI NHÁNH ĐẠI LÝ</h5>
                                     </div>
                                 </div>
@@ -454,7 +378,7 @@
                         </div>
                     </div>
                     <div class="col-xs-12">
-                        <p class="asks-call">QUESTIONS? CALL US : <span class="strong"> + 3-123- 424-5700</span></p>
+                        <p class="asks-call">CÓ CÂU HỎI? LIÊN HỆ VỚI CHÚNG TÔI: <span class="strong"> + 3-123- 424-5700</span></p>
                     </div>
                 </div>
             </div>

@@ -98,10 +98,10 @@ $(document).ready(function () {
             if (curval1 <= 1280) {
                 $('#counter1').text(sdf_FTS((curval1 + 20), 0, ' '));
             }
-            if (curval2 <= 145) {
+            if (curval2 <= 30) {
                 $('#counter2').text(curval2 + 1);
             }
-            if (curval3 <= 1022) {
+            if (curval3 <= 3) {
                 $('#counter3').text(curval3 + 1);
             }
         }, 2);
