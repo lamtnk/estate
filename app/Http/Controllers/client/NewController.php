@@ -45,8 +45,9 @@ class NewController extends Controller
 
     public function filterByTag($tagId)
     {
-        $news = $this->newService->getNewsByTag($tagId);
+        $news = $this->newService->getNewsByTag($tagId, 2); // Adjust the number of items per page as needed
         $tags = $this->tagService->getAllActiveTags();
-        return view('client.news.index', compact('news', 'tags'));
+
+        return view('client.news.index', compact('news', 'tags', 'tagId'));
     }
 }
