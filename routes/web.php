@@ -10,6 +10,7 @@ use App\Http\Controllers\admin\PropertyController;
 use App\Http\Controllers\admin\PropertyImageController;
 use App\Http\Controllers\admin\PropertyRequestController;
 use App\Http\Controllers\admin\TagController;
+use App\Http\Controllers\client\ContactController as ClientContactController;
 use App\Http\Controllers\client\HomeController;
 use App\Http\Controllers\client\NewController;
 use App\Http\Controllers\client\ProjectController as ClientProjectController;
@@ -52,6 +53,11 @@ Route::prefix('/')->group(function () {
     Route::prefix('project')->group(function () {
         Route::get('/', [ClientProjectController::class, 'index'])->name('client.project.index');
         Route::get('/{id}', [ClientProjectController::class, 'detail'])->name('client.project.detail');
+    });
+
+    Route::prefix('contact')->group(function () {
+        Route::get('/', [ClientContactController::class, 'index'])->name('client.contact.index');
+        Route::post('/send', [ClientContactController::class, 'send'])->name('client.contact.send');
     });
 });
 Route::prefix('admin')->group(function () {

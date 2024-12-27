@@ -11,7 +11,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $topProperties = Property::with('primaryImage')->take(8)->get();
+        $topProperties = Property::with('primaryImage')->take(7)->get();
         return view('client.home.index', compact('topProperties'));
     }
 }
