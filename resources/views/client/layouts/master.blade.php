@@ -93,6 +93,8 @@
                     <li class="wow fadeInDown" data-wow-delay="0.1s"><a class=""
                             href="{{ route('client.property.index') }}">Trang chủ</a></li>
                     <li class="wow fadeInDown" data-wow-delay="0.1s"><a class=""
+                            href="{{ route('client.project.index') }}">Dự án</a></li>
+                    <li class="wow fadeInDown" data-wow-delay="0.1s"><a class=""
                             href="{{ route('client.property.index') }}">Bất động sản</a></li>
                     <li class="wow fadeInDown" data-wow-delay="0.1s"><a class=""
                             href="{{ route('client.news.index') }}">Tin tức</a></li>
@@ -115,8 +117,8 @@
                             <h4>Về chúng tôi </h4>
                             <div class="footer-title-line"></div>
 
-                            <img src="{{ url('') }}/cassets/img/footer-logo.png" alt="" class="wow pulse"
-                                data-wow-delay="1s">
+                            <img src="{{ url('') }}/cassets/img/footer-logo.png" alt=""
+                                class="wow pulse" data-wow-delay="1s">
                             <p>Tài Lộc Property là một công ty chuyên cung cấp các dịch vụ bất động sản uy tín và
                                 chuyên nghiệp. Với sứ mệnh mang lại giá trị bền vững cho khách hàng, chúng tôi tự hào là
                                 đối tác đáng tin cậy trong việc tư vấn, mua bán, cho thuê và đầu tư bất động sản.</p>
@@ -214,15 +216,20 @@
 
                             <div class="social pull-right">
                                 <ul>
-                                    <li><a class="wow fadeInUp animated" href="https://www.facebook.com/p/T%C3%A0i-L%E1%BB%99c-Property-61561046392320/?locale=nn_NO"><i
+                                    <li><a class="wow fadeInUp animated"
+                                            href="https://www.facebook.com/p/T%C3%A0i-L%E1%BB%99c-Property-61561046392320/?locale=nn_NO"><i
                                                 class="fa fa-twitter"></i></a></li>
-                                    <li><a class="wow fadeInUp animated" href="https://www.facebook.com/p/T%C3%A0i-L%E1%BB%99c-Property-61561046392320/?locale=nn_NO"
+                                    <li><a class="wow fadeInUp animated"
+                                            href="https://www.facebook.com/p/T%C3%A0i-L%E1%BB%99c-Property-61561046392320/?locale=nn_NO"
                                             data-wow-delay="0.2s"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a class="wow fadeInUp animated" href="hhttps://www.facebook.com/p/T%C3%A0i-L%E1%BB%99c-Property-61561046392320/?locale=nn_NO"
+                                    <li><a class="wow fadeInUp animated"
+                                            href="hhttps://www.facebook.com/p/T%C3%A0i-L%E1%BB%99c-Property-61561046392320/?locale=nn_NO"
                                             data-wow-delay="0.3s"><i class="fa fa-google-plus"></i></a></li>
-                                    <li><a class="wow fadeInUp animated" href="https://www.facebook.com/p/T%C3%A0i-L%E1%BB%99c-Property-61561046392320/?locale=nn_NO"
+                                    <li><a class="wow fadeInUp animated"
+                                            href="https://www.facebook.com/p/T%C3%A0i-L%E1%BB%99c-Property-61561046392320/?locale=nn_NO"
                                             data-wow-delay="0.4s"><i class="fa fa-instagram"></i></a></li>
-                                    <li><a class="wow fadeInUp animated" href="https://www.facebook.com/p/T%C3%A0i-L%E1%BB%99c-Property-61561046392320/?locale=nn_NO"
+                                    <li><a class="wow fadeInUp animated"
+                                            href="https://www.facebook.com/p/T%C3%A0i-L%E1%BB%99c-Property-61561046392320/?locale=nn_NO"
                                             data-wow-delay="0.6s"><i class="fa fa-dribbble"></i></a></li>
                                 </ul>
                             </div>

@@ -13,6 +13,12 @@ class ProjectService
         return Project::all(); // Lấy toàn bộ dữ liệu từ bảng projects
     }
 
+    public function getProjectsByPaginate($perPage)
+    {
+        // Lấy dữ liệu với phân trang
+        return Project::with(['images', 'primaryImage'])->paginate($perPage);
+    }
+
     public function storeProject($data)
     {
         Project::create($data);

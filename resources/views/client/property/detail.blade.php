@@ -37,7 +37,7 @@
         }
 
         .lSAction>a:hover {
-            color: #fff;
+            color: burlywood;
             /* Màu mũi tên khi hover */
         }
 
