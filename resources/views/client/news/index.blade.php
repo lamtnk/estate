@@ -43,9 +43,11 @@
                             </p>
                         </section>
                     @endforeach
-                    <div class="pagination-wrapper text-right" style="font-size: 1.2em; ">
-                        {{ $news->links('pagination::bootstrap-4') }}
-                    </div>
+                    @if ($news instanceof \Illuminate\Pagination\LengthAwarePaginator)
+                        <div class="pagination-wrapper text-right" style="font-size: 1.2em; ">
+                            {{ $news->appends(['tag' => $tagId ?? null])->links('pagination::bootstrap-4') }}
+                        </div>
+                    @endif
                 </div>
                 {{-- ASIDE-Right --}}
                 <div class="blog-asside-right col-md-3">

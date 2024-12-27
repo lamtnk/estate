@@ -77,11 +77,11 @@ class NewsService
         $news->delete();
     }
 
-    public function getNewsByTag($tagId)
+    public function getNewsByTag($tagId, $perPage = 5)
     {
         return News::whereHas('tags', function ($query) use ($tagId) {
             $query->where('tags.id', $tagId);
-        })->get();
+        })->paginate($perPage);
     }
 
     public function getAllPaginated($perPage)
