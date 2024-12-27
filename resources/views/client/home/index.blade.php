@@ -1,4 +1,7 @@
 @extends('client.layouts.master')
+@section('title')
+{{'Trang chủ'}}
+@endsection
 @section('main')
     <div class="slider-area">
         <div class="slider">

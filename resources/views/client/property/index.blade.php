@@ -1,4 +1,7 @@
 @extends('client.layouts.master')
+@section('title')
+{{'Bất động sản'}}
+@endsection
 @section('main')
     <div class="page-head">
         <div class="container">

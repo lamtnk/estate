@@ -1,5 +1,7 @@
 @extends('client.layouts.master')
-
+@section('title')
+{{'Tin tức'}}
+@endsection
 @section('main')
     <div class="content-area blog-page padding-top-40" style="background-color: #FCFCFC; padding-bottom: 55px;">
         <div class="container">

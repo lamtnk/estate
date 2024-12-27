@@ -1,4 +1,7 @@
 @extends('client.layouts.master')
+@section('title')
+{{'Bất động sản'}}
+@endsection
 @section('styles')
     <style>
         /* Cố định kích thước ảnh chính trong slider */
