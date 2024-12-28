@@ -28,66 +28,122 @@
             <div class="container">
                 <div class="col-md-12 large-search">
                     <div class="search-form wow pulse">
-                        <form action="" class="form-inline">
+                        <form action="{{ route('client.property.index') }}" method="get" class="form-inline">
                             <div class="col-md-12">
+                                <!-- Tìm kiếm theo từ khóa -->
                                 <div class="col-md-4">
-                                    <input type="text" class="form-control" placeholder="Nhập từ khóa"
+                                    <input type="text" class="form-control" name="keyword" placeholder="Nhập từ khóa"
+                                        value="{{ request('keyword') }}"
                                         style="border: 1px solid #ccc; border-radius: 5px;">
                                 </div>
+
+                                <!-- Khu vực -->
                                 <div class="col-md-4">
-                                    <select id="lunchBegins" class="selectpicker" data-live-search="true"
-                                        data-live-search-style="begins" title="Chọn thành phố"
+                                    <input type="text" class="form-control" name="location" placeholder="Thành phố"
+                                        value="{{ request('location') }}"
                                         style="border: 1px solid #ccc; border-radius: 5px; color: #000;">
-                                        <option>Hà nội</option>
-                                        <option>Đà nẵng</option>
-                                        <option>Hải phòng</option>
-                                        <option>TP Hồ Chí Minh</option>
-                                        <option>Bình dương</option>
-                                    </select>
                                 </div>
+
+                                <!-- Dự án -->
                                 <div class="col-md-4">
-                                    <select id="basic" class="selectpicker show-tick form-control"
+                                    <select name="project" class="selectpicker show-tick form-control"
+                                        data-live-search="true" title="Dự án"
                                         style="border: 1px solid #ccc; border-radius: 5px; color: #000;">
-                                        <option> -Nhu cầu- </option>
-                                        <option>Thuê </option>
-                                        <option>Mua </option>
-                                        <option>Sử dụng </option>
+                                        <option value="">Tất cả</option>
+                                        @foreach ($projects as $project)
+                                            <option value="{{ $project->id }}">{{ $project->name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-12 ">
+                            <div class="col-md-12"><br>
+                                <!-- Loại hình giao dịch -->
+                                <div class="col-md-3">
+                                    <select name="deal_type" class="selectpicker show-tick form-control"
+                                        data-live-search="true" title="Loại hình giao dịch"
+                                        style="border: 1px solid #ccc; border-radius: 5px; color: #000;">
+                                        <option value="">Tất cả</option>
+                                        <option value="sell">Giao bán</option>
+                                        <option value="rent">Cho thuê</option>
+                                    </select>
+                                </div>
+
+                                <!-- Loại hình bất động sản -->
+                                <div class="col-md-3">
+                                    <select name="property_type" class="selectpicker show-tick form-control"
+                                        data-live-search="true" title="Loại hình bất động sản"
+                                        style="border: 1px solid #ccc; border-radius: 5px; color: #000;">
+                                        <option value="">Tất cả</option>
+                                        @foreach ($propertyTypes as $propertyType)
+                                            <option value="{{ $propertyType->id }}">{{ $propertyType->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <!-- Nội thất -->
+                                <div class="col-md-3">
+                                    <select name="furniture" class="selectpicker show-tick form-control"
+                                        data-live-search="true" title="Nội thất"
+                                        style="border: 1px solid #ccc; border-radius: 5px; color: #000;">
+                                        <option value="">Tất cả</option>
+                                        <option value="Bare Shell">Bàn giao thô</option>
+                                        <option value="Basic Furnished">Nội thất cơ bản</option>
+                                        <option value="Fully Furnished">Nội thất đầy đủ</option>
+                                        <option value="Luxury Furnished">Nội thất cao cấp</option>
+                                    </select>
+                                </div>
+
+                                <!-- Hướng -->
+                                <div class="col-md-3">
+                                    <select name="direction" class="selectpicker show-tick form-control"
+                                        data-live-search="true" title="Hướng"
+                                        style="border: 1px solid #ccc; border-radius: 5px; color: #000;">
+                                        <option value="">Tất cả</option>
+                                        <option value="East">Đông</option>
+                                        <option value="West">Tây</option>
+                                        <option value="South">Nam</option>
+                                        <option value="North">Bắc</option>
+                                        <option value="Southeast">Đông Nam</option>
+                                        <option value="Northeast">Đông Bắc</option>
+                                        <option value="Southwest">Tây Nam</option>
+                                        <option value="Northwest">Tây Bắc</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
                                 <div class="search-row">
-                                    <div class="col-sm-3">
-                                        <label for="price-range">Khoảng giá (VNĐ):</label>
-                                        <input type="text" class="span2" value="" data-slider-min="0"
-                                            data-slider-max="600" data-slider-step="5" data-slider-value="[0,450]"
-                                            id="price-range"><br />
-                                        <b class="pull-left color">2000$</b>
-                                        <b class="pull-right color">100000$</b>
+                                    <!-- Giá bán -->
+                                    <div class="col-sm-4">
+                                        <label for="price-range">Khoảng giá (VNĐ):</label><br>
+                                        <div class="col-xs-6" style="padding-left: 0">
+                                            <input type="number" class="form-control" name="price_min" placeholder="Từ"
+                                                value="" min="0">
+                                        </div>
+                                        <div class="col-xs-6" style="padding-left: 0">
+                                            <input type="number" class="form-control" name="price_max"
+                                                placeholder="Đến" value="" min="0">
+                                        </div>
                                     </div>
-                                    <div class="col-sm-3">
-                                        <label for="property-geo">Diện tích (m2) :</label>
-                                        <input type="text" class="span2" value="" data-slider-min="0"
-                                            data-slider-max="600" data-slider-step="5" data-slider-value="[50,450]"
-                                            id="property-geo"><br />
-                                        <b class="pull-left color">40m</b>
-                                        <b class="pull-right color">12000m</b>
+
+                                    <!-- Diện tích -->
+                                    <div class="col-sm-4">
+                                        <label for="property-geo">Diện tích (m2):</label><br>
+                                        <div class="col-xs-6" style="padding-left: 0">
+                                            <input type="number" class="form-control" name="area_min" placeholder="Từ"
+                                                value="" min="0">
+                                        </div>
+                                        <div class="col-xs-6" style="padding-left: 0">
+                                            <input type="number" class="form-control" name="area_max" placeholder="Đến"
+                                                value="" min="0">
+                                        </div>
                                     </div>
-                                    <div class="col-sm-3">
-                                        <label for="price-range">Số phòng tắm tối thiểu :</label>
-                                        <input type="text" class="span2" value="" data-slider-min="0"
-                                            data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]"
-                                            id="min-baths"><br />
-                                        <b class="pull-left color">1</b>
-                                        <b class="pull-right color">120</b>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        <label for="property-geo">Số phòng ngủ tối thiểu :</label>
-                                        <input type="text" class="span2" value="" data-slider-min="0"
-                                            data-slider-max="600" data-slider-step="5" data-slider-value="[250,450]"
-                                            id="min-bed"><br />
-                                        <b class="pull-left color">1</b>
-                                        <b class="pull-right color">120</b>
+
+                                    <!-- Số phòng ngủ tối thiểu -->
+                                    <div class="col-sm-4">
+                                        <label for="price-range">Số phòng ngủ tối thiểu :</label>
+                                        <input type="number" class="form-control" name="bedrooms"
+                                            placeholder="Số phòng ngủ" value="" min="1">
                                     </div>
                                 </div>
                             </div>

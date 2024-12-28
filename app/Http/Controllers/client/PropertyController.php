@@ -43,6 +43,7 @@ class PropertyController extends Controller
             'furniture' => $request->input('furniture'),
             'direction' => $request->input('direction'),
             'keyword' => $request->input('keyword'), // Thêm từ khóa
+            'location' => $request->input('location'), // Thêm thành phố
         ];
 
         // Lấy thông tin sắp xếp từ request

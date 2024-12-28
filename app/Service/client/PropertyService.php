@@ -33,7 +33,7 @@ class PropertyService
     // tìm kiếm bất động sản theo bộ lọc
     public function searchProperties(array $filters, $perPage, $orderBy = 'created_at', $order = 'DESC')
     {
-        $query = Property::with(['images', 'primaryImage']);
+        $query = Property::with(['images', 'primaryImage', 'project']);
 
         // Bộ lọc theo khu vực
         if (!empty($filters['province'])) {
@@ -91,6 +91,13 @@ class PropertyService
             $query->where(function ($q) use ($filters) {
                 $q->where('name', 'LIKE', '%' . $filters['keyword'] . '%')
                     ->orWhere('description', 'LIKE', '%' . $filters['keyword'] . '%');
+            });
+        }
+
+        // Bộ lọc theo khu vực của project (Thành phố)
+        if (!empty($filters['location'])) {
+            $query->whereHas('project', function ($q) use ($filters) {
+                $q->where('location', 'LIKE', '%' . $filters['location'] . '%');
             });
         }
 
