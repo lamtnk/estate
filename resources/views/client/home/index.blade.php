@@ -1,6 +1,6 @@
 @extends('client.layouts.master')
 @section('title')
-{{'Trang chủ'}}
+    {{ 'Trang chủ' }}
 @endsection
 @section('main')
     <div class="slider-area">
@@ -142,7 +142,8 @@
                                 <div class="more-entry overflow">
                                     <h5><a href="{{ route('client.property.index') }}">CHƯA THỂ QUYẾT ĐỊNH ? </a></h5>
                                     <h5 class="tree-sub-ttl">Xem tất cả bất động sản</h5>
-                                    <a class="btn border-btn more-black" href="{{ route('client.property.index') }}" value="All properties">Tất cả bất động
+                                    <a class="btn border-btn more-black" href="{{ route('client.property.index') }}"
+                                        value="All properties">Tất cả bất động
                                         sản</a>
                                 </div>
                             </div>
@@ -378,9 +379,43 @@
                         </div>
                     </div>
                     <div class="col-xs-12">
-                        <p class="asks-call">CÓ CÂU HỎI? LIÊN HỆ VỚI CHÚNG TÔI: <span class="strong"> + 3-123- 424-5700</span></p>
+                        <p class="asks-call">CÓ CÂU HỎI? LIÊN HỆ VỚI CHÚNG TÔI: <span class="strong"> + 3-123-
+                                424-5700</span></p>
                     </div>
                 </div>
             </div>
         </div>
+    @endsection
+    @section('scripts')
+        <script>
+            $(document).ready(function() {
+                // Lấy giá trị ban đầu của từng slider
+                let priceRange = $('#price-range').data('sliderValue');
+                let propertyGeo = $('#property-geo').data('sliderValue');
+                let minBaths = $('#min-baths').data('sliderValue');
+                let minBed = $('#min-bed').data('sliderValue');
+
+                console.log(`Khoảng giá ban đầu: ${priceRange[0]} đến ${priceRange[1]}`);
+                console.log(`Diện tích ban đầu: ${propertyGeo[0]} đến ${propertyGeo[1]}`);
+                console.log(`Số phòng tắm ban đầu: ${minBaths}`);
+                console.log(`Số phòng ngủ ban đầu: ${minBed}`);
+
+                // Lắng nghe sự kiện slide để cập nhật giá trị
+                $('#price-range').on('slide', function(event) {
+                    console.log(`Khoảng giá thay đổi: ${event.value[0]} đến ${event.value[1]}`);
+                });
+
+                $('#property-geo').on('slide', function(event) {
+                    console.log(`Diện tích thay đổi: ${event.value[0]} đến ${event.value[1]}`);
+                });
+
+                $('#min-baths').on('slide', function(event) {
+                    console.log(`Số phòng tắm thay đổi: ${event.value}`);
+                });
+
+                $('#min-bed').on('slide', function(event) {
+                    console.log(`Số phòng ngủ thay đổi: ${event.value}`);
+                });
+            });
+        </script>
     @endsection

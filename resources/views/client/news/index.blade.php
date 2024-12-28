@@ -1,8 +1,18 @@
 @extends('client.layouts.master')
 @section('title')
-{{'Tin tức'}}
+    {{ 'Tin tức' }}
 @endsection
 @section('main')
+    <div class="page-head">
+        <div class="container">
+            <div class="row">
+                <div class="page-head-content">
+                    <h1 class="page-title">Tin tức</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End page header -->
     <!-- Body content -->
     <div class="content-area blog-page padding-top-40" style="background-color: #FCFCFC; padding-bottom: 55px;">
         <div class="container">

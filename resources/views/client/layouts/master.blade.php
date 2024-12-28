@@ -24,13 +24,13 @@
     <link href="{{ url('') }}/cassets/css/animate.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="{{ url('') }}/cassets/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="{{ url('') }}/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ url('') }}/assets/css/pages/icheck.min_all.css">
+    <link rel="stylesheet" href="{{ url('') }}/cassets/css/icheck.min_all.css">
     <link rel="stylesheet" href="{{ url('') }}/cassets/css/price-range.css">
     <link rel="stylesheet" href="{{ url('') }}/cassets/css/owl.carousel.css">
     <link rel="stylesheet" href="{{ url('') }}/cassets/css/owl.theme.css">
     <link rel="stylesheet" href="{{ url('') }}/cassets/css/owl.transitions.css">
     <link rel="stylesheet" href="{{ url('') }}/cassets/css/lightslider.min.css">
-    <link rel="stylesheet" href="{{ url('') }}/assets/css/pages/style.css">
+    <link rel="stylesheet" href="{{ url('') }}/cassets/css/style.css">
     <link rel="stylesheet" href="{{ url('') }}/cassets/css/responsive.css">
 
 

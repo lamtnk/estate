@@ -1,8 +1,18 @@
 @extends('client.layouts.master')
 @section('title')
-{{'Tin tức'}}
+    {{ 'Tin tức' }}
 @endsection
 @section('main')
+    <div class="page-head">
+        <div class="container">
+            <div class="row">
+                <div class="page-head-content">
+                    <h1 class="page-title">Chi tiết tin tức</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End page header -->
     <div class="content-area blog-page padding-top-40" style="background-color: #FCFCFC; padding-bottom: 55px;">
         <div class="container">
             <div class="row">
@@ -56,7 +66,8 @@
                         <div class="row comment">
                             <div class="col-sm-3 col-md-2 text-center-xs">
                                 <p>
-                                    <img src="{{url('')}}/cassets/img/client-face1.png" class="img-responsive img-circle" alt="">
+                                    <img src="{{ url('') }}/cassets/img/client-face1.png"
+                                        class="img-responsive img-circle" alt="">
                                 </p>
                             </div>
                             <div class="col-sm-9 col-md-10">
@@ -74,7 +85,8 @@
 
                             <div class="col-sm-3 col-md-2 text-center-xs">
                                 <p>
-                                    <img src="{{url('')}}/cassets/img/client-face2.png" class="img-responsive img-circle" alt="">
+                                    <img src="{{ url('') }}/cassets/img/client-face2.png"
+                                        class="img-responsive img-circle" alt="">
                                 </p>
                             </div>
 
