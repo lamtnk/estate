@@ -143,6 +143,46 @@
             {!! $project->content !!}
         </div>
         <!-- End content area  -->
+
+        <div class="similar-post-section padding-top-20">
+            <h4 class="s-property-title">Quỹ căn dự án {{ $project->name }} </h4>
+            <div id="prop-smlr-slide_0">
+                @foreach ($project->properties->take(3) as $property)
+                    <div class="box-two proerty-item">
+                        <div class="item-thumb">
+                            <a href="{{ route('client.property.detail', $property->id) }}">
+                                <img
+                                    src="{{ asset($property->primaryImage->image_path ?? 'https://placehold.co/600x400') }}">
+                            </a>
+                        </div>
+                        <div class="item-entry overflow">
+                            <h5 style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 300px;">
+                                <a href="{{ route('client.property.detail', $property->id) }}">
+                                    {{ $property->name }}
+                                </a>
+                            </h5>
+                            <div class="dot-hr"></div>
+                            <span class="pull-left"><b>Diện tích:
+                                </b>{{ $property->area }}m2</span>
+                            <span class="proerty pull-right">
+                                @if ($property->deal_type == 'rent')
+                                    {{ $property->price_formatted }} /tháng
+                                @else
+                                    @if ($property->price_type == 1)
+                                        {{ $property->price_formatted }}
+                                    @elseif ($property->price_type == 2)
+                                        {{ $property->price_formatted * $property->area }}
+                                    @else
+                                        Giá thỏa thuận
+                                    @endif
+                                @endif
+                            </span>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+        <!-- End related property area  -->
     </div>
 @endsection
 
