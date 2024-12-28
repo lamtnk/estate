@@ -3,16 +3,19 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Service\admin\ProjectImageService;
 use App\Service\admin\ProjectService;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
     private $projectService;
+    private $projectImageService;
 
-    public function __construct(ProjectService $projectService)
+    public function __construct(ProjectService $projectService, ProjectImageService $projectImageService)
     {
         $this->projectService = $projectService;
+        $this->projectImageService = $projectImageService;
     }
 
     public function index()
@@ -36,11 +39,16 @@ class ProjectController extends Controller
             'status' => 'required|in:ongoing,completed',
             'description' => 'nullable|string',
             'content' => 'nullable|string',
+            'image' => 'required',
         ]);
+
+        // Lấy tệp ảnh từ request
+        $image = $request->file('image');  // Đây là đối tượng UploadedFile
 
         // Nếu validate thành công, gọi đến service để lưu dự án
         try {
-            $this->projectService->storeProject($validatedData);
+            $project = $this->projectService->storeProject($validatedData);
+            $this->projectImageService->storeImage($project->id, $image, true);
         } catch (\Exception $e) {
             // Nếu có lỗi khi lưu, quay lại form và hiển thị thông báo lỗi
             return redirect()->back()->with('error', 'Lỗi trong quá trình lưu dự án!');
@@ -66,11 +74,16 @@ class ProjectController extends Controller
             'status' => 'required|in:ongoing,completed',
             'description' => 'nullable|string',
             'content' => 'nullable|string',
+            'image' => 'required',
         ]);
+
+        // Lấy tệp ảnh từ request
+        $image = $request->file('image');  // Đây là đối tượng UploadedFile
 
         // Cập nhật dự án thông qua ProjectService
         try {
             $this->projectService->updateProject($id, $validatedData);
+            $this->projectImageService->changePrimaryImage($id, $image, true);
         } catch (\Exception $e) {
             // Nếu có lỗi khi lưu, quay lại form và hiển thị thông báo lỗi
             return redirect()->back()->with('error', 'Lỗi trong quá trình lưu dự án!');
