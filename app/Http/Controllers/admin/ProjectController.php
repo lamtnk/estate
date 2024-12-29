@@ -74,7 +74,7 @@ class ProjectController extends Controller
             'status' => 'required|in:ongoing,completed',
             'description' => 'nullable|string',
             'content' => 'nullable|string',
-            'image' => 'required',
+            'image' => 'nullable',
         ]);
 
         // Lấy tệp ảnh từ request

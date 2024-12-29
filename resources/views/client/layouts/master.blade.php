@@ -84,7 +84,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><img src="{{ url('') }}/cassets/img/logo.png"
+                <a class="navbar-brand" href="{{ route('client.home.index') }}"><img src="{{ url('') }}/cassets/img/logo.png"
                         width="10%" alt=""></a>
             </div>
 
