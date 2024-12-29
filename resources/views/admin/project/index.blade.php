@@ -66,8 +66,8 @@
                                             <a href="{{ route('admin.project.hide', 1) }}" class="btn btn-info">Ẩn</a>
                                             <a href="{{ route('admin.project.edit', $project->id) }}"
                                                 class="btn btn-warning">Sửa</a>
-                                            <a href="{{ route('admin.project.images.index', 1) }}" class="btn btn-info">Kho
-                                                ảnh</a>
+                                            <a href="{{ route('admin.project.images.index', $project->id) }}"
+                                                class="btn btn-info">Kho ảnh</a>
                                         </td>
                                     </tr>
                                 @endforeach

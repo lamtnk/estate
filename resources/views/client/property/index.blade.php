@@ -1,6 +1,6 @@
 @extends('client.layouts.master')
 @section('title')
-{{'Bất động sản'}}
+    {{ 'Bất động sản' }}
 @endsection
 @section('main')
     <div class="page-head">
@@ -168,33 +168,22 @@
                                         </div>
                                     </fieldset>
 
-                                    {{-- <!-- Khu vực -->
+                                    <!-- Khu vực -->
                                     <fieldset>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <select name="province" class="selectpicker" data-live-search="true"
-                                                    title="Chọn khu vực">
-                                                    <option value="">Tất cả</option>
-                                                    <option>Hà Nội</option>
-                                                    <option>Hồ Chí Minh</option>
-                                                    <option>Đà Nẵng</option>
-                                                    <option>Cần Thơ</option>
-                                                    <option>Hải Phòng</option>
-                                                    <option>Bình Dương</option>
-                                                    <option>Hải Dương</option>
-                                                    <option>Vũng Tàu</option>
-                                                    <!-- Thêm các tỉnh thành khác nếu cần -->
-                                                </select>
+                                                <input type="text" class="form-control" name="location"
+                                                    placeholder="Thành phố" value="{{ request('location') }}">
                                             </div>
                                         </div>
-                                    </fieldset> --}}
+                                    </fieldset>
 
                                     <!-- Dự án -->
                                     <fieldset>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <select name="project" class="selectpicker" data-live-search="true"
-                                                    title="Dự án">
+                                                <select name="project" class="selectpicker show-tick form-control"
+                                                    data-live-search="true" title="Dự án">
                                                     <option value="">Tất cả</option>
                                                     @foreach ($projects as $project)
                                                         <option value="{{ $project->id }}">{{ $project->name }}</option>
@@ -208,7 +197,8 @@
                                     <fieldset>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <select name="deal_type" class="selectpicker" title="Loại hình giao dịch">
+                                                <select name="deal_type" class="selectpicker show-tick form-control"
+                                                    data-live-search="true" title="Loại hình giao dịch">
                                                     <option value="">Tất cả</option>
                                                     <option value="sell">Giao bán</option>
                                                     <option value="rent">Cho thuê</option>
@@ -221,8 +211,8 @@
                                     <fieldset>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <select name="property_type" class="selectpicker"
-                                                    title="Loại hình bất động sản">
+                                                <select name="property_type" class="selectpicker show-tick form-control"
+                                                    data-live-search="true" title="Loại hình bất động sản">
                                                     <option value="">Tất cả</option>
                                                     @foreach ($propertyTypes as $propertyType)
                                                         <option value="{{ $propertyType->id }}">{{ $propertyType->name }}
@@ -265,7 +255,7 @@
                                         </div>
                                     </fieldset>
 
-                                    <!-- Số phòng ngủ -->
+                                    <!-- Số phòng ngủ, nội thất, hướng -->
                                     <fieldset class="padding-5">
                                         <div class="row">
                                             <div class="col-xs-6">
@@ -275,7 +265,8 @@
                                             </div>
                                             <div class="col-xs-6">
                                                 <label for="min-baths">Nội thất:</label>
-                                                <select name="furniture" class="selectpicker" title="Nội thất">
+                                                <select name="furniture" class="selectpicker show-tick form-control"
+                                                    data-live-search="true" title="Nội thất">
                                                     <option value="">Tất cả</option>
                                                     <option value="Bare Shell">Bàn giao thô</option>
                                                     <option value="Basic Furnished">Nội thất cơ bản</option>
@@ -285,7 +276,8 @@
                                             </div>
                                             <div class="col-xs-6">
                                                 <label for="min-baths">Hướng:</label>
-                                                <select name="direction" class="selectpicker" title="Hướng">
+                                                <select name="direction" class="selectpicker show-tick form-control"
+                                                    data-live-search="true" title="Hướng">
                                                     <option value="">Tất cả</option>
                                                     <option value="East">Đông</option>
                                                     <option value="West">Tây</option>

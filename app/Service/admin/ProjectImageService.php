@@ -81,10 +81,9 @@ class ProjectImageService
 
         // Nếu tải ảnh chính mới lên từ edit form thì sẽ thay ảnh chính
         if ($image != null) {
-            // Nếu ảnh chính cũ có tồn tại thì đổi thành ảnh phụ
+            // Nếu ảnh chính cũ có tồn tại thì xóa ảnh cũ
             if ($oldPrimaryImage != null) {
-                $oldPrimaryImage->is_primary = false;
-                $oldPrimaryImage->save();
+                $this->deleteImage($oldPrimaryImage->id);
             }
 
             // Lưu ảnh chính mới

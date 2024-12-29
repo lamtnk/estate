@@ -73,7 +73,7 @@
                                         <div class="item-thumb">
                                             <a href="{{ route('client.project.detail', $project->id) }}">
                                                 <img
-                                                    src="{{ asset($project->images[0]->image_path ?? 'https://placehold.co/600x400') }}">
+                                                    src="{{ asset($project->primaryImage->image_path ?? 'https://placehold.co/600x400') }}">
                                             </a>
                                         </div>
 

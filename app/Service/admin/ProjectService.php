@@ -15,7 +15,7 @@ class ProjectService
 
     public function storeProject($data)
     {
-        Project::create($data);
+        return Project::create($data);
     }
 
     /**
@@ -26,7 +26,7 @@ class ProjectService
      */
     public function getProjectById($id)
     {
-        return Project::findOrFail($id);
+        return Project::with('images', 'primaryImage')->findOrFail($id);
     }
 
     /**
