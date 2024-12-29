@@ -32,6 +32,7 @@
     <link rel="stylesheet" href="{{ url('') }}/cassets/css/lightslider.min.css">
     <link rel="stylesheet" href="{{ url('') }}/cassets/css/style.css">
     <link rel="stylesheet" href="{{ url('') }}/cassets/css/responsive.css">
+    <link rel="stylesheet" href="{{ url('') }}/cassets/css/custom-navbar.css">
 
 
     <!-- Thêm CSS từ section 'styles' nếu có -->
@@ -84,29 +85,31 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="{{ route('client.home.index') }}"><img src="{{ url('') }}/cassets/img/logo.png"
-                        width="10%" alt=""></a>
+                <a class="navbar-brand" href="{{ route('client.home.index') }}"><img
+                        src="{{ url('') }}/cassets/img/logo.png" width="10%" alt=""></a>
             </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse yamm" id="navigation">
-                <ul class="main-nav nav navbar-nav navbar-right">
-                    <li class="wow fadeInDown" data-wow-delay="0.1s"><a class=""
-                            href="{{ route('client.home.index') }}">Trang chủ</a></li>
-                    <li class="wow fadeInDown" data-wow-delay="0.1s"><a class=""
-                            href="{{ route('client.project.index') }}">Dự án</a></li>
-                    <li class="wow fadeInDown" data-wow-delay="0.1s"><a class=""
-                            href="{{ route('client.property.index') }}">Bất động sản</a></li>
-                    <li class="wow fadeInDown" data-wow-delay="0.1s"><a class=""
-                            href="{{ route('client.news.index') }}">Tin tức</a></li>
-                    <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="{{ route('client.contact.index') }}">Liên
-                            hệ</a></li>
-                </ul>
-            </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse yamm" id="navigation">
+        <ul class="main-nav nav navbar-nav navbar-right">
+            <li class="wow fadeInDown" data-wow-delay="0.1s"><a class=""
+                    href="{{ route('client.home.index') }}">Trang chủ</a></li>
+            <li class="wow fadeInDown" data-wow-delay="0.1s"><a class=""
+                    href="{{ route('client.project.index') }}">Dự án</a></li>
+            <li class="wow fadeInDown" data-wow-delay="0.1s"><a class=""
+                    href="{{ route('client.property.index') }}">Bất động sản</a></li>
+            <li class="wow fadeInDown" data-wow-delay="0.1s"><a class=""
+                    href="{{ route('client.news.index') }}">Tin tức</a></li>
+            <li class="wow fadeInDown" data-wow-delay="0.4s"><a href="{{ route('client.contact.index') }}">Liên
+                    hệ</a></li>
+        </ul>
+    </div><!-- /.navbar-collapse -->
     <!-- End of nav bar -->
+
     @yield('main');
+
     <!-- Footer area-->
     <div class="footer-area">
 
@@ -283,6 +286,7 @@
     <script src="{{ url('') }}/cassets/js/price-range.js"></script>
     <script type="text/javascript" src="{{ url('') }}/cassets/js/lightslider.min.js"></script>
     <script src="{{ url('') }}/cassets/js/main.js"></script>
+    <script src="{{ url('') }}/cassets/js/custom-navbar.js"></script>
 
     <!-- Thêm script JS từ section 'scripts' nếu có -->
     @yield('scripts')
