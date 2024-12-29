@@ -183,7 +183,20 @@
                                         <h5><a href="property-1.html">{{ $property->name }} </a></h5>
                                         <div class="dot-hr"></div>
                                         <span class="pull-left"><b>Area : {{ $property->area }}</b> 120m </span>
-                                        <span class="proerty-price pull-right">$ {{ $property->price }}</span>
+                                        <span class="proerty-price pull-right">
+                                            {{-- $ {{ $property->price }} --}}
+                                            @if ($property->deal_type == 'rent')
+                                                {{ $property->price_formatted }} /tháng
+                                            @else
+                                                @if ($property->price_type == 1)
+                                                    {{ $property->price_formatted }}
+                                                @elseif ($property->price_type == 2)
+                                                    {{ $property->price_formatted * $property->area }}
+                                                @else
+                                                    Thỏa thuận
+                                                @endif
+                                            @endif
+                                        </span>
                                     </div>
                                 </div>
                             </div>
