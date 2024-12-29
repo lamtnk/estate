@@ -2782,7 +2782,7 @@ single property page
 Welcom 
 ======================================*/
 .Welcome-area {
-    background: #f3f3f3 url("../../images/bg/welcome-bg.png") no-repeat scroll left top;
+    background: #f3f3f3 url("../../cassets/img/welcome-bg.png") no-repeat scroll left top;
     position: relative;
 }
 
@@ -3197,7 +3197,7 @@ blog
     border-radius: 50%;
     width: 60px;
     border: 2px solid #fff;
-    background-image: url("../../cassets/img/bg/icon-shearch.png");
+    background-image: url("../../cassets/img/icon-shearch.png");
     position: relative;
     background-position: 2px -1px;
     height: 60px;
@@ -3205,7 +3205,7 @@ blog
 
 .home-lager-shearch .large-search .btn-lg-sheach:hover,
 .home-lager-shearch .large-search .btn-lg-sheach:focus {
-    background-image: url("../../cassets/img/bg/icon-shearch.png");
+    background-image: url("../../cassets/img/icon-shearch.png");
     background-position: 2px -1px;
     background-color: #655d5d;
 }
