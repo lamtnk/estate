@@ -1,4 +1,24 @@
 @extends('client.layouts.master')
+@section('styles')
+<style>
+    @media (max-width: 768px) {
+    /* Ẩn tất cả các phần tử con của form */
+    form .col-md-12 > div {
+        display: none;
+    }
+
+    /* Hiển thị trường tìm kiếm từ khóa */
+    form .col-md-4.col-sm-12 {
+        display: block;
+    }
+
+    /* Hiển thị nút submit */
+    form .center {
+        display: block;
+    }
+}
+</style>
+@endsection
 @section('title')
     {{ 'Trang chủ' }}
 @endsection
@@ -31,8 +51,8 @@
                         <form action="{{ route('client.property.index') }}" method="get" class="form-inline">
                             <div class="col-md-12">
                                 <!-- Tìm kiếm theo từ khóa -->
-                                <div class="col-md-4">
-                                    <input type="text" class="form-control" name="keyword" placeholder="Nhập từ khóa"
+                                <div class="col-md-4 col-sm-12">
+                                    <input type="text" class="form-control" name="keyword" placeholder="Nhập từ khóa để tìm kiếm"
                                         value="{{ request('keyword') }}"
                                         style="border: 1px solid #ccc; border-radius: 5px;">
                                 </div>
