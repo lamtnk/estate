@@ -182,7 +182,7 @@
                                     <div class="item-entry overflow">
                                         <h5><a href="property-1.html">{{ $property->name }} </a></h5>
                                         <div class="dot-hr"></div>
-                                        <span class="pull-left"><b>Area : {{ $property->area }}</b> 120m </span>
+                                        <span class="pull-left"><b>Diện tích: </b>{{ $property->area }}m2</span>
                                         <span class="proerty-price pull-right">
                                             {{-- $ {{ $property->price }} --}}
                                             @if ($property->deal_type == 'rent')
