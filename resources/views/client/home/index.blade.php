@@ -58,6 +58,35 @@
         .slider-next {
             right: 10px;
         }
+
+        .location-box {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            /* Bo góc nếu cần */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* Thêm hiệu ứng đổ bóng */
+        }
+
+        .location-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Đảm bảo ảnh luôn giữ tỉ lệ gốc */
+            display: block;
+        }
+
+        .location-box .location-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .location-box .location-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: white
+        }
     </style>
 @endsection
 @section('title')
@@ -384,7 +413,134 @@
             </div>
         </div>
 
-        <div class="row">
+        <!-- project area -->
+        <div class="content-area recent-property" style="background-color: #FCFCFC; padding-bottom: 55px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
+                        <!-- /.feature title -->
+                        <h2>Dự án bất động sản nổi bật</h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="proerty-th">
+                        @foreach ($projects->take(4) as $project)
+                            <div class="col-sm-6 col-md-3 p0">
+                                <div class="box-two proerty-item">
+                                    <div class="item-thumb">
+                                        <a href="{{ route('client.project.detail', $project->id) }}"><img
+                                                src="{{ asset($project->primaryImage->image_path ?? 'https://placehold.co/400x400') }}"></a>
+                                    </div>
+                                    <div class="item-entry overflow">
+                                        <span
+                                            class="badge
+                                                @if ($project->status == 'completed') bg-success
+                                                @elseif($project->status == 'ongoing') bg-primary @endif">
+                                            {{ ucfirst($project->status) }}
+                                        </span>
+                                        <h5
+                                            style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 300px;">
+                                            <a href="{{ route('client.project.detail', $project->id) }}">{{ $project->name }}
+                                            </a>
+                                        </h5>
+                                        <div class="dot-hr"></div>
+                                        <span class="pull-left">
+                                            <img src="cassets/img/icon/location.png"> {{ $project->location }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- location property area -->
+        <div class="content-area recent-property" style="background-color: #FCFCFC; padding-bottom: 55px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
+                        <h2>Bất động sản theo địa điểm</h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- TP Hồ Chí Minh -->
+                    <div class="col-md-6 col-sm-12">
+                        <div class="location-box" style="height: 410px; margin-bottom: 30px">
+                            <a href="{{ route('client.property.index', ['location' => 'Hồ Chí Minh']) }}">
+                                <img src="{{ asset('cassets/img/TPHCM.jpg') }}" alt="TP.Hồ Chí Minh">
+                            </a>
+                            <div class="location-overlay">
+                                <a href="{{ route('client.property.index', ['location' => 'Hồ Chí Minh']) }}">
+                                    <p class="location-name">TP. Hồ Chí Minh</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Các địa điểm khác -->
+                    <div class="col-md-6 col-sm-12">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="location-box" style="height: 190px; margin-bottom: 30px">
+                                    <a href="{{ route('client.property.index', ['location' => 'Hà Nội']) }}">
+                                        <img src="{{ asset('cassets/img/Hanoi.jpg') }}" alt="Hà Nội">
+                                    </a>
+                                    <div class="location-overlay">
+                                        <a href="{{ route('client.property.index', ['location' => 'Hà Nội']) }}">
+                                            <p class="location-name">Hà Nội</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="location-box" style="height: 190px; margin-bottom: 30px">
+                                    <a href="{{ route('client.property.index', ['location' => 'Đà Nẵng']) }}">
+                                        <img src="{{ asset('cassets/img/Danang.jpg') }}" alt="Đà Nẵng">
+                                    </a>
+                                    <div class="location-overlay">
+                                        <a href="{{ route('client.property.index', ['location' => 'Đà Nẵng']) }}">
+                                            <p class="location-name">Đà Nẵng</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="location-box" style="height: 190px; margin-bottom: 30px">
+                                    <a href="{{ route('client.property.index', ['location' => 'Bình Dương']) }}">
+                                        <img src="{{ asset('cassets/img/Binhduong.jpg') }}" alt="Bình Dương">
+                                    </a>
+                                    <div class="location-overlay">
+                                        <a href="{{ route('client.property.index', ['location' => 'Bình Dương']) }}">
+                                            <p class="location-name">Bình Dương</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="location-box" style="height: 190px; margin-bottom: 30px">
+                                    <a href="{{ route('client.property.index', ['location' => 'Đồng Nai']) }}">
+                                        <img src="{{ asset('cassets/img/Dongnai.jpg') }}" alt="Đồng Nai">
+                                    </a>
+                                    <div class="location-overlay">
+                                        <a href="{{ route('client.property.index', ['location' => 'Đồng Nai']) }}">
+                                            <p class="location-name">Đồng Nai</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- <div class="row">
             <div class="col-md-4">
                 <div class="box-two proerty-item">
                     <div class="item-thumb">
@@ -424,7 +580,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <!--Khu vực chào mừng -->
         <div class="Welcome-area">
