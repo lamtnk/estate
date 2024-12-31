@@ -43,6 +43,11 @@
                             </label> --}}
                         </div>
                         <button class="btn btn-primary btn-block btn-lg shadow-lg mt-5">Đăng nhập</button>
+                                                @if(session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                     </form>
                     <div class="text-center mt-5 text-lg fs-4">
                         {{-- <p class="text-gray-600">Don't have an account? <a href="auth-register.html"
