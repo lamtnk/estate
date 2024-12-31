@@ -282,10 +282,12 @@
         </div>
 
     </div>
-
+    
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> --}}
     <script src="{{ url('') }}/cassets/js/modernizr-2.6.2.min.js"></script>
-
+    
     <script src="{{ url('') }}/cassets/js/jquery-1.10.2.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
     <script src="{{ url('') }}/bootstrap/js/bootstrap.min.js"></script>
     <script src="{{ url('') }}/cassets/js/bootstrap-select.min.js"></script>
     <script src="{{ url('') }}/cassets/js/bootstrap-hover-dropdown.js"></script>
@@ -302,7 +304,6 @@
     <script type="text/javascript" src="{{ url('') }}/cassets/js/lightslider.min.js"></script>
     <script src="{{ url('') }}/cassets/js/main.js"></script>
     <script src="{{ url('') }}/cassets/js/custom-navbar.js"></script>
-
     <!-- Thêm script JS từ section 'scripts' nếu có -->
     @yield('scripts')
 </body>

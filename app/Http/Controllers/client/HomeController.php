@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\client;
 
 use App\Http\Controllers\Controller;
+use App\Models\News;
 use Illuminate\Http\Request;
 use App\Models\Property;
 use App\Service\client\ProjectService;
@@ -21,12 +22,13 @@ class HomeController extends Controller
 
     public function index()
     {
-        $topProperties = Property::with('primaryImage')->take(7)->get();
+        $topProperties = Property::with('primaryImage')->take(3)->get();
 
+        $news = News::take(4)->get();
         // Lấy danh sách dự án và loại hình bất động sản để đổ select box
         $propertyTypes = $this->propertyTypeService->getAllPropertyTypes();
         $projects = $this->projectService->getAllProjects();
 
-        return view('client.home.index', compact('topProperties', 'propertyTypes', 'projects'));
+        return view('client.home.index', compact('topProperties', 'propertyTypes', 'projects', 'news'));
     }
 }
