@@ -48,7 +48,8 @@
                                 @endif
 
                                 {{-- Form thêm dự án --}}
-                                <form action="{{ route('admin.project.store') }}" method="POST">
+                                <form action="{{ route('admin.project.store') }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     <div class="mb-3">
                                         <label for="name" class="form-label">Tên Dự Án</label>
@@ -77,6 +78,16 @@
                                     <div class="mb-3">
                                         <label for="description" class="form-label">Mô Tả</label>
                                         <textarea class="form-control" id="description" name="description" rows="3">{{ old('description') }}</textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="image" class="form-label">Ảnh dự án</label>
+                                        <input class="form-control" type="file" id="image" name="image"
+                                            accept="image/*" required>
+                                        <div id="image-preview-container" class="mt-3"
+                                            style="display:none; text-align: center;">
+                                            <img id="image-preview" src="" alt="Image preview"
+                                                style="max-width: 100%; max-height: 500px; display: block; margin: 0 auto; object-fit: contain;">
+                                        </div>
                                     </div>
                                     <div class="mb-3">
                                         <label for="content" class="form-label">Nội Dung Chi Tiết</label>
@@ -112,6 +123,25 @@
             $('form').on('submit', function() {
                 var content = $('#summernote').summernote('code'); // Lấy nội dung HTML từ Summernote
                 $('#content').val(content); // Gán nội dung vào trường ẩn
+            });
+
+            document.getElementById('image').addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                const previewContainer = document.getElementById('image-preview-container');
+                const previewImage = document.getElementById('image-preview');
+
+                if (file) {
+                    const reader = new FileReader();
+
+                    reader.onload = function(e) {
+                        previewImage.src = e.target.result; // Cập nhật src của ảnh
+                        previewContainer.style.display = 'block'; // Hiển thị khu vực xem trước
+                    };
+
+                    reader.readAsDataURL(file); // Đọc tệp ảnh và chuyển đổi thành URL để hiển thị
+                } else {
+                    previewContainer.style.display = 'none'; // Ẩn khu vực xem trước nếu không có tệp ảnh
+                }
             });
         </script>
     @endsection

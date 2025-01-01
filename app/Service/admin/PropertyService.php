@@ -29,7 +29,7 @@ class PropertyService
      */
     public function getPropertyById($id)
     {
-        return Property::with('images')->findOrFail($id);
+        return Property::with('images', 'primaryImage')->findOrFail($id);
     }
 
     /**

@@ -49,7 +49,8 @@
                                 @endif
 
                                 {{-- Form sửa dự án --}}
-                                <form action="{{ route('admin.project.update', $project->id) }}" method="POST">
+                                <form action="{{ route('admin.project.update', $project->id) }}" method="POST"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT') {{-- Method spoofing để gửi PUT request --}}
                                     <div class="mb-3">
@@ -83,6 +84,18 @@
                                     <div class="mb-3">
                                         <label for="description" class="form-label">Mô Tả</label>
                                         <textarea class="form-control" id="description" name="description" rows="3">{{ old('description', $project->description) }}</textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="image" class="form-label">Ảnh dự án</label>
+                                        <input class="form-control" type="file" id="image" name="image"
+                                            accept="image/*" {{ $project->primaryImage == null ? 'required' : '' }}>
+                                        <div id="image-preview-container" class="mt-3"
+                                            style="display:none; text-align: center;">
+                                            <img id="image-preview"
+                                                src="{{ asset($project->primaryImage->image_path ?? '') }}"
+                                                alt="Image preview" alt="Image preview"
+                                                style="max-width: 100%; max-height: 500px; display: block; margin: 0 auto; object-fit: contain;">
+                                        </div>
                                     </div>
                                     <div class="mb-3">
                                         <label for="content" class="form-label">Nội Dung Chi Tiết</label>
@@ -119,6 +132,40 @@
             $('form').on('submit', function() {
                 var content = $('#summernote').summernote('code'); // Lấy nội dung HTML từ Summernote
                 $('#content').val(content); // Gán nội dung vào trường ẩn
+            });
+
+            document.addEventListener('DOMContentLoaded', function() {
+                const previewContainer = document.getElementById('image-preview-container');
+                const previewImage = document.getElementById('image-preview');
+                const imageInput = document.getElementById('image');
+
+                // Hiển thị ảnh mặc định khi mở form
+                if (previewImage.src && previewImage.src !== 'https://placehold.co/600x400') {
+                    previewContainer.style.display = 'block'; // Hiển thị ảnh nếu có ảnh mặc định
+                }
+
+                // Lắng nghe sự kiện change khi người dùng chọn ảnh mới
+                imageInput.addEventListener('change', function(event) {
+                    const file = event.target.files[0];
+
+                    if (file) {
+                        const reader = new FileReader();
+
+                        reader.onload = function(e) {
+                            previewImage.src = e.target.result; // Cập nhật src của ảnh mới
+                            previewContainer.style.display = 'block'; // Hiển thị khu vực xem trước
+                        };
+
+                        reader.readAsDataURL(file); // Đọc tệp ảnh và chuyển đổi thành URL để hiển thị
+                    } else {
+                        // Nếu không có tệp ảnh mới, kiểm tra xem có ảnh cũ không
+                        if (previewImage.src) {
+                            previewContainer.style.display = 'block'; // Giữ ảnh cũ hiển thị
+                        } else {
+                            previewContainer.style.display = 'none'; // Ẩn khu vực xem trước nếu không có ảnh
+                        }
+                    }
+                });
             });
         </script>
     @endsection

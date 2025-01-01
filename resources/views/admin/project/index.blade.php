@@ -27,13 +27,13 @@
                 <div class="card">
                     <div class="card-body">
                         @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
                         @elseif (session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
                         @endif
                         <a href="{{ route('admin.project.show_add') }}" class="btn btn-primary">Thêm dự án</a>
                         <table class="table table-striped table-bordered" id="table1">
@@ -56,8 +56,8 @@
                                         <td>{{ $project->handover_date }}</td>
                                         <td>
                                             <span
-                                                class="badge 
-                                                @if ($project->status == 'completed') bg-success 
+                                                class="badge
+                                                @if ($project->status == 'completed') bg-success
                                                 @elseif($project->status == 'ongoing') bg-primary @endif">
                                                 {{ ucfirst($project->status) }}
                                             </span>
@@ -66,6 +66,8 @@
                                             <a href="{{ route('admin.project.hide', 1) }}" class="btn btn-info">Ẩn</a>
                                             <a href="{{ route('admin.project.edit', $project->id) }}"
                                                 class="btn btn-warning">Sửa</a>
+                                            <a href="{{ route('admin.project.images.index', $project->id) }}"
+                                                class="btn btn-info">Kho ảnh</a>
                                         </td>
                                     </tr>
                                 @endforeach

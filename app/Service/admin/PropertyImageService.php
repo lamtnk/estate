@@ -10,7 +10,14 @@ class PropertyImageService
     public function getPropertyImages($propertyId)
     {
         // Lấy toàn bộ ảnh của bất động sản
-        return PropertyImage::with('property')->where('property_id', $propertyId)->get();
+        return PropertyImage::where('property_id', $propertyId)->get();
+    }
+
+    public function getPrimaryImage($propertyId)
+    {
+        return PropertyImage::where('property_id', $propertyId)
+            ->where('is_primary', true)
+            ->first(); // Chỉ lấy ảnh chính đầu tiên
     }
 
     public function getImageById($id)
@@ -65,6 +72,22 @@ class PropertyImageService
 
             // Xóa bản ghi trong db
             $image->delete();
+        }
+    }
+
+    public function changePrimaryImage($propertyId, $image, $isPrimary)
+    {
+        $oldPrimaryImage = $this->getPrimaryImage($propertyId);
+
+        // Nếu tải ảnh chính mới lên từ edit form thì sẽ thay ảnh chính
+        if ($image != null) {
+            // Nếu ảnh chính cũ có tồn tại thì xóa ảnh cũ
+            if ($oldPrimaryImage != null) {
+                $this->deleteImage($oldPrimaryImage->id);
+            }
+
+            // Lưu ảnh chính mới
+            $this->storeImage($propertyId, $image, $isPrimary);
         }
     }
 }
