@@ -1,23 +1,91 @@
 @extends('client.layouts.master')
 @section('styles')
-<style>
-    @media (max-width: 768px) {
-    /* Ẩn tất cả các phần tử con của form */
-    form .col-md-12 > div {
-        display: none;
-    }
+    <style>
+        @media (max-width: 768px) {
 
-    /* Hiển thị trường tìm kiếm từ khóa */
-    form .col-md-4.col-sm-12 {
-        display: block;
-    }
+            /* Ẩn tất cả các phần tử con của form */
+            form .col-md-12>div {
+                display: none;
+            }
 
-    /* Hiển thị nút submit */
-    form .center {
-        display: block;
-    }
-}
-</style>
+            /* Hiển thị trường tìm kiếm từ khóa */
+            form .col-md-4.col-sm-12 {
+                display: block;
+            }
+
+            /* Hiển thị nút submit */
+            form .center {
+                display: block;
+            }
+        }
+
+        .custom-slider {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .slider-wrapper {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slider-item {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .slider-prev,
+        .slider-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .slider-prev {
+            left: 10px;
+        }
+
+        .slider-next {
+            right: 10px;
+        }
+
+        .location-box {
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            /* Bo góc nếu cần */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            /* Thêm hiệu ứng đổ bóng */
+        }
+
+        .location-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Đảm bảo ảnh luôn giữ tỉ lệ gốc */
+            display: block;
+        }
+
+        .location-box .location-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+
+        .location-box .location-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: white
+        }
+    </style>
 @endsection
 @section('title')
     {{ 'Trang chủ' }}
@@ -29,7 +97,8 @@
 
                 <div class="item"><img src="{{ url('') }}/cassets/img/slide1/slider-image-2.jpg" alt="The Last of us">
                 </div>
-                <div class="item"><img src="{{ url('') }}/cassets/img/slide1/slider-image-1.jpg" alt="GTA V"></div>
+                <div class="item"><img src="{{ url('') }}/cassets/img/slide1/slider-image-1.jpg" alt="GTA V">
+                </div>
 
             </div>
         </div>
@@ -52,8 +121,8 @@
                             <div class="col-md-12">
                                 <!-- Tìm kiếm theo từ khóa -->
                                 <div class="col-md-4 col-sm-12">
-                                    <input type="text" class="form-control" name="keyword" placeholder="Nhập từ khóa để tìm kiếm"
-                                        value="{{ request('keyword') }}"
+                                    <input type="text" class="form-control" name="keyword"
+                                        placeholder="Nhập từ khóa để tìm kiếm" value="{{ request('keyword') }}"
                                         style="border: 1px solid #ccc; border-radius: 5px;">
                                 </div>
 
@@ -176,6 +245,105 @@
             </div>
         </div>
 
+        <div class="content-area recent-property" style="background-color: #FCFCFC; padding-bottom: 55px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
+                        <!-- /.feature title -->
+                        <h2>Tin tức mới nhất</h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="proerty-th">
+                        @foreach ($news as $item)
+                            <div class="col-sm-6 col-md-3 p0">
+                                <div class="box-two proerty-item">
+                                    <div class="item-thumb">
+                                        <a href="{{ route('client.news.detail', ['id' => $item->id]) }}"><img
+                                                src="https://file4.batdongsan.com.vn/images/newhome/cities1/HCM-web-1.jpg"></a>
+                                    </div>
+                                    <div class="item-entry overflow">
+                                        <h5><a href="{{ route('client.news.detail', ['id' => $item->id]) }}">{{ $item->title }}
+                                            </a></h5>
+                                        <div class="dot-hr"></div>
+                                        <span class="pull-left"><b>Người đăng: </b>Admin</span>
+                                        <span class="proerty-price pull-right">
+                                            {{ \Carbon\Carbon::parse($item->created_at)->format('d-m-Y') }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+
+                        {{-- Chưa thể quyết định ? --}}
+                        <div class="col-sm-12 col-md-12 p0 text-center">
+                            <a href="{{ route('client.news.index') }}" class="btn btn-primary bodered">Xem tất cả</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!--Lời chứng thực -->
+        <div class="testimonial-area recent-property" style="background-color: #FCFCFC; padding-bottom: 15px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
+                        <!-- /.feature title -->
+                        <h2>Khách hàng nói gì?</h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="row testimonial">
+                        <div class="col-md-12">
+                            <div id="testimonial-slider">
+                                <div class="item">
+                                    <div class="client-text">
+                                        <p>Chúng tôi rất hài lòng. </p>
+                                        <h4><strong>Trung Luân </strong><i>Nhà thiết kế web</i></h4>
+                                    </div>
+                                    <div class="client-face wow fadeInRight" data-wow-delay=".9s">
+                                        <img src="{{ url('') }}/cassets/img/client-face1.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="client-text">
+                                        <p>Tôi cực kỳ ấn tượng với phong cách làm việc của công ty</p>
+                                        <h4><strong>Khánh Huy </strong><i>Khách hàng</i></h4>
+                                    </div>
+                                    <div class="client-face">
+                                        <img src="{{ url('') }}/cassets/img/client-face2.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="client-text">
+                                        <p>Một trải nghiệm tuyệt vời khi được tư vấn và trải nghiệm tại đây</p>
+                                        <h4><strong>Nguyễn Minh </strong><i>Khách hàng</i></h4>
+                                    </div>
+                                    <div class="client-face">
+                                        <img src="{{ url('') }}/cassets/img/client-face1.png" alt="">
+                                    </div>
+                                </div>
+                                <div class="item">
+                                    <div class="client-text">
+                                        <p>Làm việc rất chuyên nghiệp, đúng giờ, tôn trọng khách hàng.</p>
+                                        <h4><strong>Trung Hiếu </strong><i>Giáo viên</i></h4>
+                                    </div>
+                                    <div class="client-face">
+                                        <img src="{{ url('') }}/cassets/img/client-face2.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
         <!-- property area -->
         <div class="content-area recent-property" style="background-color: #FCFCFC; padding-bottom: 55px;">
@@ -243,6 +411,175 @@
             </div>
         </div>
 
+        <!-- project area -->
+        <div class="content-area recent-property" style="background-color: #FCFCFC; padding-bottom: 55px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
+                        <!-- /.feature title -->
+                        <h2>Dự án bất động sản nổi bật</h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="proerty-th">
+                        @foreach ($projects->take(4) as $project)
+                            <div class="col-sm-6 col-md-3 p0">
+                                <div class="box-two proerty-item">
+                                    <div class="item-thumb">
+                                        <a href="{{ route('client.project.detail', $project->id) }}"><img
+                                                src="{{ asset($project->primaryImage->image_path ?? 'https://placehold.co/400x400') }}"></a>
+                                    </div>
+                                    <div class="item-entry overflow">
+                                        <span
+                                            class="badge
+                                                @if ($project->status == 'completed') bg-success
+                                                @elseif($project->status == 'ongoing') bg-primary @endif">
+                                            {{ ucfirst($project->status) }}
+                                        </span>
+                                        <h5
+                                            style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 300px;">
+                                            <a href="{{ route('client.project.detail', $project->id) }}">{{ $project->name }}
+                                            </a>
+                                        </h5>
+                                        <div class="dot-hr"></div>
+                                        <span class="pull-left">
+                                            <img src="cassets/img/icon/location.png"> {{ $project->location }}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- location property area -->
+        <div class="content-area recent-property" style="background-color: #FCFCFC; padding-bottom: 55px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
+                        <h2>Bất động sản theo địa điểm</h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <!-- TP Hồ Chí Minh -->
+                    <div class="col-md-6 col-sm-12">
+                        <div class="location-box" style="height: 410px; margin-bottom: 30px">
+                            <a href="{{ route('client.property.index', ['location' => 'Hồ Chí Minh']) }}">
+                                <img src="{{ asset('cassets/img/TPHCM.jpg') }}" alt="TP.Hồ Chí Minh">
+                            </a>
+                            <div class="location-overlay">
+                                <a href="{{ route('client.property.index', ['location' => 'Hồ Chí Minh']) }}">
+                                    <p class="location-name">TP. Hồ Chí Minh</p>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Các địa điểm khác -->
+                    <div class="col-md-6 col-sm-12">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="location-box" style="height: 190px; margin-bottom: 30px">
+                                    <a href="{{ route('client.property.index', ['location' => 'Hà Nội']) }}">
+                                        <img src="{{ asset('cassets/img/Hanoi.jpg') }}" alt="Hà Nội">
+                                    </a>
+                                    <div class="location-overlay">
+                                        <a href="{{ route('client.property.index', ['location' => 'Hà Nội']) }}">
+                                            <p class="location-name">Hà Nội</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="location-box" style="height: 190px; margin-bottom: 30px">
+                                    <a href="{{ route('client.property.index', ['location' => 'Đà Nẵng']) }}">
+                                        <img src="{{ asset('cassets/img/Danang.jpg') }}" alt="Đà Nẵng">
+                                    </a>
+                                    <div class="location-overlay">
+                                        <a href="{{ route('client.property.index', ['location' => 'Đà Nẵng']) }}">
+                                            <p class="location-name">Đà Nẵng</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6">
+                                <div class="location-box" style="height: 190px; margin-bottom: 30px">
+                                    <a href="{{ route('client.property.index', ['location' => 'Bình Dương']) }}">
+                                        <img src="{{ asset('cassets/img/Binhduong.jpg') }}" alt="Bình Dương">
+                                    </a>
+                                    <div class="location-overlay">
+                                        <a href="{{ route('client.property.index', ['location' => 'Bình Dương']) }}">
+                                            <p class="location-name">Bình Dương</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6">
+                                <div class="location-box" style="height: 190px; margin-bottom: 30px">
+                                    <a href="{{ route('client.property.index', ['location' => 'Đồng Nai']) }}">
+                                        <img src="{{ asset('cassets/img/Dongnai.jpg') }}" alt="Đồng Nai">
+                                    </a>
+                                    <div class="location-overlay">
+                                        <a href="{{ route('client.property.index', ['location' => 'Đồng Nai']) }}">
+                                            <p class="location-name">Đồng Nai</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- <div class="row">
+            <div class="col-md-4">
+                <div class="box-two proerty-item">
+                    <div class="item-thumb">
+                        <a href="project-1.html"><img src="{{ asset('path/to/project1.jpg') }}" alt="Project 1"></a>
+                    </div>
+                    <div class="item-entry overflow">
+                        <h5><a href="project-1.html">Project 1</a></h5>
+                        <div class="dot-hr"></div>
+                        <span class="pull-left"><b>Diện tích: </b>100m2</span>
+                        <span class="proerty-price pull-right">1,000,000 VND</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="box-two proerty-item">
+                    <div class="item-thumb">
+                        <a href="project-2.html"><img src="{{ asset('path/to/project2.jpg') }}" alt="Project 2"></a>
+                    </div>
+                    <div class="item-entry overflow">
+                        <h5><a href="project-2.html">Project 2</a></h5>
+                        <div class="dot-hr"></div>
+                        <span class="pull-left"><b>Diện tích: </b>150m2</span>
+                        <span class="proerty-price pull-right">1,500,000 VND</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="box-two proerty-item">
+                    <div class="item-thumb">
+                        <a href="project-3.html"><img src="{{ asset('path/to/project3.jpg') }}" alt="Project 3"></a>
+                    </div>
+                    <div class="item-entry overflow">
+                        <h5><a href="project-3.html">Project 3</a></h5>
+                        <div class="dot-hr"></div>
+                        <span class="pull-left"><b>Diện tích: </b>200m2</span>
+                        <span class="proerty-price pull-right">2,000,000 VND</span>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
+
         <!--Khu vực chào mừng -->
         <div class="Welcome-area">
             <div class="container">
@@ -303,64 +640,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <!--Lời chứng thực -->
-        <div class="testimonial-area recent-property" style="background-color: #FCFCFC; padding-bottom: 15px;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
-                        <!-- /.feature title -->
-                        <h2>Khách hàng của chúng tôi nói gì</h2>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="row testimonial">
-                        <div class="col-md-12">
-                            <div id="testimonial-slider">
-                                <div class="item">
-                                    <div class="client-text">
-                                        <p>Chúng tôi rất hài lòng. </p>
-                                        <h4><strong>Trung Luân </strong><i>Nhà thiết kế web</i></h4>
-                                    </div>
-                                    <div class="client-face wow fadeInRight" data-wow-delay=".9s">
-                                        <img src="{{ url('') }}/cassets/img/client-face1.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="client-text">
-                                        <p>Tôi cực kỳ ấn tượng với phong cách làm việc của công ty</p>
-                                        <h4><strong>Khánh Huy </strong><i>Khách hàng</i></h4>
-                                    </div>
-                                    <div class="client-face">
-                                        <img src="{{ url('') }}/cassets/img/client-face2.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="client-text">
-                                        <p>Một trải nghiệm tuyệt vời khi được tư vấn và trải nghiệm tại đây</p>
-                                        <h4><strong>Nguyễn Minh </strong><i>Khách hàng</i></h4>
-                                    </div>
-                                    <div class="client-face">
-                                        <img src="{{ url('') }}/cassets/img/client-face1.png" alt="">
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="client-text">
-                                        <p>Làm việc rất chuyên nghiệp, đúng giờ, tôn trọng khách hàng.</p>
-                                        <h4><strong>Trung Hiếu </strong><i>Giáo viên</i></h4>
-                                    </div>
-                                    <div class="client-face">
-                                        <img src="{{ url('') }}/cassets/img/client-face2.png" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -468,8 +747,7 @@
                         </div>
                     </div>
                     <div class="col-xs-12">
-                        <p class="asks-call">CÓ CÂU HỎI? LIÊN HỆ VỚI CHÚNG TÔI: <span class="strong"> + 3-123-
-                                424-5700</span></p>
+                        <p class="asks-call">CÓ CÂU HỎI? LIÊN HỆ NGAY: <span class="strong"> 0904967555</span></p>
                     </div>
                 </div>
             </div>
