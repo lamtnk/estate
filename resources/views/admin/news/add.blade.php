@@ -61,7 +61,7 @@
                                             value="{{ old('published_at') }}">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="image">Hình ảnh</label>
+                                        <label for="image">Hình ảnh (Tối đa 3MB)</label>
                                         <div class="custom-file">
                                             <input type="file" class="custom-file-input" id="image" name="image">
                                         </div>

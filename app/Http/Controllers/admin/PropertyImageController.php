@@ -40,7 +40,7 @@ class PropertyImageController extends Controller
             }
         } catch (\Throwable $th) {
             // Xử lý lỗi khi lưu ảnh
-            return redirect()->back()->with('error', 'Lỗi trong quá trình lưu ảnh');
+            return redirect()->back()->with('error', 'Lỗi trong quá trình lưu ảnh' . $th->getMessage());
         }
 
         // Chuyển hướng về danh sách ảnh với thông báo thành công

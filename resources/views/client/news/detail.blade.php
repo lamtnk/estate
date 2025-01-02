@@ -2,6 +2,16 @@
 @section('title')
     {{ 'Tin tức' }}
 @endsection
+@section('styles')
+<style>
+    .blog-asside-right {
+    position: sticky;
+    top: 20px; /* Khoảng cách từ cạnh trên của trang */
+    z-index: 100; /* Đảm bảo hiển thị trên các thành phần khác */
+}
+
+</style>
+@endsection
 @section('main')
     <div class="page-head">
         <div class="container">
@@ -47,7 +57,7 @@
 
                         <div id="post-content" class="post-body single wow fadeInLeft animated">
                             <p>
-                                {{ $new->content }}
+                                {!! $new->content !!}
                             </p>
                         </div>
                         <div class="post-footer single wow fadeInBottum animated">
@@ -152,16 +162,16 @@
                         </div>
                         <div class="panel-body text-widget">
                             <p>
-                                Ngôi nhà nhỏ bên đồi, bao quanh bởi khu vườn xanh mát và tiếng chim hót, mang đến không gian
-                                sống yên bình và thơ mộng. Từng chi tiết được chăm chút kỹ lưỡng, tạo nên cảm giác ấm áp và
-                                gần gũi – một tổ ấm lý tưởng để tận hưởng cuộc sống.
+                                Tài Lộc Property là một công ty chuyên cung cấp các dịch vụ bất động sản uy tín và chuyên
+                                nghiệp. Với sứ mệnh mang lại giá trị bền vững cho khách hàng, chúng tôi tự hào là đối tác
+                                đáng tin cậy trong việc tư vấn, mua bán, cho thuê và đầu tư bất động sản
                             </p>
                         </div>
                     </div>
 
                     <div class="panel panel-default sidebar-menu wow fadeInRight animated">
                         <div class="panel-heading">
-                            <h3 class="panel-title">Gợi ý các mẫu</h3>
+                            <h3 class="panel-title">Bất động sản liên quan</h3>
                         </div>
                         <div class="panel-body recent-property-widget">
                             <ul>

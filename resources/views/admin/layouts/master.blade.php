@@ -80,6 +80,14 @@
                             </a>
                         </li>
 
+                        <li
+                            class="sidebar-item {{ request()->routeIs('admin.news.index') ? 'active' : '' }}">
+                            <a href="{{ route('admin.news.index') }}" class='sidebar-link'>
+                                <i class="bi bi-file-earmark-spreadsheet-fill"></i>
+                                <span>Tin tức</span>
+                            </a>
+                        </li>
+
                     </ul>
                 </div>
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>

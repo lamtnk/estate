@@ -2,6 +2,17 @@
 @section('title')
     {{ 'Tin tức' }}
 @endsection
+@section('styles')
+    <style>
+        .blog-asside-right {
+            position: sticky;
+            top: 20px;
+            /* Khoảng cách từ cạnh trên của trang */
+            z-index: 100;
+            /* Đảm bảo hiển thị trên các thành phần khác */
+        }
+    </style>
+@endsection
 @section('main')
     <div class="page-head">
         <div class="container">
@@ -28,8 +39,9 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <p class="author-category">
-                                        Thuộc dự án <a href="#">{{ $item->Project->name }}</a> By <a
-                                            href="#">{{ $item->User->name }}</a>
+                                        Thuộc dự án <a
+                                            href="{{ route('client.project.detail', ['id' => $item->Project->id]) }}">{{ $item->Project->name }}</a>
+                                        By <a href="#">{{ $item->User->name }}</a>
                                     </p>
                                 </div>
                                 <div class="col-sm-6 right">
@@ -41,7 +53,7 @@
                                 </div>
                             </div>
                             <div class="image wow fadeInLeft animated">
-                                <a href="#">
+                                <a href="{{ route('client.news.detail', ['id' => $item->id]) }}">
                                     <img src="{{ url('assets/images/thumb') . '/' . $item->image }}" alt=""
                                         style="width: 100%; height: 350px;">
                                 </a>
@@ -67,10 +79,7 @@
                         </div>
                         <div class="panel-body text-widget">
                             <p>
-
-                                Ngôi nhà nhỏ bên đồi, bao quanh bởi khu vườn xanh mát và tiếng chim hót, mang đến không gian
-                                sống yên bình và thơ mộng. Từng chi tiết được chăm chút kỹ lưỡng, tạo nên cảm giác ấm áp và
-                                gần gũi – một tổ ấm lý tưởng để tận hưởng cuộc sống.
+                                Tin tức mới nhất về dự án, công nghệ, sự kiện, khuyến mãi, chính sách mới nhất
                             </p>
 
                         </div>

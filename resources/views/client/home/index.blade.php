@@ -85,6 +85,26 @@
             font-weight: bold;
             color: white
         }
+
+        .text-background {
+            background-color: rgba(0, 0, 0, 0.7);
+            /* Nền đen với độ trong suốt 70% */
+            padding: 20px;
+            /* Khoảng cách bên trong */
+            border-radius: 8px;
+            /* Bo góc nhẹ */
+            color: white;
+            /* Màu chữ trắng */
+            text-align: center;
+            /* Canh giữa văn bản */
+        }
+
+        .text-background h2,
+        .text-background p {
+            margin: 0;
+            color: white;
+            /* Loại bỏ khoảng cách mặc định */
+        }
     </style>
 @endsection
 @section('title')
@@ -95,21 +115,19 @@
         <div class="slider">
             <div id="bg-slider" class="owl-carousel owl-theme">
 
-                <div class="item"><img src="{{ url('') }}/cassets/img/slide1/slider-image-2.jpg" alt="The Last of us">
+                <div class="item"><img src="{{ url('') }}/cassets/img/slide1/anhnen1.jpg" alt="anhnen1">
                 </div>
-                <div class="item"><img src="{{ url('') }}/cassets/img/slide1/slider-image-1.jpg" alt="GTA V">
+                <div class="item"><img src="{{ url('') }}/cassets/img/slide1/anhnen2.jpg" alt="anhnen2">
                 </div>
 
             </div>
         </div>
         <div class="container slider-content">
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 col-sm-12 text-background">
                     <h2>Tìm kiếm bất động sản trở nên dễ dàng hơn bao giờ hết</h2>
                     <p>Khám phá những cơ hội đầu tư bất động sản tuyệt vời với
-                        chúng tôi. Dù bạn
-                        đang tìm kiếm một ngôi nhà
-                        mơ ước hay một cơ hội đầu tư sinh lời, chúng tôi luôn sẵn sàng hỗ trợ bạn!</p>
+                        chúng tôi.</p>
                 </div>
             </div>
         </div>
@@ -264,8 +282,12 @@
                                                 src="https://file4.batdongsan.com.vn/images/newhome/cities1/HCM-web-1.jpg"></a>
                                     </div>
                                     <div class="item-entry overflow">
-                                        <h5><a href="{{ route('client.news.detail', ['id' => $item->id]) }}">{{ $item->title }}
-                                            </a></h5>
+                                        <h5>
+                                            <a href="{{ route('client.news.detail', ['id' => $item->id]) }}"
+                                                title="{{ $item->title }}">
+                                                {{ \Illuminate\Support\Str::limit($item->title, 55) }}
+                                            </a>
+                                        </h5>
                                         <div class="dot-hr"></div>
                                         <span class="pull-left"><b>Người đăng: </b>Admin</span>
                                         <span class="proerty-price pull-right">
@@ -352,9 +374,6 @@
                     <div class="col-md-10 col-md-offset-1 col-sm-12 text-center page-title">
                         <!-- /.feature title -->
                         <h2>Top các bất động sản hàng đầu</h2>
-                        <p>Khám phá những bất động sản hàng đầu với chúng tôi. Chúng tôi cung cấp những lựa chọn tốt nhất để
-                            bạn có thể tìm thấy ngôi nhà mơ ước hoặc cơ hội đầu tư hoàn hảo.
-                        </p>
                     </div>
                 </div>
 
@@ -364,11 +383,15 @@
                             <div class="col-sm-6 col-md-3 p0">
                                 <div class="box-two proerty-item">
                                     <div class="item-thumb">
-                                        <a href="property-1.html"><img
+                                        <a href="{{route('client.property.detail', ['id' => $property->id]) }}"><img
                                                 src="{{ asset($property->primaryImage->image_path ?? 'https://placehold.co/400x400') }}"></a>
                                     </div>
                                     <div class="item-entry overflow">
-                                        <h5><a href="property-1.html">{{ $property->name }} </a></h5>
+                                        <h5>
+                                            <a href="{{route('client.property.detail', ['id' => $property->id]) }}" title="{{ $property->name }}">
+                                                {{ \Illuminate\Support\Str::limit($property->name, 35) }}
+                                            </a>
+                                        </h5>
                                         <div class="dot-hr"></div>
                                         <span class="pull-left"><b>Diện tích: </b>{{ $property->area }}m2</span>
                                         <span class="proerty-price pull-right">
@@ -427,7 +450,7 @@
                             <div class="col-sm-6 col-md-3 p0">
                                 <div class="box-two proerty-item">
                                     <div class="item-thumb">
-                                        <a href="{{ route('client.project.detail', $project->id) }}"><img
+                                        <a href="{{ route('client.project.detail', $project->id) }}"><img style="height: 500px;"
                                                 src="{{ asset($project->primaryImage->image_path ?? 'https://placehold.co/400x400') }}"></a>
                                     </div>
                                     <div class="item-entry overflow">
@@ -444,7 +467,7 @@
                                         </h5>
                                         <div class="dot-hr"></div>
                                         <span class="pull-left">
-                                            <img src="cassets/img/icon/location.png"> {{ $project->location }}
+                                            <img src="cassets/img/icon/location.png"> {{ \Illuminate\Support\Str::limit($project->location, 25) }}
                                         </span>
                                     </div>
                                 </div>
@@ -510,12 +533,12 @@
                         <div class="row">
                             <div class="col-md-6 col-sm-6">
                                 <div class="location-box" style="height: 190px; margin-bottom: 30px">
-                                    <a href="{{ route('client.property.index', ['location' => 'Bình Dương']) }}">
-                                        <img src="{{ asset('cassets/img/Binhduong.jpg') }}" alt="Bình Dương">
+                                    <a href="{{ route('client.property.index', ['location' => 'Hải Phòng']) }}">
+                                        <img src="{{ asset('cassets/img/Binhduong.jpg') }}" alt="Hải Phòng">
                                     </a>
                                     <div class="location-overlay">
-                                        <a href="{{ route('client.property.index', ['location' => 'Bình Dương']) }}">
-                                            <p class="location-name">Bình Dương</p>
+                                        <a href="{{ route('client.property.index', ['location' => 'Hải Phòng']) }}">
+                                            <p class="location-name">Hải Phòng</p>
                                         </a>
                                     </div>
                                 </div>

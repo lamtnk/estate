@@ -84,7 +84,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/store', [ProjectController::class, 'store'])->name('admin.project.store');
         Route::get('/edit/{id}', [ProjectController::class, 'edit'])->name('admin.project.edit');
         Route::put('/edit/{id}', [ProjectController::class, 'update'])->name('admin.project.update');
-        Route::post('/hide/{status}', [ProjectController::class, 'index'])->name('admin.project.hide');
+        Route::get('/hide/{status}', [ProjectController::class, 'index'])->name('admin.project.hide');
         Route::get('/{projectId}/images', [ProjectImageController::class, 'index'])->name('admin.project.images.index');
         Route::post('/{projectId}/images/store', [ProjectImageController::class, 'store'])->name('admin.project.images.store');
         Route::get('/{projectId}/images/delete/{id}', [ProjectImageController::class, 'delete'])->name('admin.project.images.delete');

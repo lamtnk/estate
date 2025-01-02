@@ -58,7 +58,7 @@
                                         <td>{{ $new->published_at }}</td>
                                         <td class="text-center">
                                             <a href="{{ route('admin.news.show_edit', ['id' => $new->id]) }}" class="btn btn-info">Sửa</a>
-                                            <a href="{{ route('admin.news.delete', ['id' => $new->id]) }}"
+                                            <a onclick="return confirm('Bạn có chắc chắn muốn xóa không??')" href="{{ route('admin.news.delete', ['id' => $new->id]) }}"
                                                 class="btn btn-warning">Xóa</a>
                                         </td>
                                     </tr>

@@ -36,7 +36,7 @@ class NewsController extends Controller
         // Validate dữ liệu đầu vào
         $request->validate([
             'title' => 'required|string|max:255',
-            'image' => 'required|image|max:2048', // Đảm bảo tệp là ảnh
+            'image' => 'nullable|image|max:4096', // Đảm bảo tệp là ảnh
             'published_at' => 'required|date',
             'content' => 'required',
             'project_id' => 'required|integer|exists:projects,id',
@@ -95,7 +95,7 @@ class NewsController extends Controller
             'project_id' => 'required|integer|exists:projects,id',
             'tags' => 'nullable|array',
             'tags.*' => 'exists:tags,id',
-            'image' => 'nullable|image|max:2048',
+            'image' => 'nullable|image|max:4096',
         ]);
 
         try {

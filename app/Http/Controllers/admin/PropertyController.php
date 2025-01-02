@@ -111,7 +111,6 @@ class PropertyController extends Controller
 
         // Lấy tệp ảnh từ request
         $image = $request->file('image');  // Đây là đối tượng UploadedFile
-
         // Nếu Validate thành công thì gọi đến Service để cập nhật bất động sản
         try {
             $this->propertyService->updateProperty($id, $validateData);

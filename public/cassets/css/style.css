@@ -2204,8 +2204,8 @@ proerty-th
 }
 
 .proerty-th .proerty-item .item-entry h5 {
-    text-transform: uppercase;
-    font-weight: 600;
+    /* text-transform: uppercase; */
+    font-weight: 550;
     color: #9b9b9b;
     letter-spacing: 2px;
     position: relative;
