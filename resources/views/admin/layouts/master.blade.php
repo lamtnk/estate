@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tài Lộc Property</title>
-
+    <link rel="shortcut icon" href="{{ url('') }}/cassets/img/logo.png" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url('') }}/assets/css/bootstrap.css">
@@ -31,8 +31,8 @@
                 <div class="sidebar-header">
                     <div class="d-flex justify-content-between">
                         <div class="logo">
-                            <a href="#"><img src="{{ url('') }}/cassets/img/logo.png"
-                                    alt="Logo" srcset=""></a>
+                            <a href="#"><img src="{{ url('') }}/cassets/img/logo.png" alt="Logo"
+                                    srcset=""></a>
                         </div>
                         {{-- <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i
@@ -80,8 +80,7 @@
                             </a>
                         </li>
 
-                        <li
-                            class="sidebar-item {{ request()->routeIs('admin.news.index') ? 'active' : '' }}">
+                        <li class="sidebar-item {{ request()->routeIs('admin.news.index') ? 'active' : '' }}">
                             <a href="{{ route('admin.news.index') }}" class='sidebar-link'>
                                 <i class="bi bi-file-earmark-spreadsheet-fill"></i>
                                 <span>Tin tức</span>
